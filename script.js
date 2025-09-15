@@ -11,11 +11,11 @@ const btnTerabox = document.getElementById('btn-terabox');
 
 // ✅ TUS ENLACES REALES (ya configurados)
 const socialLinks = {
-  x: "https://x.com/patuconsumoxd",           // ❌ Cambia esto por tu X real
-  facebook: "https://facebook.com/patuconsumoxd", // ❌ Cambia esto por tu FB real
-  instagram: "https://instagram.com/patuconsumoxd", // ❌ Cambia esto por tu IG real
+  x: "https://x.com/patuconsumoxxd?t=Atkj5xEDUFC3nl6UH5OE5A&s=09",    // ❌ Cambia esto por tu X real
+  facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL", // ❌ Cambia esto por tu FB real
+  instagram: "https://www.instagram.com/mysweetlinks/?igsh=eDhuZHNtOHE4eXdx#", // ❌ Cambia esto por tu IG real
   whatsapp: "https://whatsapp.com/channel/0029VaUDtFDDp2QCGAzyPB3u", // ✅ Tu canal de WhatsApp
-  tiktok: "https://tiktok.com/@patuconsumoxd" // ✅ Cambia esto por tu TikTok real
+  tiktok: "https://www.tiktok.com/@patuconsumoxdpacks?is_from_webapp=1&sender_device=pc" // ✅ Cambia esto por tu TikTok real
 };
 
 fetch('data.json')
