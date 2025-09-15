@@ -4,18 +4,18 @@ const videoId = window.location.pathname.substring(1);
 const loading = document.getElementById('loading');
 const videoTitle = document.getElementById('video-title');
 
+// ✅ SOLO 3 BOTONES: Filemoon, StreamHG, Terabox (StreamTape eliminado)
 const btnFilemoon = document.getElementById('btn-filemoon');
-const btnStreamtape = document.getElementById('btn-streamtape');
 const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
 
-// ✅ REEMPLAZA ESTOS ENLACES POR LOS TUYOS (¡YA LO HICISTE!)
+// ✅ TUS ENLACES REALES (ya configurados)
 const socialLinks = {
-  x: "https://x.com/patuconsumoxd",           // ❌ Cambia esto por tu X
-  facebook: "https://facebook.com/patuconsumoxd", // ❌ Cambia esto por tu FB
-  instagram: "https://instagram.com/patuconsumoxd", // ❌ Cambia esto por tu IG
-  whatsapp: "https://whatsapp.com/channel/0029VaUDtFDDp2QCGAzyPB3u", // ✅ ¡TU CANAL YA ESTÁ AQUÍ!
-  tiktok: "https://tiktok.com/@patuconsumoxd" // ✅ ¡AÑADIDO! Cambia esto por tu TikTok
+  x: "https://x.com/patuconsumoxd",           // ❌ Cambia esto por tu X real
+  facebook: "https://facebook.com/patuconsumoxd", // ❌ Cambia esto por tu FB real
+  instagram: "https://instagram.com/patuconsumoxd", // ❌ Cambia esto por tu IG real
+  whatsapp: "https://whatsapp.com/channel/0029VaUDtFDDp2QCGAzyPB3u", // ✅ Tu canal de WhatsApp
+  tiktok: "https://tiktok.com/@patuconsumoxd" // ✅ Cambia esto por tu TikTok real
 };
 
 fetch('data.json')
@@ -29,14 +29,14 @@ fetch('data.json')
     const video = data[videoId];
     videoTitle.textContent = video.title;
 
+    // ✅ Asignar solo los 3 enlaces válidos
     btnFilemoon.href = video.filemoon;
-    btnStreamtape.href = video.streamtape;
     btnStreamhg.href = video.streamhg;
     btnTerabox.href = video.terabox;
 
     loading.style.display = 'none';
 
-    // ✅ MUESTRA LAS REDES DESPUÉS DE 5 SEGUNDOS
+    // ✅ Mostrar redes después de 5 segundos
     setTimeout(() => {
       const container = document.querySelector('.container');
       const socialSection = document.createElement('div');
