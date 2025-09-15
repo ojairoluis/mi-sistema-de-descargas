@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📥 Descarga tu Video - Alta Calidad</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+    }
+    h1 { font-size: 2.2rem; color: #ffcc00; margin-bottom: 10px; }
+    .subtitle { font-size: 1.1rem; color: #ddd; margin-bottom: 30px; }
+    .btn {
+      display: block;
+      width: 90%;
+      max-width: 400px;
+      margin: 15px auto;
+      padding: 16px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+      text-decoration: none;
+    }
+    .filemoon { background: #4CAF50; }
+    .streamtape { background: #FFC107; color: #333; }
+    .streamhg { background: #FF9800; }
+    .terabox { background: #2196F3; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+    .loading { color: #aaa; font-style: italic; margin: 20px 0; }
+    .footer { margin-top: 40px; font-size: 0.9rem; color: #aaa; }
+    .footer a { color: #ffcc00; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎬 ¡Descarga tu video ahora!</h1>
+    <p class="subtitle" id="video-title">Cargando título del video...</p>
+
+    <a href="#" class="btn filemoon" id="btn-filemoon">🟢 Filemoon</a>
+    <a href="#" class="btn streamtape" id="btn-streamtape">🟡 StreamTape</a>
+    <a href="#" class="btn streamhg" id="btn-streamhg">🟠 StreamHG</a>
+    <a href="#" class="btn terabox" id="btn-terabox">🔵 Terabox</a>
+
+    <p class="loading" id="loading">🔍 Buscando enlaces...</p>
+
+    <div class="footer">
+      <p>⚠️ Enlaces externos. No alojamos contenido.</p>
+      <p>💡 Cada clic ayuda a mantener el servicio gratuito 💙</p>
+      <p>© 2025 | <a href="https://linkvertise.com" target="_blank">Linkvertise</a></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
