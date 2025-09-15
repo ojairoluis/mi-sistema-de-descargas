@@ -4,18 +4,24 @@ const videoId = window.location.pathname.substring(1);
 const loading = document.getElementById('loading');
 const videoTitle = document.getElementById('video-title');
 
-// ✅ SOLO 3 BOTONES: Filemoon, StreamHG, Terabox (StreamTape eliminado)
 const btnFilemoon = document.getElementById('btn-filemoon');
 const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
 
-// ✅ TUS ENLACES REALES (ya configurados)
+// ✅ TUS ENLACES DE REDES
 const socialLinks = {
-  x: "https://x.com/patuconsumoxxd?t=Atkj5xEDUFC3nl6UH5OE5A&s=09",    // ❌ Cambia esto por tu X real
-  facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL", // ❌ Cambia esto por tu FB real
-  instagram: "https://www.instagram.com/mysweetlinks/?igsh=eDhuZHNtOHE4eXdx#", // ❌ Cambia esto por tu IG real
-  whatsapp: "https://whatsapp.com/channel/0029VaUDtFDDp2QCGAzyPB3u", // ✅ Tu canal de WhatsApp
-  tiktok: "https://www.tiktok.com/@patuconsumoxdpacks?is_from_webapp=1&sender_device=pc" // ✅ Cambia esto por tu TikTok real
+  x: "https://x.com/patuconsumoxxd?t=lBK2T6a-4wD-fXKMzQ_Lsg&s=35",
+  facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL",
+  instagram: "https://www.instagram.com/mysweetlinks/?igsh=eDhuZHNtOHE4eXdx#",
+  whatsapp: "https://whatsapp.com/channel/0029VaUDtFDDp2QCGAzyPB3u",
+  tiktok: "https://www.tiktok.com/@patuconsumoxdpacks?is_from_webapp=1&sender_device=pc"
+};
+
+// ✅ TUS CANALES DE TELEGRAM (LOS MÁS IMPORTANTES)
+const telegramChannels = {
+  main: "https://t.me/+iQ-eesmcw0VhYzQx",        // Canal principal de screenshots
+  catalog: "https://t.me/patuconsumoxdmenu", // Catálogo completo
+  tutorial: "https://t.me/tutodescargas"    // Tutorial de descargas
 };
 
 fetch('data.json')
@@ -29,16 +35,17 @@ fetch('data.json')
     const video = data[videoId];
     videoTitle.textContent = video.title;
 
-    // ✅ Asignar solo los 3 enlaces válidos
     btnFilemoon.href = video.filemoon;
     btnStreamhg.href = video.streamhg;
     btnTerabox.href = video.terabox;
 
     loading.style.display = 'none';
 
-    // ✅ Mostrar redes después de 5 segundos
+    // ✅ MOSTRAR REDES SOCIALES (como antes)
     setTimeout(() => {
       const container = document.querySelector('.container');
+      
+      // 🔹 Sección de redes sociales
       const socialSection = document.createElement('div');
       socialSection.innerHTML = `
         <h2 style="color: #ffcc00; margin: 30px 0 20px;">🌟 ¡Sígueme para más videos exclusivos!</h2>
@@ -53,6 +60,24 @@ fetch('data.json')
         <p style="color: #aaa; margin-top: 40px; font-size: 0.9rem;">Gracias por apoyar mi trabajo 💙</p>
       `;
       container.appendChild(socialSection);
+
+      // ✅ NUEVA SECCIÓN: CANALES DE TELEGRAM (¡LO PRINCIPAL!)
+      const telegramSection = document.createElement('div');
+      telegramSection.innerHTML = `
+        <hr style="border: 1px solid #444; margin: 40px 0;">
+        <h2 style="color: #0088cc; margin: 20px 0 15px;">📬 ¡ENTRA A MIS CANALES DE TELEGRAM!</h2>
+        <p style="color: #ddd; margin-bottom: 25px; font-size: 1rem;">
+          Aquí encontrarás <strong>screenshots exclusivos</strong>, <strong>catálogos completos</strong> y <strong>tutoriales paso a paso</strong>.
+        </p>
+        
+        <a href="${telegramChannels.main}" target="_blank" class="btn" style="background: #0088cc; margin: 10px auto; display: block; width: 90%; max-width: 400px;">✨ @teralinks12 — Screenshots Exclusivos</a>
+        <a href="${telegramChannels.catalog}" target="_blank" class="btn" style="background: #0088cc; margin: 10px auto; display: block; width: 90%; max-width: 400px;">📂 @patuconsumoxdmenu — Catálogo Completo</a>
+        <a href="${telegramChannels.tutorial}" target="_blank" class="btn" style="background: #0088cc; margin: 10px auto; display: block; width: 90%; max-width: 400px;">📚 @tutodescargas — Guía de Descargas</a>
+        
+        <p style="color: #aaa; margin-top: 30px; font-size: 0.9rem;">📲 Todos los canales funcionan en cualquier dispositivo.</p>
+      `;
+      container.appendChild(telegramSection);
+
     }, 5000);
   })
   .catch(() => {
