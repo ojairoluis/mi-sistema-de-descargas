@@ -10,6 +10,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* --- INICIO: NUEVAS ANIMACIONES --- */
+    @keyframes spookyGlow {
+      0%, 100% {
+        text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
+      }
+      50% {
+        /* Brillo más intenso en la mitad de la animación */
+        text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600;
+      }
+    }
+    
+    @keyframes spookyShake {
+      /* Animación de "temblor" para los botones */
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px) rotate(-1deg); }
+      40% { transform: translateX(4px) rotate(1deg); }
+      60% { transform: translateX(-4px) rotate(1deg); }
+      80% { transform: translateX(4px) rotate(-1deg); }
+    }
+    /* --- FIN: NUEVAS ANIMACIONES --- */
+
     * { 
       margin: 0; 
       padding: 0; 
@@ -17,7 +38,6 @@
       font-family: 'Segoe UI', sans-serif; 
     }
     body {
-      /* Fondo: Gradiente de negro a naranja oscuro */
       background: linear-gradient(135deg, #331a00, #000000);
       color: white;
       min-height: 100vh;
@@ -30,30 +50,37 @@
     }
     .container {
       max-width: 600px;
-      /* Contenedor: Fondo negro semitransparente con borde naranja */
       background: rgba(10, 0, 0, 0.4);
       padding: 40px;
       border-radius: 20px;
-      /* Sombra: Un brillo naranja "impactante" */
       box-shadow: 0 10px 40px rgba(255, 100, 0, 0.4);
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 100, 0, 0.2);
     }
     h1 {
-      /* Título: Fuente 'Creepster' de Halloween y color naranja */
       font-family: 'Creepster', cursive;
       font-size: 2.8rem;
       color: #FF6600;
       margin-bottom: 10px;
-      /* Sombra: Brillo rojo/naranja para el texto */
       text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
       letter-spacing: 2px;
+      
+      /* --- APLICAMOS ANIMACIÓN DE BRILLO --- */
+      animation: spookyGlow 2.5s ease-in-out infinite;
     }
+
+    /* --- INICIO: ESTILO DE TÍTULO DE VIDEO MEJORADO --- */
     .subtitle { 
-      font-size: 1.1rem; 
-      color: #ddd; 
+      font-size: 1.3rem; /* Más grande */
+      color: #ffcc00;  /* Naranja/Ámbar pálido */
       margin-bottom: 30px; 
+      font-weight: bold; /* Más impacto */
+      text-shadow: 0 0 8px rgba(255, 100, 0, 0.7); /* Sombra a juego */
+      transition: all 0.3s ease; /* Transición suave */
+      min-height: 1.3rem; /* Evita que la página "salte" al cargar */
     }
+    /* --- FIN: ESTILO DE TÍTULO DE VIDEO MEJORADO --- */
+    
     .btn {
       display: block;
       width: 90%;
@@ -63,7 +90,6 @@
       font-size: 1.2rem;
       font-weight: bold;
       border: none;
-      /* Bordes más "afilados" */
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -72,16 +98,18 @@
       text-transform: uppercase;
     }
     
-    /* Nuevos colores de botones HALLOWEEN */
-    .filemoon { background: #6a0dad; } /* Púrpura Bruja */
-    .streamhg { background: #FF6600; } /* Naranja Calabaza */
-    .terabox { background: #8b0000; } /* Rojo Sangre */
+    .filemoon { background: #6a0dad; }
+    .streamhg { background: #FF6600; }
+    .terabox { background: #8b0000; }
 
     .btn:hover { 
-      transform: translateY(-3px); 
       /* Sombra de hover más intensa */
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
+      
+      /* --- APLICAMOS ANIMACIÓN DE TEMBLOR --- */
+      animation: spookyShake 0.4s ease-in-out;
     }
+    
     .loading { 
       color: #aaa; 
       font-style: italic; 
@@ -93,7 +121,6 @@
       color: #aaa; 
     }
     .footer a { 
-      /* Enlaces del footer en color naranja */
       color: #FF6600; 
       text-decoration: none; 
     }
