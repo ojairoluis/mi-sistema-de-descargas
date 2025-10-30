@@ -26,28 +26,27 @@ const telegramChannels = {
 };
 
 // --- Función para Renderizar Contenido Dinámico ---
-// (Se ejecuta al cargar, sin delays)
 function renderDynamicContent() {
   
-  // --- 1. SECCIÓN DE TELEGRAM (¡LO PRINCIPAL!) ---
+  // --- 1. SECCIÓN DE TELEGRAM (CTA Secundario) ---
   const telegramSection = document.createElement('div');
   telegramSection.innerHTML = `
     <hr style="border: 1px solid #444; margin: 40px 0;">
     <h2 style="color: #ffcc00; margin: 20px 0 15px;">📬 ¡CANALES DE TERROR! (TELEGRAM)</h2>
     <p style="color: #ddd; margin-bottom: 25px; font-size: 1rem;">
-      Aquí encontrarás <strong>screenshots exclusivos</strong>, <strong>catálogos completos</strong> y <strong>tutoriales paso a paso</strong>.
+      Screenshots exclusivos, catálogos completos y tutoriales paso a paso.
     </p>
     
-    <a href="${telegramChannels.main}" target="_blank" class="btn" style="background: #6a0dad; margin: 10px auto; display: block; width: 90%; max-width: 400px;">✨ @teralinks12 — Screenshots Exclusivos</a>
-    <a href="${telegramChannels.catalog}" target="_blank" class="btn" style="background: #6a0dad; margin: 10px auto; display: block; width: 90%; max-width: 400px;">📂 @patuconsumoxdmenu — Catálogo Completo</a>
-    <a href="${telegramChannels.tutorial}" target="_blank" class="btn" style="background: #6a0dad; margin: 10px auto; display: block; width: 90%; max-width: 400px;">📚 @tutodescargas — Guía de Descargas</a>
+    <a href="${telegramChannels.main}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">✨ @teralinks12 — Screenshots Exclusivos</a>
+    <a href="${telegramChannels.catalog}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">📂 @patuconsumoxdmenu — Catálogo Completo</a>
+    <a href="${telegramChannels.tutorial}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">📚 @tutodescargas — Guía de Descargas</a>
     
     <p style="color: #aaa; margin-top: 30px; font-size: 0.9rem;">📲 Todos los canales funcionan en cualquier dispositivo.</p>
   `;
 
-  // --- 2. NUEVA BARRA DE REDES SOCIALES ---
+  // --- 2. BARRA DE REDES SOCIALES (Sin cambios) ---
   const socialSection = document.createElement('div');
-  socialSection.className = 'social-bar'; // Usa los estilos CSS del HTML
+  socialSection.className = 'social-bar';
   socialSection.innerHTML = `
     <h2>🌟 ¡Sígueme en mis otras redes!</h2>
     <div class="social-icons-container">
@@ -60,14 +59,13 @@ function renderDynamicContent() {
     <p style="color: #aaa; margin-top: 40px; font-size: 0.9rem;">Gracias por apoyar mi trabajo 💙</p>
   `;
   
-  // Inyecta el contenido en el DOM de forma ordenada:
-  // (Telegram y Redes se insertan ANTES del footer)
+  // Inyecta el contenido en el DOM
   mainContainer.insertBefore(telegramSection, footer);
   mainContainer.insertBefore(socialSection, footer);
 }
 
 
-// --- LÓGICA DE CARGA PRINCIPAL ---
+// --- LÓGICA DE CARGA PRINCIPAL (Sin cambios) ---
 fetch('data.json')
   .then(response => response.json())
   .then(data => {
@@ -77,20 +75,13 @@ fetch('data.json')
     }
 
     const video = data[videoId];
-    
-    // Título genial y optimizado
     videoTitle.textContent = `🦇 » ${video.title.toUpperCase()} « 🦇`;
-
-    // Asigna enlaces de descarga
     btnFilemoon.href = video.filemoon;
     btnStreamhg.href = video.streamhg;
     btnTerabox.href = video.terabox;
-
-    // Oculta "cargando"
     loading.style.display = 'none';
 
-    // ¡SIN SETTIMEOUT!
-    // El contenido extra se renderiza al instante, sin saltos.
+    // Renderiza el contenido dinámico al instante
     renderDynamicContent();
 
   })
