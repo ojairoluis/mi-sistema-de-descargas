@@ -12,12 +12,8 @@
   <style>
     /* --- Animaciones Halloween --- */
     @keyframes spookyGlow {
-      0%, 100% {
-        text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
-      }
-      50% {
-        text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600;
-      }
+      0%, 100% { text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600; }
+      50% { text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600; }
     }
     
     @keyframes spookyShake {
@@ -26,6 +22,12 @@
       40% { transform: translateX(4px) rotate(1deg); }
       60% { transform: translateX(-4px) rotate(1deg); }
       80% { transform: translateX(4px) rotate(-1deg); }
+    }
+    
+    /* --- NUEVO: Animación de Pulso para CTA Primario --- */
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255,102,0,0.5); }
+      50% { box-shadow: 0 0 30px rgba(255,102,0,1); }
     }
 
     /* --- Estilos Base --- */
@@ -50,7 +52,7 @@
       width: 100%;
       max-width: 600px;
       background: rgba(10, 0, 0, 0.4);
-      padding: 25px; /* Optimizado para móviles */
+      padding: 25px;
       border-radius: 20px;
       box-shadow: 0 10px 40px rgba(255, 100, 0, 0.4);
       backdrop-filter: blur(10px);
@@ -70,15 +72,25 @@
     .subtitle { 
       font-size: 1.3rem; 
       color: #ffcc00;  
-      margin-bottom: 30px; 
+      margin-bottom: 25px; /* Reducido un poco */
       font-weight: bold;
       text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
       transition: all 0.3s ease;
       min-height: 1.3rem;
-      word-wrap: break-word; /* Asegura que títulos largos no rompan el layout */
+      word-wrap: break-word;
     }
     
-    /* --- Botones --- */
+    /* --- NUEVO: Texto CTA (Llamada a la Acción) --- */
+    .cta-text {
+      font-size: 1.1rem;
+      color: #ddd;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* --- Estilo Base de Botones (compartido) --- */
     .btn {
       display: block;
       width: 90%;
@@ -87,7 +99,6 @@
       padding: 16px;
       font-size: 1.2rem;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -96,13 +107,34 @@
       text-transform: uppercase;
     }
     
-    .filemoon { background: #6a0dad; } /* Púrpura Bruja */
-    .streamhg { background: #FF6600; } /* Naranja Calabaza */
-    .terabox { background: #8b0000; } /* Rojo Sangre */
+    /* --- NUEVO: CTA Primario (Descarga) --- */
+    .btn-primary {
+      border: none;
+      /* Aplicamos la animación de pulso */
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+    .filemoon { background: #6a0dad; }
+    .streamhg { background: #FF6600; }
+    .terabox { background: #8b0000; }
 
-    .btn:hover { 
+    .btn-primary:hover { 
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
       animation: spookyShake 0.4s ease-in-out;
+      /* Pausamos el pulso al hacer hover para dar paso al shake */
+      animation-play-state: paused;
+    }
+    
+    /* --- NUEVO: CTA Secundario (Telegram) - Estilo "Fantasma" --- */
+    .btn-secondary {
+      background: transparent;
+      border: 3px solid #6a0dad; /* Borde Púrpura Halloween */
+      color: #6a0dad;
+    }
+    .btn-secondary:hover {
+      background: #6a0dad; /* Se rellena al pasar el mouse */
+      color: white;
+      box-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
+      transform: scale(1.02); /* Efecto sutil de crecimiento */
     }
     
     /* --- Varios --- */
@@ -121,22 +153,22 @@
       text-decoration: none; 
     }
 
-    /* --- NUEVA BARRA DE REDES SOCIALES PROFESIONAL --- */
+    /* --- Barra de Redes Sociales Profesional (Sin cambios) --- */
     .social-bar {
       margin-top: 40px;
       padding-top: 30px;
-      border-top: 1px solid #444; /* Separador limpio */
+      border-top: 1px solid #444;
     }
     .social-bar h2 {
-      color: #ffcc00; /* Color Ámbar/Naranja */
+      color: #ffcc00;
       margin-bottom: 25px;
       font-size: 1.5rem;
     }
     .social-icons-container {
       display: flex;
       justify-content: center;
-      gap: 15px; /* Espacio entre iconos */
-      flex-wrap: wrap; /* Súper optimizado para móviles */
+      gap: 15px;
+      flex-wrap: wrap;
     }
     .social-icon {
       display: inline-block;
@@ -145,14 +177,14 @@
       font-size: 1rem;
       font-weight: bold;
       padding: 10px 15px;
-      border-radius: 50px; /* Estilo "píldora" moderno */
+      border-radius: 50px;
       background: rgba(255, 255, 255, 0.1);
       transition: all 0.3s ease;
     }
     .social-icon:hover {
-      background: #FF6600; /* Naranja Halloween al pasar el mouse */
+      background: #FF6600;
       color: white;
-      transform: scale(1.1); /* Efecto genial */
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -162,9 +194,11 @@
     <h1>🎃 ¡Tu Video de Terror! 👻</h1>
     <p class="subtitle" id="video-title">Buscando en la cripta... 🦇</p>
 
-    <a href="#" class="btn filemoon" id="btn-filemoon">🟣 Filemoon</a>
-    <a href="#" class="btn streamhg" id="btn-streamhg">🟠 StreamHG</a>
-    <a href="#" class="btn terabox" id="btn-terabox">🔴 Terabox</a>
+    <p class="cta-text">👇 Elige tu opción de descarga 👇</p>
+
+    <a href="#" class="btn btn-primary filemoon" id="btn-filemoon">🟣 Filemoon 💀</a>
+    <a href="#" class="btn btn-primary streamhg" id="btn-streamhg">🟠 StreamHG 👻</a>
+    <a href="#" class="btn btn-primary terabox" id="btn-terabox">🔴 Terabox 🎃</a>
 
     <p class="loading" id="loading">🕯️ Conjurando enlaces...</p>
 
