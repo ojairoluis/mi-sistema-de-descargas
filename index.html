@@ -10,27 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- INICIO: NUEVAS ANIMACIONES --- */
+    /* --- Animaciones Halloween --- */
     @keyframes spookyGlow {
       0%, 100% {
         text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
       }
       50% {
-        /* Brillo más intenso en la mitad de la animación */
         text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600;
       }
     }
     
     @keyframes spookyShake {
-      /* Animación de "temblor" para los botones */
       0%, 100% { transform: translateX(0); }
       20% { transform: translateX(-4px) rotate(-1deg); }
       40% { transform: translateX(4px) rotate(1deg); }
       60% { transform: translateX(-4px) rotate(1deg); }
       80% { transform: translateX(4px) rotate(-1deg); }
     }
-    /* --- FIN: NUEVAS ANIMACIONES --- */
 
+    /* --- Estilos Base --- */
     * { 
       margin: 0; 
       padding: 0; 
@@ -49,14 +47,17 @@
       text-align: center;
     }
     .container {
+      width: 100%;
       max-width: 600px;
       background: rgba(10, 0, 0, 0.4);
-      padding: 40px;
+      padding: 25px; /* Optimizado para móviles */
       border-radius: 20px;
       box-shadow: 0 10px 40px rgba(255, 100, 0, 0.4);
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 100, 0, 0.2);
     }
+
+    /* --- Títulos --- */
     h1 {
       font-family: 'Creepster', cursive;
       font-size: 2.8rem;
@@ -64,23 +65,20 @@
       margin-bottom: 10px;
       text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
       letter-spacing: 2px;
-      
-      /* --- APLICAMOS ANIMACIÓN DE BRILLO --- */
       animation: spookyGlow 2.5s ease-in-out infinite;
     }
-
-    /* --- INICIO: ESTILO DE TÍTULO DE VIDEO MEJORADO --- */
     .subtitle { 
-      font-size: 1.3rem; /* Más grande */
-      color: #ffcc00;  /* Naranja/Ámbar pálido */
+      font-size: 1.3rem; 
+      color: #ffcc00;  
       margin-bottom: 30px; 
-      font-weight: bold; /* Más impacto */
-      text-shadow: 0 0 8px rgba(255, 100, 0, 0.7); /* Sombra a juego */
-      transition: all 0.3s ease; /* Transición suave */
-      min-height: 1.3rem; /* Evita que la página "salte" al cargar */
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
+      transition: all 0.3s ease;
+      min-height: 1.3rem;
+      word-wrap: break-word; /* Asegura que títulos largos no rompan el layout */
     }
-    /* --- FIN: ESTILO DE TÍTULO DE VIDEO MEJORADO --- */
     
+    /* --- Botones --- */
     .btn {
       display: block;
       width: 90%;
@@ -98,18 +96,16 @@
       text-transform: uppercase;
     }
     
-    .filemoon { background: #6a0dad; }
-    .streamhg { background: #FF6600; }
-    .terabox { background: #8b0000; }
+    .filemoon { background: #6a0dad; } /* Púrpura Bruja */
+    .streamhg { background: #FF6600; } /* Naranja Calabaza */
+    .terabox { background: #8b0000; } /* Rojo Sangre */
 
     .btn:hover { 
-      /* Sombra de hover más intensa */
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
-      
-      /* --- APLICAMOS ANIMACIÓN DE TEMBLOR --- */
       animation: spookyShake 0.4s ease-in-out;
     }
     
+    /* --- Varios --- */
     .loading { 
       color: #aaa; 
       font-style: italic; 
@@ -123,6 +119,40 @@
     .footer a { 
       color: #FF6600; 
       text-decoration: none; 
+    }
+
+    /* --- NUEVA BARRA DE REDES SOCIALES PROFESIONAL --- */
+    .social-bar {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #444; /* Separador limpio */
+    }
+    .social-bar h2 {
+      color: #ffcc00; /* Color Ámbar/Naranja */
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+    .social-icons-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px; /* Espacio entre iconos */
+      flex-wrap: wrap; /* Súper optimizado para móviles */
+    }
+    .social-icon {
+      display: inline-block;
+      color: #ddd;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 50px; /* Estilo "píldora" moderno */
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      background: #FF6600; /* Naranja Halloween al pasar el mouse */
+      color: white;
+      transform: scale(1.1); /* Efecto genial */
     }
   </style>
 </head>
