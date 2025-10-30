@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📥 Descarga tu Video - Alta Calidad</title>
+  <title>🎃 ¡Tu Video de Terror! 🦇</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Segoe UI', sans-serif; 
+    }
     body {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      /* Fondo: Gradiente de negro a naranja oscuro */
+      background: linear-gradient(135deg, #331a00, #000000);
       color: white;
       min-height: 100vh;
       display: flex;
@@ -19,14 +30,30 @@
     }
     .container {
       max-width: 600px;
-      background: rgba(0, 0, 0, 0.3);
+      /* Contenedor: Fondo negro semitransparente con borde naranja */
+      background: rgba(10, 0, 0, 0.4);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      /* Sombra: Un brillo naranja "impactante" */
+      box-shadow: 0 10px 40px rgba(255, 100, 0, 0.4);
       backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 100, 0, 0.2);
     }
-    h1 { font-size: 2.2rem; color: #ffcc00; margin-bottom: 10px; }
-    .subtitle { font-size: 1.1rem; color: #ddd; margin-bottom: 30px; }
+    h1 {
+      /* Título: Fuente 'Creepster' de Halloween y color naranja */
+      font-family: 'Creepster', cursive;
+      font-size: 2.8rem;
+      color: #FF6600;
+      margin-bottom: 10px;
+      /* Sombra: Brillo rojo/naranja para el texto */
+      text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
+      letter-spacing: 2px;
+    }
+    .subtitle { 
+      font-size: 1.1rem; 
+      color: #ddd; 
+      margin-bottom: 30px; 
+    }
     .btn {
       display: block;
       width: 90%;
@@ -36,37 +63,57 @@
       font-size: 1.2rem;
       font-weight: bold;
       border: none;
-      border-radius: 12px;
+      /* Bordes más "afilados" */
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
       color: white;
       text-decoration: none;
+      text-transform: uppercase;
     }
-    .filemoon { background: #4CAF50; }
-    .streamtape { background: #FFC107; color: #333; }
-    .streamhg { background: #FF9800; }
-    .terabox { background: #2196F3; }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
-    .loading { color: #aaa; font-style: italic; margin: 20px 0; }
-    .footer { margin-top: 40px; font-size: 0.9rem; color: #aaa; }
-    .footer a { color: #ffcc00; text-decoration: none; }
+    
+    /* Nuevos colores de botones HALLOWEEN */
+    .filemoon { background: #6a0dad; } /* Púrpura Bruja */
+    .streamhg { background: #FF6600; } /* Naranja Calabaza */
+    .terabox { background: #8b0000; } /* Rojo Sangre */
+
+    .btn:hover { 
+      transform: translateY(-3px); 
+      /* Sombra de hover más intensa */
+      box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
+    }
+    .loading { 
+      color: #aaa; 
+      font-style: italic; 
+      margin: 20px 0; 
+    }
+    .footer { 
+      margin-top: 40px; 
+      font-size: 0.9rem; 
+      color: #aaa; 
+    }
+    .footer a { 
+      /* Enlaces del footer en color naranja */
+      color: #FF6600; 
+      text-decoration: none; 
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>🎬 ¡Descarga tu video ahora!</h1>
-    <p class="subtitle" id="video-title">Cargando título del video...</p>
+    <h1>🎃 ¡Tu Video de Terror! 👻</h1>
+    <p class="subtitle" id="video-title">Buscando en la cripta... 🦇</p>
 
-    <a href="#" class="btn filemoon" id="btn-filemoon">🟢 Filemoon</a>
+    <a href="#" class="btn filemoon" id="btn-filemoon">🟣 Filemoon</a>
     <a href="#" class="btn streamhg" id="btn-streamhg">🟠 StreamHG</a>
-    <a href="#" class="btn terabox" id="btn-terabox">🔵 Terabox</a>
+    <a href="#" class="btn terabox" id="btn-terabox">🔴 Terabox</a>
 
-    <p class="loading" id="loading">🔍 Buscando enlaces...</p>
+    <p class="loading" id="loading">🕯️ Conjurando enlaces...</p>
 
     <div class="footer">
       <p>⚠️ Enlaces externos. No alojamos contenido.</p>
-      <p>💡 Cada clic ayuda a mantener el servicio gratuito 💙</p>
+      <p>🕷️ Cada clic alimenta a la araña... 🕸️</p>
       <p>© 2025 | <a href="https://linkvertise.com" target="_blank">Linkvertise</a></p>
     </div>
   </div>
