@@ -24,7 +24,6 @@
       80% { transform: translateX(4px) rotate(-1deg); }
     }
     
-    /* --- NUEVO: Animación de Pulso para CTA Primario --- */
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 15px rgba(255,102,0,0.5); }
       50% { box-shadow: 0 0 30px rgba(255,102,0,1); }
@@ -72,7 +71,7 @@
     .subtitle { 
       font-size: 1.3rem; 
       color: #ffcc00;  
-      margin-bottom: 25px; /* Reducido un poco */
+      margin-bottom: 25px;
       font-weight: bold;
       text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
       transition: all 0.3s ease;
@@ -80,7 +79,7 @@
       word-wrap: break-word;
     }
     
-    /* --- NUEVO: Texto CTA (Llamada a la Acción) --- */
+    /* --- Texto CTA (Llamada a la Acción) --- */
     .cta-text {
       font-size: 1.1rem;
       color: #ddd;
@@ -107,10 +106,9 @@
       text-transform: uppercase;
     }
     
-    /* --- NUEVO: CTA Primario (Descarga) --- */
+    /* --- CTA Primario (Descarga) --- */
     .btn-primary {
       border: none;
-      /* Aplicamos la animación de pulso */
       animation: glowPulse 2s ease-in-out infinite;
     }
     .filemoon { background: #6a0dad; }
@@ -120,21 +118,20 @@
     .btn-primary:hover { 
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
       animation: spookyShake 0.4s ease-in-out;
-      /* Pausamos el pulso al hacer hover para dar paso al shake */
       animation-play-state: paused;
     }
     
-    /* --- NUEVO: CTA Secundario (Telegram) - Estilo "Fantasma" --- */
+    /* --- CTA Secundario (Telegram) - Estilo "Fantasma" --- */
     .btn-secondary {
       background: transparent;
-      border: 3px solid #6a0dad; /* Borde Púrpura Halloween */
+      border: 3px solid #6a0dad;
       color: #6a0dad;
     }
     .btn-secondary:hover {
-      background: #6a0dad; /* Se rellena al pasar el mouse */
+      background: #6a0dad;
       color: white;
       box-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
-      transform: scale(1.02); /* Efecto sutil de crecimiento */
+      transform: scale(1.02);
     }
     
     /* --- Varios --- */
@@ -153,7 +150,7 @@
       text-decoration: none; 
     }
 
-    /* --- Barra de Redes Sociales Profesional (Sin cambios) --- */
+    /* --- Barra de Redes Sociales Profesional --- */
     .social-bar {
       margin-top: 40px;
       padding-top: 30px;
@@ -186,6 +183,40 @@
       color: white;
       transform: scale(1.1);
     }
+    
+    /* ============================================================
+      NUEVO: OPTIMIZACIÓN MÓVIL (Soluciona el texto "junto")
+    ============================================================
+    */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px; /* Menos padding para más espacio */
+      }
+      
+      h1 {
+        font-size: 2.4rem; /* Título principal un poco más pequeño */
+      }
+      
+      .subtitle {
+        font-size: 1.1rem; /* Título del video más pequeño */
+        margin-bottom: 20px; /* Un poco menos de espacio */
+      }
+      
+      .cta-text {
+        font-size: 1.0rem; /* Texto CTA más pequeño */
+        margin-bottom: 15px;
+      }
+      
+      .btn {
+        padding: 15px; /* Botones un poco más delgados */
+        font-size: 1.1rem;
+      }
+      
+      .social-bar h2 {
+        font-size: 1.3rem;
+      }
+    }
+    
   </style>
 </head>
 <body>
