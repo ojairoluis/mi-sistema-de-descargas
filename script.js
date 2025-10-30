@@ -33,7 +33,11 @@ fetch('data.json')
     }
 
     const video = data[videoId];
-    videoTitle.textContent = video.title;
+    
+    // --- INICIO: LÍNEA MODIFICADA ---
+    // ¡Ahora el título se formatea para ser más genial!
+    videoTitle.textContent = `🦇 » ${video.title.toUpperCase()} « 🦇`;
+    // --- FIN: LÍNEA MODIFICADA ---
 
     btnFilemoon.href = video.filemoon;
     btnStreamhg.href = video.streamhg;
