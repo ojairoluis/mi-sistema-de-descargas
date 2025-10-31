@@ -71,7 +71,7 @@
     .subtitle { 
       font-size: 1.3rem; 
       color: #ffcc00;  
-      margin-bottom: 25px;
+      margin-bottom: 25px; /* Espacio entre título y divisor */
       font-weight: bold;
       text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
       transition: all 0.3s ease;
@@ -79,14 +79,14 @@
       word-wrap: break-word;
     }
     
-    /* --- Texto CTA (Llamada a la Acción) --- */
-    .cta-text {
-      font-size: 1.1rem;
-      color: #ddd;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    /* --- NUEVO: Divisor Profesional --- */
+    .spooky-divider {
+      border: none;
+      height: 1px;
+      /* Línea naranja semitransparente que combina */
+      background: rgba(255, 100, 0, 0.3);
+      width: 80%; /* Más elegante que 100% */
+      margin: 0 auto 25px auto; /* 0 arriba, centrado, 25px abajo */
     }
     
     /* --- Estilo Base de Botones (compartido) --- */
@@ -185,30 +185,31 @@
     }
     
     /* ============================================================
-      NUEVO: OPTIMIZACIÓN MÓVIL (Soluciona el texto "junto")
+      OPTIMIZACIÓN MÓVIL (Actualizada)
     ============================================================
     */
     @media (max-width: 480px) {
       .container {
-        padding: 20px; /* Menos padding para más espacio */
+        padding: 20px;
       }
       
       h1 {
-        font-size: 2.4rem; /* Título principal un poco más pequeño */
+        font-size: 2.4rem;
       }
       
       .subtitle {
-        font-size: 1.1rem; /* Título del video más pequeño */
-        margin-bottom: 20px; /* Un poco menos de espacio */
+        font-size: 1.1rem;
+        margin-bottom: 20px; /* Espacio ajustado para móvil */
       }
       
-      .cta-text {
-        font-size: 1.0rem; /* Texto CTA más pequeño */
-        margin-bottom: 15px;
+      /* Eliminamos el estilo del cta-text que ya no existe */
+      
+      .spooky-divider {
+        margin-bottom: 20px; /* Espacio ajustado para móvil */
       }
       
       .btn {
-        padding: 15px; /* Botones un poco más delgados */
+        padding: 15px;
         font-size: 1.1rem;
       }
       
@@ -225,7 +226,7 @@
     <h1>🎃 ¡Tu Video de Terror! 👻</h1>
     <p class="subtitle" id="video-title">Buscando en la cripta... 🦇</p>
 
-    <p class="cta-text">👇 Elige tu opción de descarga 👇</p>
+    <hr class="spooky-divider">
 
     <a href="#" class="btn btn-primary filemoon" id="btn-filemoon">🟣 Filemoon 💀</a>
     <a href="#" class="btn btn-primary streamhg" id="btn-streamhg">🟠 StreamHG 👻</a>
