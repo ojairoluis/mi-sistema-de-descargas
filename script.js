@@ -1,16 +1,13 @@
-const urlParams = new URLSearchParams(window.location.search);
-const videoId = window.location.pathname.substring(1);
-
-// --- Elementos del DOM ---
+// --- Elementos del DOM (cache) ---
+// Es buena práctica "cachear" los elementos que usarás
 const loading = document.getElementById('loading');
 const videoTitle = document.getElementById('video-title');
 const btnFilemoon = document.getElementById('btn-filemoon');
 const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
-const mainContainer = document.querySelector('.container');
-const footer = document.querySelector('.footer');
+const catalogList = document.getElementById('video-catalog-list');
 
-// --- Tus Enlaces ---
+// --- Tus Enlaces (Se mantienen igual) ---
 const socialLinks = {
   x: "https://x.com/patuconsumoxxd?t=lBK2T6a-4wD-fXKMzQ_Lsg&s=35",
   facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL",
@@ -25,66 +22,108 @@ const telegramChannels = {
   tutorial: "https://t.me/tutodescargas"
 };
 
-// --- Función para Renderizar Contenido Dinámico ---
-function renderDynamicContent() {
+/**
+ * TAREA 1: Hidratar enlaces estáticos de la comunidad.
+ * Esto se ejecuta de inmediato. No espera al fetch.
+ * El usuario puede interactuar con esto incluso antes de que carguen los videos.
+ */
+function populateCommunityLinks() {
+  // Telegram
+  document.getElementById('link-telegram-main').href = telegramChannels.main;
+  document.getElementById('link-telegram-catalog').href = telegramChannels.catalog;
+  document.getElementById('link-telegram-tutorial').href = telegramChannels.tutorial;
   
-  // --- 1. SECCIÓN DE TELEGRAM (CTA Secundario) ---
-  const telegramSection = document.createElement('div');
-  telegramSection.innerHTML = `
-    <hr style="border: 1px solid #444; margin: 40px 0;">
-    <h2 style="color: #ffcc00; margin: 20px 0 15px;">📬 ¡CANALES DE TERROR! (TELEGRAM)</h2>
-    <p style="color: #ddd; margin-bottom: 25px; font-size: 1rem;">
-      Screenshots exclusivos, catálogos completos y tutoriales paso a paso.
-    </p>
-    
-    <a href="${telegramChannels.main}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">✨ @teralinks12 — Screenshots Exclusivos</a>
-    <a href="${telegramChannels.catalog}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">📂 @patuconsumoxdmenu — Catálogo Completo</a>
-    <a href="${telegramChannels.tutorial}" target="_blank" class="btn btn-secondary" style="margin: 10px auto; display: block; width: 90%; max-width: 400px;">📚 @tutodescargas — Guía de Descargas</a>
-    
-    <p style="color: #aaa; margin-top: 30px; font-size: 0.9rem;">📲 Todos los canales funcionan en cualquier dispositivo.</p>
-  `;
-
-  // --- 2. BARRA DE REDES SOCIALES (Sin cambios) ---
-  const socialSection = document.createElement('div');
-  socialSection.className = 'social-bar';
-  socialSection.innerHTML = `
-    <h2>🌟 ¡Sígueme en mis otras redes!</h2>
-    <div class="social-icons-container">
-      <a href="${socialLinks.tiktok}" target="_blank" class="social-icon">🎬 TikTok</a>
-      <a href="${socialLinks.whatsapp}" target="_blank" class="social-icon">📱 WhatsApp</a>
-      <a href="${socialLinks.x}" target="_blank" class="social-icon">🐦 X (Twitter)</a>
-      <a href="${socialLinks.facebook}" target="_blank" class="social-icon">📘 Facebook</a>
-      <a href="${socialLinks.instagram}" target="_blank" class="social-icon">📸 Instagram</a>
-    </div>
-    <p style="color: #aaa; margin-top: 40px; font-size: 0.9rem;">Gracias por apoyar mi trabajo 💙</p>
-  `;
-  
-  // Inyecta el contenido en el DOM
-  mainContainer.insertBefore(telegramSection, footer);
-  mainContainer.insertBefore(socialSection, footer);
+  // Redes Sociales
+  document.getElementById('link-tiktok').href = socialLinks.tiktok;
+  document.getElementById('link-whatsapp').href = socialLinks.whatsapp;
+  document.getElementById('link-x').href = socialLinks.x;
+  document.getElementById('link-facebook').href = socialLinks.facebook;
+  document.getElementById('link-instagram').href = socialLinks.instagram;
 }
 
+/**
+ * TAREA 2: Rellenar el catálogo de videos.
+ * Se llama después de que el fetch tiene éxito.
+ */
+function populateVideoCatalog(data) {
+  // Limpiamos la lista por si acaso
+  catalogList.innerHTML = ''; 
+  
+  // Usamos Object.entries para tener la clave (videoKey) y el valor (video)
+  // y .reverse() para mostrar los más nuevos (asumiendo que los añades al final del JSON)
+  const allVideos = Object.entries(data).reverse();
 
-// --- LÓGICA DE CARGA PRINCIPAL (Sin cambios) ---
-fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    if (!data[videoId]) {
-      loading.textContent = "❌ Video no encontrado.";
-      return;
-    }
-
-    const video = data[videoId];
-    videoTitle.textContent = `🦇 » ${video.title.toUpperCase()} « 🦇`;
-    btnFilemoon.href = video.filemoon;
-    btnStreamhg.href = video.streamhg;
-    btnTerabox.href = video.terabox;
-    loading.style.display = 'none';
-
-    // Renderiza el contenido dinámico al instante
-    renderDynamicContent();
-
-  })
-  .catch(() => {
-    loading.textContent = "⚠️ Error cargando enlaces. Intenta más tarde.";
+  allVideos.forEach(([videoKey, video]) => {
+    // Creamos los elementos del DOM de forma segura
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    
+    // Usamos la redirección que ya tienes configurada
+    // Ej: /video1 -> index.html (y el script leerá "video1")
+    link.href = `/${videoKey}`; 
+    link.textContent = `🦇 ${video.title.toUpperCase()}`;
+    
+    listItem.appendChild(link);
+    catalogList.appendChild(listItem);
   });
+}
+
+/**
+ * TAREA 3: Lógica Principal (Fetch y carga del video actual)
+ */
+function main() {
+  // 1. Rellenar la comunidad INMEDIATAMENTE
+  populateCommunityLinks();
+
+  // 2. Obtener el ID del video actual (Sin cambios)
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoId = window.location.pathname.substring(1);
+
+  // 3. Buscar los datos del video
+  fetch('data.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error en la red: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // --- A. Rellenar el Catálogo de Videos ---
+      // Lo hacemos aquí para que no bloquee la carga del video principal
+      populateVideoCatalog(data);
+
+      // --- B. Rellenar el Video Principal ---
+      if (!data[videoId]) {
+        // Video no encontrado
+        videoTitle.textContent = "❌ Este video fue devorado ❌";
+        loading.textContent = "El video no existe o fue movido de la cripta.";
+        return;
+      }
+
+      // ¡Video encontrado!
+      const video = data[videoId];
+      
+      // Rellenar Título y Enlaces
+      videoTitle.textContent = `🦇 » ${video.title.toUpperCase()} « 🦇`;
+      btnFilemoon.href = video.filemoon;
+      btnStreamhg.href = video.streamhg;
+      btnTerabox.href = video.terabox;
+
+      // Ocultar "Cargando..."
+      loading.style.display = 'none';
+
+      // Mostrar los botones (CTA Primario)
+      btnFilemoon.classList.remove('hidden');
+      btnStreamhg.classList.remove('hidden');
+      btnTerabox.classList.remove('hidden');
+
+    })
+    .catch((error) => {
+      console.error('Error al cargar data.json:', error);
+      videoTitle.textContent = "Error en el Conjurø";
+      loading.textContent = "⚠️ Error cargando enlaces. La cripta está sellada. Intenta más tarde.";
+    });
+}
+
+// Ejecutar la lógica principal cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', main);
