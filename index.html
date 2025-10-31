@@ -10,12 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Animaciones Halloween --- */
+    /* --- Animaciones (Sin cambios) --- */
     @keyframes spookyGlow {
       0%, 100% { text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600; }
       50% { text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600; }
     }
-    
     @keyframes spookyShake {
       0%, 100% { transform: translateX(0); }
       20% { transform: translateX(-4px) rotate(-1deg); }
@@ -23,19 +22,13 @@
       60% { transform: translateX(-4px) rotate(1deg); }
       80% { transform: translateX(4px) rotate(-1deg); }
     }
-    
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 15px rgba(255,102,0,0.5); }
       50% { box-shadow: 0 0 30px rgba(255,102,0,1); }
     }
 
     /* --- Estilos Base --- */
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      font-family: 'Segoe UI', sans-serif; 
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: linear-gradient(135deg, #331a00, #000000);
       color: white;
@@ -43,9 +36,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       padding: 20px;
       text-align: center;
+      font-family: 'Segoe UI', sans-serif; 
     }
     .container {
       width: 100%;
@@ -58,7 +51,7 @@
       border: 2px solid rgba(255, 100, 0, 0.2);
     }
 
-    /* --- Títulos --- */
+    /* --- Títulos y Divisores --- */
     h1 {
       font-family: 'Creepster', cursive;
       font-size: 2.8rem;
@@ -71,25 +64,31 @@
     .subtitle { 
       font-size: 1.3rem; 
       color: #ffcc00;  
-      margin-bottom: 25px; /* Espacio entre título y divisor */
+      margin-bottom: 25px;
       font-weight: bold;
       text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
       transition: all 0.3s ease;
       min-height: 1.3rem;
       word-wrap: break-word;
     }
-    
-    /* --- NUEVO: Divisor Profesional --- */
     .spooky-divider {
       border: none;
       height: 1px;
-      /* Línea naranja semitransparente que combina */
       background: rgba(255, 100, 0, 0.3);
-      width: 80%; /* Más elegante que 100% */
-      margin: 0 auto 25px auto; /* 0 arriba, centrado, 25px abajo */
+      width: 80%;
+      margin: 25px auto; /* Espacio consistente */
     }
-    
-    /* --- Estilo Base de Botones (compartido) --- */
+
+    /* --- Contenido Principal (CTA Primario) --- */
+    /* Contenedor para los botones principales y el estado de carga */
+    .main-content {
+      min-height: 250px; /* Pre-asigna espacio para evitar saltos */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* --- Estilo Base de Botones --- */
     .btn {
       display: block;
       width: 90%;
@@ -118,14 +117,42 @@
     .btn-primary:hover { 
       box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
       animation: spookyShake 0.4s ease-in-out;
-      animation-play-state: paused;
+      /* Pausar el pulso al hacer hover para que el shake sea el protagonista */
+      animation-play-state: running, paused; 
     }
     
-    /* --- CTA Secundario (Telegram) - Estilo "Fantasma" --- */
+    /* Ocultar botones hasta que JS los rellene */
+    .btn-primary.hidden {
+      display: none;
+    }
+
+    .loading { 
+      color: #aaa; 
+      font-style: italic; 
+      margin: 20px 0; 
+      font-size: 1.2rem;
+    }
+
+    /* --- Secciones Secundarias (Comunidad y Catálogo) --- */
+    .secondary-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #444;
+    }
+    .secondary-section h2 {
+      color: #ffcc00;
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+
+    /* --- CTA Secundario (Telegram) --- */
     .btn-secondary {
       background: transparent;
       border: 3px solid #6a0dad;
       color: #6a0dad;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 400px;
     }
     .btn-secondary:hover {
       background: #6a0dad;
@@ -133,34 +160,13 @@
       box-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
       transform: scale(1.02);
     }
-    
-    /* --- Varios --- */
-    .loading { 
-      color: #aaa; 
-      font-style: italic; 
-      margin: 20px 0; 
-    }
-    .footer { 
-      margin-top: 40px; 
-      font-size: 0.9rem; 
-      color: #aaa; 
-    }
-    .footer a { 
-      color: #FF6600; 
-      text-decoration: none; 
+    .telegram-section p {
+      color: #ddd; 
+      margin-bottom: 25px; 
+      font-size: 1rem;
     }
 
-    /* --- Barra de Redes Sociales Profesional --- */
-    .social-bar {
-      margin-top: 40px;
-      padding-top: 30px;
-      border-top: 1px solid #444;
-    }
-    .social-bar h2 {
-      color: #ffcc00;
-      margin-bottom: 25px;
-      font-size: 1.5rem;
-    }
+    /* --- Barra de Redes Sociales --- */
     .social-icons-container {
       display: flex;
       justify-content: center;
@@ -184,38 +190,51 @@
       transform: scale(1.1);
     }
     
-    /* ============================================================
-      OPTIMIZACIÓN MÓVIL (Actualizada)
-    ============================================================
-    */
+    /* --- NUEVA SECCIÓN: Catálogo de Videos --- */
+    #video-catalog-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 400px; /* Evita que la lista sea eterna */
+      overflow-y: auto; /* Scroll si es necesario */
+      border: 1px solid rgba(255, 100, 0, 0.3);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    #video-catalog-list li {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 100, 0, 0.1);
+    }
+    #video-catalog-list li:last-child {
+      border-bottom: none;
+    }
+    #video-catalog-list a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    #video-catalog-list a:hover {
+      color: #FF6600;
+      text-shadow: 0 0 10px #FF0000;
+    }
+
+    /* --- Footer --- */
+    .footer { 
+      margin-top: 40px; 
+      font-size: 0.9rem; 
+      color: #aaa; 
+    }
+    .footer a { color: #FF6600; text-decoration: none; }
+
+    /* --- Optimización Móvil (Sin cambios) --- */
     @media (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-      
-      h1 {
-        font-size: 2.4rem;
-      }
-      
-      .subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 20px; /* Espacio ajustado para móvil */
-      }
-      
-      /* Eliminamos el estilo del cta-text que ya no existe */
-      
-      .spooky-divider {
-        margin-bottom: 20px; /* Espacio ajustado para móvil */
-      }
-      
-      .btn {
-        padding: 15px;
-        font-size: 1.1rem;
-      }
-      
-      .social-bar h2 {
-        font-size: 1.3rem;
-      }
+      .container { padding: 20px; }
+      h1 { font-size: 2.4rem; }
+      .subtitle { font-size: 1.1rem; margin-bottom: 20px; }
+      .spooky-divider { margin: 20px auto; }
+      .btn { padding: 15px; font-size: 1.1rem; }
+      .secondary-section h2 { font-size: 1.3rem; }
     }
     
   </style>
@@ -223,16 +242,46 @@
 <body>
 
   <div class="container">
+    
     <h1>🎃 ¡Tu Video de Terror! 👻</h1>
     <p class="subtitle" id="video-title">Buscando en la cripta... 🦇</p>
 
-    <hr class="spooky-divider">
+    <div class="main-content">
+      <a href="#" class="btn btn-primary filemoon hidden" id="btn-filemoon">🟣 Filemoon 💀</a>
+      <a href="#" class="btn btn-primary streamhg hidden" id="btn-streamhg">🟠 StreamHG 👻</a>
+      <a href="#" class="btn btn-primary terabox hidden" id="btn-terabox">🔴 Terabox 🎃</a>
 
-    <a href="#" class="btn btn-primary filemoon" id="btn-filemoon">🟣 Filemoon 💀</a>
-    <a href="#" class="btn btn-primary streamhg" id="btn-streamhg">🟠 StreamHG 👻</a>
-    <a href="#" class="btn btn-primary terabox" id="btn-terabox">🔴 Terabox 🎃</a>
+      <p class="loading" id="loading">🕯️ Conjurando enlaces...</p>
+    </div>
 
-    <p class="loading" id="loading">🕯️ Conjurando enlaces...</p>
+    <div class="secondary-section telegram-section">
+      <hr class="spooky-divider">
+      <h2 style="color: #ffcc00;">📬 ¡Únete a la Cripta! (TELEGRAM)</h2>
+      <p>Screenshots exclusivos, catálogos y guías de terror.</p>
+      
+      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-main">✨ @teralinks12 — Exclusivos</a>
+      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-catalog">📂 @patuconsumoxdmenu — Catálogo</a>
+      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-tutorial">📚 @tutodescargas — Guía</a>
+    </div>
+
+    <div class="secondary-section social-bar">
+      <h2>🌟 ¡Sígueme en el más allá!</h2>
+      <div class="social-icons-container">
+        <a href="#" target="_blank" class="social-icon" id="link-tiktok">🎬 TikTok</a>
+        <a href="#" target="_blank" class="social-icon" id="link-whatsapp">📱 WhatsApp</a>
+        <a href="#" target="_blank" class="social-icon" id="link-x">🐦 X (Twitter)</a>
+        <a href="#" target="_blank" class="social-icon" id="link-facebook">📘 Facebook</a>
+        <a href="#" target="_blank" class="social-icon" id="link-instagram">📸 Instagram</a>
+      </div>
+    </div>
+
+    <div class="secondary-section catalog-section">
+      <hr class="spooky-divider">
+      <h2>🧟‍♂️ Archivo de Horrores (Más Videos)</h2>
+      <ul id="video-catalog-list">
+        </ul>
+    </div>
+
 
     <div class="footer">
       <p>⚠️ Enlaces externos. No alojamos contenido.</p>
