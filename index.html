@@ -3,86 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎃 ¡Tu Video de Terror! 🦇</title>
+  <title>🎬 ¡Tu Video está Listo! 🍿</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Animaciones (Sin cambios) --- */
-    @keyframes spookyGlow {
-      0%, 100% { text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600; }
-      50% { text-shadow: 0 0 20px #FF0000, 0 0 30px #FF6600, 0 0 40px #FF6600; }
+    /* ============================================================
+      NUEVO: TEMA "NEON PRO" (Tu idea, refinada)
+    ============================================================
+    */
+
+    /* --- 1. Variables de Color (Tema Neón) --- */
+    :root {
+      /* Fondo oscuro premium */
+      --color-bg-start: #0F0C29;
+      --color-bg-end: #24243E;
+      
+      /* Color del contenedor (oscuro traslúcido) */
+      --color-container-bg: rgba(20, 20, 40, 0.6);
+      
+      /* Colores de texto */
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #E0E0E0;
+      --color-text-glow: #00AFFF; /* El neón principal */
+      
+      /* Colores de Gradiente Animado (Para CTAs) */
+      --color-brand-1: #00AFFF; /* Cian */
+      --color-brand-2: #B224EF; /* Magenta */
+      --color-brand-3: #00FFD1; /* Turquesa */
+
+      /* Fuente de sistema (sigue siendo la más rápida) */
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
-    @keyframes spookyShake {
-      0%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-4px) rotate(-1deg); }
-      40% { transform: translateX(4px) rotate(1deg); }
-      60% { transform: translateX(-4px) rotate(1deg); }
-      80% { transform: translateX(4px) rotate(-1deg); }
+
+    /* --- Animaciones --- */
+    @keyframes animatedGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    @keyframes glowPulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(255,102,0,0.5); }
-      50% { box-shadow: 0 0 30px rgba(255,102,0,1); }
+    @keyframes subtleGlow {
+      0%, 100% { text-shadow: 0 0 15px var(--color-text-glow); }
+      50% { text-shadow: 0 0 25px var(--color-text-glow); }
     }
 
     /* --- Estilos Base --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: linear-gradient(135deg, #331a00, #000000);
-      color: white;
+      background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+      color: var(--color-text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
       text-align: center;
-      font-family: 'Segoe UI', sans-serif; 
+      font-family: var(--font-stack); 
     }
     .container {
       width: 100%;
       max-width: 600px;
-      background: rgba(10, 0, 0, 0.4);
+      background: var(--color-container-bg);
       padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(255, 100, 0, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 100, 0, 0.2);
+      /* Borde neón sutil (como en tu imagen) */
+      border: 1px solid rgba(0, 175, 255, 0.4);
     }
 
     /* --- Títulos y Divisores --- */
     h1 {
-      font-family: 'Creepster', cursive;
-      font-size: 2.8rem;
-      color: #FF6600;
+      font-family: var(--font-stack);
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: var(--color-text-primary);
+      /* Título con glow (como en tu imagen) */
+      text-shadow: 0 0 10px var(--color-text-glow);
       margin-bottom: 10px;
-      text-shadow: 0 0 10px #FF0000, 0 0 15px #FF6600;
-      letter-spacing: 2px;
-      animation: spookyGlow 2.5s ease-in-out infinite;
+      letter-spacing: -1px;
     }
     .subtitle { 
       font-size: 1.3rem; 
-      color: #ffcc00;  
+      color: var(--color-text-secondary);
       margin-bottom: 25px;
-      font-weight: bold;
-      text-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
-      transition: all 0.3s ease;
+      font-weight: 500;
       min-height: 1.3rem;
       word-wrap: break-word;
     }
-    .spooky-divider {
+    .divider {
       border: none;
       height: 1px;
-      background: rgba(255, 100, 0, 0.3);
-      width: 80%;
-      margin: 25px auto; /* Espacio consistente */
+      background: rgba(0, 175, 255, 0.3); /* Divisor neón */
+      width: 100%;
+      margin: 30px auto;
     }
 
     /* --- Contenido Principal (CTA Primario) --- */
-    /* Contenedor para los botones principales y el estado de carga */
     .main-content {
-      min-height: 250px; /* Pre-asigna espacio para evitar saltos */
+      min-height: 250px; 
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -91,132 +111,139 @@
     /* --- Estilo Base de Botones --- */
     .btn {
       display: block;
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
+      max-width: 450px;
       margin: 15px auto;
       padding: 16px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      color: white;
+      color: var(--color-text-primary);
       text-decoration: none;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     /* --- CTA Primario (Descarga) --- */
     .btn-primary {
+      color: #FFF;
       border: none;
-      animation: glowPulse 2s ease-in-out infinite;
+      /* Gradiente animado como en "Aura", pero con colores Neón */
+      background: linear-gradient(90deg, var(--color-brand-1), var(--color-brand-2), var(--color-brand-3), var(--color-brand-1));
+      background-size: 300% 300%;
+      animation: animatedGradient 4s ease-in-out infinite;
+      box-shadow: 0 5px 20px rgba(178, 36, 239, 0.3);
     }
-    .filemoon { background: #6a0dad; }
-    .streamhg { background: #FF6600; }
-    .terabox { background: #8b0000; }
-
     .btn-primary:hover { 
-      box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6); 
-      animation: spookyShake 0.4s ease-in-out;
-      /* Pausar el pulso al hacer hover para que el shake sea el protagonista */
-      animation-play-state: running, paused; 
+      box-shadow: 0 8px 30px rgba(178, 36, 239, 0.6); 
+      transform: scale(1.03);
+      animation-play-state: paused;
     }
-    
-    /* Ocultar botones hasta que JS los rellene */
-    .btn-primary.hidden {
-      display: none;
-    }
-
+    .btn-primary.hidden { display: none; }
     .loading { 
-      color: #aaa; 
-      font-style: italic; 
+      color: var(--color-text-secondary); 
       margin: 20px 0; 
       font-size: 1.2rem;
     }
 
-    /* --- Secciones Secundarias (Comunidad y Catálogo) --- */
-    .secondary-section {
-      margin-top: 40px;
-      padding-top: 30px;
-      border-top: 1px solid #444;
-    }
-    .secondary-section h2 {
-      color: #ffcc00;
-      margin-bottom: 25px;
-      font-size: 1.5rem;
-    }
-
-    /* --- CTA Secundario (Telegram) --- */
+    /* --- CTA Secundario (Telegram) - Estilo "Neon Ghost" --- */
     .btn-secondary {
       background: transparent;
-      border: 3px solid #6a0dad;
-      color: #6a0dad;
-      margin: 10px auto;
-      width: 90%;
-      max-width: 400px;
+      /* Borde neón */
+      border: 2px solid var(--color-text-glow);
+      color: var(--color-text-glow);
+      box-shadow: 0 0 15px rgba(0, 175, 255, 0.3);
     }
     .btn-secondary:hover {
-      background: #6a0dad;
-      color: white;
-      box-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
+      background: var(--color-text-glow);
+      color: var(--color-bg-start);
+      box-shadow: 0 0 25px rgba(0, 175, 255, 0.7);
       transform: scale(1.02);
     }
     .telegram-section p {
-      color: #ddd; 
+      color: var(--color-text-secondary); 
       margin-bottom: 25px; 
       font-size: 1rem;
     }
+    .secondary-section h2 {
+      color: var(--color-text-primary);
+      text-shadow: 0 0 8px var(--color-text-glow);
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
 
-    /* --- Barra de Redes Sociales --- */
-    .social-icons-container {
-      display: flex;
-      justify-content: center;
+    /* ============================================================
+      NUEVO: REDES SOCIALES "NEON LINKTREE"
+    ============================================================
+    */
+    .social-button-container {
+      display: grid;
       gap: 15px;
-      flex-wrap: wrap;
     }
-    .social-icon {
-      display: inline-block;
-      color: #ddd;
-      text-decoration: none;
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 15px;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
       font-size: 1rem;
-      font-weight: bold;
-      padding: 10px 15px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      background: rgba(0, 0, 0, 0.2); /* Fondo oscuro para el botón */
+      border: 1px solid rgba(0, 175, 255, 0.3);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
-    .social-icon:hover {
-      background: #FF6600;
-      color: white;
-      transform: scale(1.1);
+    .social-btn:hover {
+      transform: scale(1.03);
+      background: rgba(0, 175, 255, 0.1);
+      color: var(--color-text-primary);
+      border-color: var(--color-text-glow);
     }
-    
-    /* --- NUEVA SECCIÓN: Catálogo de Videos --- */
+    .social-btn svg {
+      position: absolute;
+      left: 20px;
+      width: 24px;
+      height: 24px;
+      fill: var(--color-text-glow); /* Icono neón */
+      transition: all 0.2s ease;
+    }
+    .social-btn:hover svg {
+      filter: drop-shadow(0 0 5px var(--color-text-glow));
+    }
+
+    /* --- Catálogo de Videos --- */
     #video-catalog-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      max-height: 400px; /* Evita que la lista sea eterna */
-      overflow-y: auto; /* Scroll si es necesario */
-      border: 1px solid rgba(255, 100, 0, 0.3);
+      max-height: 400px; 
+      overflow-y: auto; 
+      border: 1px solid rgba(0, 175, 255, 0.3);
       border-radius: 8px;
       background: rgba(0, 0, 0, 0.2);
     }
     #video-catalog-list li {
       padding: 15px;
-      border-bottom: 1px solid rgba(255, 100, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 175, 255, 0.2);
     }
-    #video-catalog-list li:last-child {
-      border-bottom: none;
-    }
+    #video-catalog-list li:last-child { border-bottom: none; }
     #video-catalog-list a {
-      color: #ffcc00;
+      color: var(--color-text-glow);
       text-decoration: none;
       font-weight: bold;
       transition: all 0.2s ease;
     }
     #video-catalog-list a:hover {
-      color: #FF6600;
-      text-shadow: 0 0 10px #FF0000;
+      color: var(--color-text-primary);
+      text-shadow: 0 0 10px var(--color-text-glow);
     }
 
     /* --- Footer --- */
@@ -225,15 +252,16 @@
       font-size: 0.9rem; 
       color: #aaa; 
     }
-    .footer a { color: #FF6600; text-decoration: none; }
+    .footer a { color: var(--color-text-glow); text-decoration: none; }
 
-    /* --- Optimización Móvil (Sin cambios) --- */
+    /* --- Optimización Móvil --- */
     @media (max-width: 480px) {
       .container { padding: 20px; }
-      h1 { font-size: 2.4rem; }
+      h1 { font-size: 2rem; }
       .subtitle { font-size: 1.1rem; margin-bottom: 20px; }
-      .spooky-divider { margin: 20px auto; }
-      .btn { padding: 15px; font-size: 1.1rem; }
+      .btn { padding: 15px; font-size: 1rem; }
+      .social-btn { padding: 14px; font-size: 0.9rem; }
+      .social-btn svg { left: 15px; width: 20px; height: 20px; }
       .secondary-section h2 { font-size: 1.3rem; }
     }
     
@@ -243,50 +271,65 @@
 
   <div class="container">
     
-    <h1>🎃 ¡Tu Video de Terror! 👻</h1>
-    <p class="subtitle" id="video-title">Buscando en la cripta... 🦇</p>
+    <h1><span id="video-icon">⚡</span> ¡Tu Video está Listo! <span id="video-icon">⚡</span></h1>
+    <p class="subtitle" id="video-title">Buscando en nuestros archivos... 🔍</p>
 
     <div class="main-content">
-      <a href="#" class="btn btn-primary filemoon hidden" id="btn-filemoon">🟣 Filemoon 💀</a>
-      <a href="#" class="btn btn-primary streamhg hidden" id="btn-streamhg">🟠 StreamHG 👻</a>
-      <a href="#" class="btn btn-primary terabox hidden" id="btn-terabox">🔴 Terabox 🎃</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Ver en Filemoon</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Ver en StreamHG</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Ver en Terabox</a>
 
-      <p class="loading" id="loading">🕯️ Conjurando enlaces...</p>
+      <p class="loading" id="loading">⚙️ Preparando enlaces...</p>
     </div>
 
     <div class="secondary-section telegram-section">
-      <hr class="spooky-divider">
-      <h2 style="color: #ffcc00;">📬 ¡Únete a la Cripta! (TELEGRAM)</h2>
-      <p>Screenshots exclusivos, catálogos y guías de terror.</p>
+      <hr class="divider">
+      <h2 style="color: var(--color-text-glow);">🔗 Conecta con la Comunidad</h2>
+      <p>Explora contenido, obtén soporte y accede a nuestro catálogo completo.</p>
       
-      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-main">✨ @teralinks12 — Exclusivos</a>
-      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-catalog">📂 @patuconsumoxdmenu — Catálogo</a>
-      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-tutorial">📚 @tutodescargas — Guía</a>
+      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-main">🚀 @teralinks12 — Contenido VIP</a>
+      <a href="#" target="_blank" class="btn btn-secondary" id="link-telegram-catalog">📂 @patuconsumoxdmenu — Catálogo Principal</a>
+      <a href="#" target="_blank" " class="btn btn-secondary" id="link-telegram-tutorial">💡 @tutodescargas — Soporte y Guías</a>
     </div>
 
     <div class="secondary-section social-bar">
-      <h2>🌟 ¡Sígueme en el más allá!</h2>
-      <div class="social-icons-container">
-        <a href="#" target="_blank" class="social-icon" id="link-tiktok">🎬 TikTok</a>
-        <a href="#" target="_blank" class="social-icon" id="link-whatsapp">📱 WhatsApp</a>
-        <a href="#" target="_blank" class="social-icon" id="link-x">🐦 X (Twitter)</a>
-        <a href="#" target="_blank" class="social-icon" id="link-facebook">📘 Facebook</a>
-        <a href="#" target="_blank" class="social-icon" id="link-instagram">📸 Instagram</a>
+      <h2>🌐 Síguenos para Novedades</h2>
+      
+      <div class="social-button-container">
+        <a href="#" target="_blank" class="social-btn" id="link-tiktok">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.053 6.643A6.26 6.26 0 0 0 16.5 5.25a6.25 6.25 0 0 0-6.25 6.25v5.5a2.25 2.25 0 1 1-4.5 0v-2a.75.75 0 0 1 1.5 0v2a.75.75 0 1 0 1.5 0v-5.5a7.75 7.75 0 0 1 7.75-7.75c2.348 0 4.51.98 6.053 2.643a.75.75 0 0 1-1.006 1.11Z"/></svg>
+          <span>TikTok</span>
+        </a>
+        <a href="#" target="_blank" class="social-btn" id="link-whatsapp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.48 1.34 5.04L2.06 22l5.1-1.4A9.9 9.9 0 0 0 12.04 22c5.46 0 9.91-4.45 9.91-10S17.5 2 12.04 2m.01 1.66c4.6 0 8.32 3.73 8.32 8.33s-3.73 8.34-8.32 8.34a8.27 8.27 0 0 1-4.26-1.16l-.3-.18-3.17.84.85-3.1-.2-.32a8.28 8.28 0 0 1-1.28-4.58c0-4.6 3.72-8.33 8.32-8.33m4.33 10.23c-.1-.13-.33-.2-.5-.33-.17-.12-1-.48-1.16-.54-.16-.06-.28-.1-.4.1-.12.2-.44.54-.54.64-.1.1-.18.12-.33.06-.15-.06-.63-.23-1.2-.74-.44-.4-.73-.88-.82-1.03-.09-.15 0-.23.06-.3.05-.06.12-.15.18-.23.06-.07.08-.12.12-.2.04-.08.02-.15 0-.2-.02-.05-.1-.23-.14-.3-.04-.08-.1-.08-.14-.08-.05 0-.1 0-.15.02s-.18.02-.27.1c-.1.08-.3.3-.46.58-.17.28-.26.5-.26.83 0 .32.1.65.2.85.1.2.53 1.03 1.28 1.78.75.75 1.33 1.2 1.8 1.4.47.2 1 .3 1.34.27.34-.03 1-.4 1.14-.8.14-.4.14-.74.1-.8ZM12.04 2Zm0 1.66Z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#" target="_blank" class="social-btn" id="link-x">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m18.244 2.25-3.308 4.633L10.078 2.25H2.25l8.604 12.326L2.25 21.75h1.616l4.01-4.893 4.608 4.893h7.828L9.706 9.075 17.522 2.25h-1.616L12. 657 5.567l-1.08-1.518L18.244 2.25Zm-2.872 17.51L6.878 4.14h-2.14l11.522 15.62h2.14L15.372 19.76Z"/></svg>
+          <span>X (Twitter)</span>
+        </a>
+        <a href="#" target="_blank" class="social-btn" id="link-facebook">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89H8.131V12h2.307V9.781c0-2.28 1.353-3.522 3.398-3.522 1 0 1.863.075 2.112.108v2.54h-1.49c-1.104 0-1.317.525-1.317 1.293V12h2.82l-.367 2.89H13.13v7.008C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a href="#" target="_blank" class="social-btn" id="link-instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.217.598 1.77.96.556.36 1.007.91 1.368 1.465.362.554.708 1.11.962 1.77.248.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.217 1.79-.465 2.428a4.883 4.883 0 0 1-.962 1.77c-.36.554-.91 1.007-1.465 1.368-.554.362-1.11.708-1.77.962-.637.248-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.217-2.428-.465a4.883 4.883 0 0 1-1.77-.962 4.91 4.91 0 0 1-1.368-1.465 4.883 4.883 0 0 1-.962-1.77c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.217 1.79.465-2.428.254-.66.598-1.217.962-1.77.36-.554.91-1.007 1.465-1.368.554-.362 1.11-.708 1.77-.962.637.248 1.363.415 2.428.465C8.944 2.01 9.283 2 12 2Zm0 1.8c-2.68 0-3.007.01-4.048.058-.975.048-1.542.21-1.89.362-.451.196-.71.39-1.007.747a3.09 3.09 0 0 0-.747 1.007c-.152.348-.314.915-.362 1.89C2.01 8.993 2 9.32 2 12s.01 3.007.058 4.048c.048.975.21 1.542.362 1.89.196.451.39.71.747 1.007.356.297.604.551 1.007.747.348.152.915.314 1.89.362 1.04.048 1.368.058 4.048.058s3.007-.01 4.048-.058c.975-.048 1.542-.21 1.89-.362.451-.196.71-.39 1.007-.747.297-.356.551-.604.747-1.007.152-.348.314.915.362-1.89.048-1.04.058-1.368.058-4.048s-.01-3.007-.058-4.048c-.048-.975-.21-1.542-.362-1.89a3.09 3.09 0 0 0-.747-1.007 3.09 3.09 0 0 0-1.007-.747c-.348-.152-.915-.314-1.89-.362C15.007 3.81 14.68 3.8 12 3.8Zm0 3.6c-3.09 0-5.6 2.51-5.6 5.6s2.51 5.6 5.6 5.6 5.6-2.51 5.6-5.6-2.51-5.6-5.6-5.6Zm0 9.4c-2.1 0-3.8-1.7-3.8-3.8s1.7-3.8 3.8-3.8 3.8 1.7 3.8 3.8-1.7 3.8-3.8 3.8Zm6.4-10.2a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg>
+          <span>Instagram</span>
+        </a>
       </div>
     </div>
 
     <div class="secondary-section catalog-section">
-      <hr class="spooky-divider">
-      <h2>🧟‍♂️ Archivo de Horrores (Más Videos)</h2>
+      <hr class="divider">
+      <h2>🗂️ Catálogo Completo (Más Videos)</h2>
       <ul id="video-catalog-list">
         </ul>
     </div>
 
 
     <div class="footer">
-      <p>⚠️ Enlaces externos. No alojamos contenido.</p>
-      <p>🕷️ Cada clic alimenta a la araña... 🕸️</p>
-      <p>© 2025 | <a href="https://linkvertise.com" target="_blank">Linkvertise</a></p>
+      <p>⚠️ Todos los enlaces son externos. Este sitio no aloja contenido.</p>
+      <p>© 2025 | <a href="https://linkvertise.com" target="_blank">Partner de Linkvertise</a></p>
     </div>
   </div>
 
