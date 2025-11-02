@@ -24,8 +24,7 @@ const telegramChannels = {
 
 /**
  * TAREA 1: Hidratar enlaces estáticos de la comunidad.
- * Esto se ejecuta de inmediato. No espera al fetch.
- * El usuario puede interactuar con esto incluso antes de que carguen los videos.
+ * (Sin cambios)
  */
 function populateCommunityLinks() {
   // Telegram
@@ -43,7 +42,7 @@ function populateCommunityLinks() {
 
 /**
  * TAREA 2: Rellenar el catálogo de videos.
- * Se llama después de que el fetch tiene éxito.
+ * (Un único cambio de emoji)
  */
 function populateVideoCatalog(data) {
   // Limpiamos la lista por si acaso
@@ -61,7 +60,10 @@ function populateVideoCatalog(data) {
     // Usamos la redirección que ya tienes configurada
     // Ej: /video1 -> index.html (y el script leerá "video1")
     link.href = `/${videoKey}`; 
-    link.textContent = `🦇 ${video.title.toUpperCase()}`;
+    
+    // *** ÚNICO CAMBIO AQUÍ ***
+    // Cambiamos el emoji '🦇' por '▶️' para el nuevo tema.
+    link.textContent = `▶️ ${video.title.toUpperCase()}`;
     
     listItem.appendChild(link);
     catalogList.appendChild(listItem);
@@ -70,6 +72,7 @@ function populateVideoCatalog(data) {
 
 /**
  * TAREA 3: Lógica Principal (Fetch y carga del video actual)
+ * (Ligeros cambios en los textos de error/título)
  */
 function main() {
   // 1. Rellenar la comunidad INMEDIATAMENTE
@@ -89,14 +92,13 @@ function main() {
     })
     .then(data => {
       // --- A. Rellenar el Catálogo de Videos ---
-      // Lo hacemos aquí para que no bloquee la carga del video principal
       populateVideoCatalog(data);
 
       // --- B. Rellenar el Video Principal ---
       if (!data[videoId]) {
         // Video no encontrado
-        videoTitle.textContent = "❌ Este video fue devorado ❌";
-        loading.textContent = "El video no existe o fue movido de la cripta.";
+        videoTitle.textContent = "❌ Video no encontrado ❌";
+        loading.textContent = "El video no existe o fue movido de nuestros archivos.";
         return;
       }
 
@@ -104,7 +106,7 @@ function main() {
       const video = data[videoId];
       
       // Rellenar Título y Enlaces
-      videoTitle.textContent = `🦇 » ${video.title.toUpperCase()} « 🦇`;
+      videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`;
       btnFilemoon.href = video.filemoon;
       btnStreamhg.href = video.streamhg;
       btnTerabox.href = video.terabox;
@@ -120,8 +122,8 @@ function main() {
     })
     .catch((error) => {
       console.error('Error al cargar data.json:', error);
-      videoTitle.textContent = "Error en el Conjurø";
-      loading.textContent = "⚠️ Error cargando enlaces. La cripta está sellada. Intenta más tarde.";
+      videoTitle.textContent = "Error en el Sistema";
+      loading.textContent = "⚠️ Error cargando enlaces. Los archivos están temporalmente corruptos. Intenta más tarde.";
     });
 }
 
