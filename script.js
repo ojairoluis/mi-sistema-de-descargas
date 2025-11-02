@@ -16,14 +16,14 @@ const socialLinks = {
 };
 
 const telegramChannels = {
-  main: "https://t.me/+iQ-eesmcw0VhYzQx",
-  catalog: "https://t.me/patuconsumoxdmenu",
-  tutorial: "https://t.me/tutodescargas"
+  main: "https://t.me/+iQ-eesmcw0VhYzQx",      // Este es @teralinks12 (VIP)
+  catalog: "https://t.me/patuconsumoxdmenu",   // Este es el Catálogo (Carpeta)
+  tutorial: "https://t.me/tutodescargas" // Este es el de Guías (Libro)
 };
 
 /**
  * TAREA 1: Hidratar enlaces estáticos de la comunidad.
- * (Sin cambios)
+ * (Asigna los enlaces a los nuevos botones de ícono)
  */
 function populateCommunityLinks() {
   // Telegram
@@ -41,7 +41,7 @@ function populateCommunityLinks() {
 
 /**
  * TAREA 2: Rellenar el catálogo de videos.
- * (Un único cambio de emoji)
+ * (Emoji ⚡ coincide con el tema Neón)
  */
 function populateVideoCatalog(data) {
   // Limpiamos la lista por si acaso
@@ -59,8 +59,7 @@ function populateVideoCatalog(data) {
     // Usamos la redirección que ya tienes configurada
     link.href = `/${videoKey}`; 
     
-    // *** CAMBIO DE COHERENCIA DE TEMA ***
-    // Cambiamos el emoji '▶️' por '⚡' para el nuevo tema.
+    // Emoji Neón
     link.textContent = `⚡ ${video.title.toUpperCase()}`;
     
     listItem.appendChild(link);
@@ -70,7 +69,7 @@ function populateVideoCatalog(data) {
 
 /**
  * TAREA 3: Lógica Principal (Fetch y carga del video actual)
- * (Textos de error actualizados)
+ * (Sin cambios)
  */
 function main() {
   // 1. Rellenar la comunidad INMEDIATAMENTE
