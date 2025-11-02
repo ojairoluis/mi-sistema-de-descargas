@@ -1,5 +1,4 @@
 // --- Elementos del DOM (cache) ---
-// Es buena práctica "cachear" los elementos que usarás
 const loading = document.getElementById('loading');
 const videoTitle = document.getElementById('video-title');
 const btnFilemoon = document.getElementById('btn-filemoon');
@@ -58,12 +57,11 @@ function populateVideoCatalog(data) {
     const link = document.createElement('a');
     
     // Usamos la redirección que ya tienes configurada
-    // Ej: /video1 -> index.html (y el script leerá "video1")
     link.href = `/${videoKey}`; 
     
-    // *** ÚNICO CAMBIO AQUÍ ***
-    // Cambiamos el emoji '🦇' por '▶️' para el nuevo tema.
-    link.textContent = `▶️ ${video.title.toUpperCase()}`;
+    // *** CAMBIO DE COHERENCIA DE TEMA ***
+    // Cambiamos el emoji '▶️' por '⚡' para el nuevo tema.
+    link.textContent = `⚡ ${video.title.toUpperCase()}`;
     
     listItem.appendChild(link);
     catalogList.appendChild(listItem);
@@ -72,7 +70,7 @@ function populateVideoCatalog(data) {
 
 /**
  * TAREA 3: Lógica Principal (Fetch y carga del video actual)
- * (Ligeros cambios en los textos de error/título)
+ * (Textos de error actualizados)
  */
 function main() {
   // 1. Rellenar la comunidad INMEDIATAMENTE
