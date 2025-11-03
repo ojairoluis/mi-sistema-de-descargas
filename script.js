@@ -126,3 +126,5 @@ function main() {
 
 // Ejecutar la lógica principal cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', main);
+
+// NOTA: El '}' extra que estaba aquí ha sido eliminado.
