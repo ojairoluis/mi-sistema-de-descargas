@@ -1,6 +1,7 @@
 // --- Elementos del DOM (cache) ---
 const loading = document.getElementById('loading');
-const videoTitle = document.getElementById('video-title');
+const videoTitle = document.getElementById('video-title'); // Este es el <p> subtítulo
+const mainTitleH1 = document.querySelector('h1'); // --- CAMBIO: Añadido para controlar el H1
 const btnFilemoon = document.getElementById('btn-filemoon');
 const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
@@ -23,7 +24,7 @@ const telegramChannels = {
 
 /**
  * TAREA 1: Hidratar enlaces estáticos de la comunidad.
- * (Asigna los enlaces a los nuevos botones de ícono)
+ * (Sin cambios)
  */
 function populateCommunityLinks() {
   // Telegram
@@ -41,7 +42,7 @@ function populateCommunityLinks() {
 
 /**
  * TAREA 2: Rellenar el catálogo de videos.
- * (Emoji ⚡ coincide con el tema Neón)
+ * (Sin cambios)
  */
 function populateVideoCatalog(data) {
   // Limpiamos la lista por si acaso
@@ -69,7 +70,7 @@ function populateVideoCatalog(data) {
 
 /**
  * TAREA 3: Lógica Principal (Fetch y carga del video actual)
- * (Sin cambios)
+ * (--- CAMBIO: Lógica principal actualizada ---)
  */
 function main() {
   // 1. Rellenar la comunidad INMEDIATAMENTE
@@ -88,43 +89,60 @@ function main() {
       return response.json();
     })
     .then(data => {
-      // --- A. Rellenar el Catálogo de Videos ---
+      // --- A. Rellenar el Catálogo de Videos (Siempre se rellena) ---
       populateVideoCatalog(data);
 
-      // --- B. Rellenar el Video Principal ---
-      if (!data[videoId]) {
+      // --- B. Rellenar el Video Principal O el Índice ---
+      //    (--- ESTA ES LA NUEVA LÓGICA MEJORADA ---)
+
+      if (videoId === "") {
+        // **MODO ÍNDICE (Página Raíz: /) **
+        // Estamos en la página principal, mostramos el catálogo.
+        
+        mainTitleH1.innerHTML = '⚡ Bienvenido al Catálogo ⚡'; // Título principal
+        videoTitle.textContent = "Selecciona un video de la lista de abajo"; // Subtítulo
+        loading.style.display = 'none'; // Ocultar "Cargando..."
+        
+        // Los botones de descarga (Filemoon, etc.) permanecen ocultos 
+        // ya que tienen la clase 'hidden' por defecto en el HTML.
+
+      } else if (data[videoId]) {
+        // **MODO VIDEO (Página de Video Válida: /test) **
+        // ¡Video encontrado!
+        const video = data[videoId];
+        
+        // Rellenar Título y Enlaces
+        // El H1 se queda como "¡Tu Video está Listo!" (del index.html)
+        videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`; // Subtítulo
+        btnFilemoon.href = video.filemoon;
+        btnStreamhg.href = video.streamhg;
+        btnTerabox.href = video.terabox;
+
+        // Ocultar "Cargando..."
+        loading.style.display = 'none';
+
+        // Mostrar los botones (CTA Primario)
+        btnFilemoon.classList.remove('hidden');
+        btnStreamhg.classList.remove('hidden');
+        btnTerabox.classList.remove('hidden');
+        
+      } else {
+        // **MODO ERROR (Video no encontrado: /url-falsa)**
         // Video no encontrado
-        videoTitle.textContent = "❌ Video no encontrado ❌";
-        loading.textContent = "El video no existe o fue movido de nuestros archivos.";
-        return;
+        mainTitleH1.innerHTML = '❌ Error 404 ❌';
+        videoTitle.textContent = "Video no encontrado";
+        loading.textContent = "El video no existe o fue movido de nuestros archivos. Por favor, selecciona uno del catálogo de abajo.";
       }
-
-      // ¡Video encontrado!
-      const video = data[videoId];
-      
-      // Rellenar Título y Enlaces
-      videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`;
-      btnFilemoon.href = video.filemoon;
-      btnStreamhg.href = video.streamhg;
-      btnTerabox.href = video.terabox;
-
-      // Ocultar "Cargando..."
-      loading.style.display = 'none';
-
-      // Mostrar los botones (CTA Primario)
-      btnFilemoon.classList.remove('hidden');
-      btnStreamhg.classList.remove('hidden');
-      btnTerabox.classList.remove('hidden');
+      // --- FIN DE LA NUEVA LÓGICA ---
 
     })
     .catch((error) => {
       console.error('Error al cargar data.json:', error);
-      videoTitle.textContent = "Error en el Sistema";
+      mainTitleH1.innerHTML = "Error en el Sistema"; // --- CAMBIO ---
+      videoTitle.textContent = "Error cargando la base de datos."; // --- CAMBIO ---
       loading.textContent = "⚠️ Error cargando enlaces. Los archivos están temporalmente corruptos. Intenta más tarde.";
     });
 }
 
 // Ejecutar la lógica principal cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', main);
-
-// NOTA: El '}' extra que estaba aquí ha sido eliminado.
