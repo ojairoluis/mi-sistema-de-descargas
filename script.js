@@ -5,9 +5,8 @@ const btnFilemoon = document.getElementById('btn-filemoon');
 const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
 const catalogList = document.getElementById('video-catalog-list');
-const searchInput = document.getElementById('search-input');
-const videoCount = document.getElementById('video-count');
-const specificVideoSection = document.getElementById('specific-video-section');
+const mainContent = document.querySelector('.main-content');
+const mainTitleText = document.getElementById('main-title-text');
 
 // --- Tus Enlaces (Se mantienen igual) -------
 const socialLinks = {
@@ -23,9 +22,6 @@ const telegramChannels = {
   catalog: "https://t.me/patuconsumoxdmenu",   // Este es el Catálogo (Carpeta)
   tutorial: "https://t.me/tutodescargas" // Este es el de Guías (Libro)
 };
-
-// Variable global para almacenar todos los videos
-let allVideos = [];
 
 /**
  * TAREA 1: Hidratar enlaces estáticos de la comunidad.
@@ -49,72 +45,39 @@ function populateCommunityLinks() {
  * TAREA 2: Rellenar el catálogo de videos.
  * (Emoji ⚡ coincide con el tema Neón)
  */
-function populateVideoCatalog(data, filter = '') {
+function populateVideoCatalog(data) {
   // Limpiamos la lista por si acaso
-  catalogList.innerHTML = ''; 
+  catalogList.innerHTML = '';  
   
-  // Guardamos todos los videos globalmente
-  allVideos = Object.entries(data);
-  
-  // Filtramos si hay un término de búsqueda
-  let filteredVideos = allVideos;
-  if (filter) {
-    const searchTerm = filter.toLowerCase();
-    filteredVideos = allVideos.filter(([videoKey, video]) => 
-      video.title.toLowerCase().includes(searchTerm) || 
-      videoKey.toLowerCase().includes(searchTerm)
-    );
-  }
-  
-  // Actualizamos el contador
-  const totalCount = allVideos.length;
-  const filteredCount = filteredVideos.length;
-  
-  if (filter) {
-    videoCount.textContent = `${filteredCount} de ${totalCount} videos encontrados`;
-    videoCount.style.background = 'rgba(178, 36, 239, 0.2)';
-  } else {
-    videoCount.textContent = `${totalCount} videos disponibles`;
-    videoCount.style.background = 'rgba(0, 175, 255, 0.1)';
-  }
-  
-  // Mostramos los videos filtrados (más recientes primero)
-  if (filteredVideos.length === 0) {
-    const emptyMessage = document.createElement('li');
-    emptyMessage.textContent = 'No se encontraron videos';
-    emptyMessage.style.padding = '30px';
-    emptyMessage.style.color = 'var(--color-text-secondary)';
-    emptyMessage.style.textAlign = 'center';
-    catalogList.appendChild(emptyMessage);
-  } else {
-    filteredVideos.reverse().forEach(([videoKey, video], index) => {
-      // Creamos los elementos del DOM de forma segura
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      
-      // Usamos la redirección que ya tienes configurada
-      link.href = `/${videoKey}`; 
-      
-      // Emoji Neón con animación escalonada
-      link.textContent = `⚡ ${video.title.toUpperCase()}`;
-      link.style.animationDelay = `${index * 0.05}s`;
-      
-      listItem.appendChild(link);
-      catalogList.appendChild(listItem);
-    });
-  }
+  // Usamos Object.entries para tener la clave (videoKey) y el valor (video)
+  // y .reverse() para mostrar los más nuevos (asumiendo que los añades al final del JSON)
+  const allVideos = Object.entries(data).reverse();
+
+  allVideos.forEach(([videoKey, video]) => {
+    // Creamos los elementos del DOM de forma segura
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    
+    // Usamos la redirección que ya tienes configurada
+    link.href = `/${videoKey}`;  
+    
+    // Emoji Neón
+    link.textContent = `⚡ ${video.title.toUpperCase()}`;
+    
+    listItem.appendChild(link);
+    catalogList.appendChild(listItem);
+  });
 }
 
 /**
  * TAREA 3: Lógica Principal (Fetch y carga del video actual)
- * (Con cambios para funcionar como página principal)
+ * (¡¡¡AQUÍ ESTÁ LA MEJORA!!!)
  */
 function main() {
   // 1. Rellenar la comunidad INMEDIATAMENTE
   populateCommunityLinks();
 
-  // 2. Obtener el ID del video actual (si existe)
-  const urlParams = new URLSearchParams(window.location.search);
+  // 2. Obtener el ID del video actual
   const videoId = window.location.pathname.substring(1);
 
   // 3. Buscar los datos del video
@@ -126,103 +89,58 @@ function main() {
       return response.json();
     })
     .then(data => {
-      // --- A. Rellenar el Catálogo de Videos ---
+      // --- A. Rellenar el Catálogo de Videos (Esto se hace siempre) ---
       populateVideoCatalog(data);
 
-      // --- B. Si hay un video específico en la URL, mostrarlo ---
-      if (videoId && data[videoId]) {
-        showSpecificVideo(data[videoId], videoId);
+      // --- B. LÓGICA CONDICIONAL ---
+      // ¿Estamos en la Homepage (raíz) O en un video específico?
+
+      if (videoId === "" || videoId === "index.html") {
+        // --- VISTA "LINKTREE" (Homepage) ---
+        
+        // 1. Cambiar Títulos
+        mainTitleText.textContent = "PatuConsumoXD";
+        videoTitle.textContent = "Bienvenido. Encuentra todos nuestros enlaces. 👇";
+
+        // 2. Ocultar la sección de video (botones y loading)
+        mainContent.style.display = 'none';
+
       } else {
-        // Si no hay video específico, mostrar la página principal
-        showMainPage();
+        // --- VISTA "VIDEO ESPECÍFICO" (Lógica anterior) ---
+
+        if (!data[videoId]) {
+          // Video no encontrado
+          videoTitle.textContent = "❌ Video no encontrado ❌";
+          loading.textContent = "El video no existe o fue movido de nuestros archivos.";
+          return;
+        }
+
+        // ¡Video encontrado!
+        const video = data[videoId];
+        
+        // Rellenar Título y Enlaces
+        // (El H1 ya dice "¡Tu Video está Listo!" por defecto, perfecto)
+        videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`;
+        btnFilemoon.href = video.filemoon;
+        btnStreamhg.href = video.streamhg;
+        btnTerabox.href = video.terabox;
+
+        // Ocultar "Cargando..."
+        loading.style.display = 'none';
+
+        // Mostrar los botones (CTA Primario)
+        btnFilemoon.classList.remove('hidden');
+        btnStreamhg.classList.remove('hidden');
+        btnTerabox.classList.remove('hidden');
       }
 
-      // --- C. Configurar la búsqueda ---
-      setupSearch(data);
     })
     .catch((error) => {
       console.error('Error al cargar data.json:', error);
       videoTitle.textContent = "Error en el Sistema";
       loading.textContent = "⚠️ Error cargando enlaces. Los archivos están temporalmente corruptos. Intenta más tarde.";
-      videoCount.textContent = "Error al cargar el catálogo";
     });
-}
-
-/**
- * Muestra un video específico
- */
-function showSpecificVideo(video, videoId) {
-  // Cambiar el título de la página
-  document.title = `⚡ ${video.title} ⚡ - PatuConsumoXD`;
-  
-  // Mostrar la sección de video específico
-  specificVideoSection.style.display = 'block';
-  
-  // Ocultar otras secciones
-  document.querySelector('.community-section').style.display = 'none';
-  document.querySelector('.catalog-section').style.display = 'none';
-  
-  // Rellenar Título y Enlaces
-  videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`;
-  btnFilemoon.href = video.filemoon;
-  btnStreamhg.href = video.streamhg;
-  btnTerabox.href = video.terabox;
-
-  // Ocultar "Cargando..."
-  loading.style.display = 'none';
-
-  // Mostrar los botones (CTA Primario)
-  btnFilemoon.classList.remove('hidden');
-  btnStreamhg.classList.remove('hidden');
-  btnTerabox.classList.remove('hidden');
-}
-
-/**
- * Muestra la página principal (catálogo)
- */
-function showMainPage() {
-  // Asegurarse de que la sección de video específico esté oculta
-  specificVideoSection.style.display = 'none';
-  
-  // Mostrar todas las secciones
-  document.querySelector('.community-section').style.display = 'block';
-  document.querySelector('.catalog-section').style.display = 'block';
-  
-  // Cambiar el título si es necesario
-  document.title = "⚡ PatuConsumoXD ⚡ - Tu Catálogo Premium";
-  videoTitle.textContent = "Tu catálogo premium de contenido";
-}
-
-/**
- * Configura la funcionalidad de búsqueda
- */
-function setupSearch(data) {
-  let searchTimeout;
-  
-  searchInput.addEventListener('input', function() {
-    // Debounce para mejorar rendimiento
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      populateVideoCatalog(data, this.value);
-    }, 300);
-  });
-  
-  // Limpiar búsqueda con Escape
-  searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      this.value = '';
-      populateVideoCatalog(data, '');
-      this.blur();
-    }
-  });
 }
 
 // Ejecutar la lógica principal cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', main);
-
-// Prevenir comportamiento por defecto en enlaces vacíos
-document.addEventListener('click', function(e) {
-  if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
-    e.preventDefault();
-  }
-});
