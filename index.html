@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>⚡ ¡Tu Video está Listo! ⚡</title>
+  <title>⚡ PatuConsumoXD ⚡ - Tu Catálogo Premium</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <style>
     /* ============================================================
-      TEMA "NEON PRO" (Estilo Íconos Redondos Verificado)
+      TEMA "NEON PRO" ULTRA OPTIMIZADO
     ============================================================
     */
 
@@ -37,7 +37,7 @@
       --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    /* --- Animaciones --- */
+    /* --- Animaciones Optimizadas --- */
     @keyframes animatedGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -48,12 +48,23 @@
       50% { text-shadow: 0 0 25px var(--color-text-glow); }
     }
     @keyframes iconFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-3px) scale(1.02); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Estilos Base --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* --- Estilos Base Optimizados --- */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
       color: var(--color-text-primary);
@@ -63,7 +74,8 @@
       align-items: center;
       padding: 20px;
       text-align: center;
-      font-family: var(--font-stack); 
+      font-family: var(--font-stack);
+      overflow-x: hidden;
     }
     .container {
       width: 100%;
@@ -74,6 +86,7 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(0, 175, 255, 0.4);
+      animation: fadeInUp 0.6s ease-out;
     }
 
     /* --- Títulos y Divisores --- */
@@ -97,7 +110,7 @@
     .divider {
       border: none;
       height: 1px;
-      background: rgba(0, 175, 255, 0.3); /* Divisor neón */
+      background: rgba(0, 175, 255, 0.3);
       width: 100%;
       margin: 30px auto;
     }
@@ -148,39 +161,41 @@
     .secondary-section h2 {
       color: var(--color-text-primary);
       text-shadow: 0 0 8px var(--color-text-glow);
-      margin: 40px 0 25px 0; /* Espacio arriba y abajo */
+      margin: 40px 0 25px 0;
       font-size: 1.5rem;
       font-weight: 600;
     }
     
     /* ============================================================
-      ICONOS OPTIMIZADOS - Versión Mejorada
+      ICONOS ULTRA OPTIMIZADOS - Versión Definitiva
     ============================================================
     */
     .icon-btn-container {
       display: flex;
-      flex-wrap: wrap; /* Para que se ajusten en móviles */
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 20px; /* Espacio entre botones */
+      gap: 20px;
     }
     
     .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 60px;  /* Tamaño del círculo */
-      height: 60px; /* Tamaño del círculo */
-      border-radius: 50%; /* ¡Redondo! */
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       background: rgba(0, 0, 0, 0.2);
-      border: 2px solid; /* El color se define por ID */
-      color: white; /* Para el texto, aunque no hay */
+      border: 2px solid;
+      color: white;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative;
       overflow: hidden;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
-    /* Efecto de brillo mejorado */
+    /* Efecto de brillo ultra suave */
     .icon-btn::before {
       content: '';
       position: absolute;
@@ -188,8 +203,8 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.6s ease;
     }
 
     .icon-btn:hover::before {
@@ -197,34 +212,33 @@
     }
 
     .icon-btn svg {
-      width: 32px;  /* Tamaño del ícono SVG */
+      width: 32px;
       height: 32px;
-      fill: white; /* Color del ícono */
+      fill: white;
       transition: all 0.3s ease;
-      /* Propiedades clave para nitidez */
       shape-rendering: geometricPrecision;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
-      transform: translateZ(0); /* Aceleración por hardware */
+      transform: translateZ(0);
       will-change: transform;
     }
 
     .icon-btn:hover {
-      transform: scale(1.1) translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transform: scale(1.12) translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
     
-    /* Animación flotante sutil */
+    /* Animación flotante escalonada */
     .icon-btn {
       animation: iconFloat 3s ease-in-out infinite;
     }
-    .icon-btn:nth-child(2) { animation-delay: 0.2s; }
-    .icon-btn:nth-child(3) { animation-delay: 0.4s; }
-    .icon-btn:nth-child(4) { animation-delay: 0.6s; }
-    .icon-btn:nth-child(5) { animation-delay: 0.8s; }
-    .icon-btn:nth-child(6) { animation-delay: 1s; }
+    .icon-btn:nth-child(2) { animation-delay: 0.15s; }
+    .icon-btn:nth-child(3) { animation-delay: 0.3s; }
+    .icon-btn:nth-child(4) { animation-delay: 0.45s; }
+    .icon-btn:nth-child(5) { animation-delay: 0.6s; }
+    .icon-btn:nth-child(6) { animation-delay: 0.75s; }
     
-    /* --- Colores Individuales de Glow (Mejorados) --- */
+    /* --- Colores Individuales de Glow (Ultra Mejorados) --- */
     
     /* Comunidad */
     #link-whatsapp {
@@ -232,7 +246,7 @@
       box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
     }
     #link-whatsapp:hover { 
-      box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
+      box-shadow: 0 0 35px rgba(37, 211, 102, 1);
       border-color: #128C7E;
     }
     #link-whatsapp svg { fill: #25D366; }
@@ -242,7 +256,7 @@
       box-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
     }
     #link-telegram-main:hover { 
-      box-shadow: 0 0 30px rgba(0, 136, 204, 0.9);
+      box-shadow: 0 0 35px rgba(0, 136, 204, 1);
       border-color: #005A8C;
     }
     #link-telegram-main svg { fill: #0088CC; }
@@ -252,7 +266,7 @@
       box-shadow: 0 0 20px rgba(238, 29, 82, 0.6);
     }
     #link-tiktok:hover { 
-      box-shadow: 0 0 30px rgba(238, 29, 82, 0.9);
+      box-shadow: 0 0 35px rgba(238, 29, 82, 1);
       border-color: #C0153F;
     }
     #link-tiktok svg { fill: #EE1D52; }
@@ -262,7 +276,7 @@
       box-shadow: 0 0 20px rgba(29, 161, 242, 0.6);
     }
     #link-x:hover { 
-      box-shadow: 0 0 30px rgba(29, 161, 242, 0.9);
+      box-shadow: 0 0 35px rgba(29, 161, 242, 1);
       border-color: #0C85D0;
     }
     #link-x svg { fill: #1DA1F2; }
@@ -272,7 +286,7 @@
       box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
     }
     #link-facebook:hover { 
-      box-shadow: 0 0 30px rgba(24, 119, 242, 0.9);
+      box-shadow: 0 0 35px rgba(24, 119, 242, 1);
       border-color: #0C5AB5;
     }
     #link-facebook svg { fill: #1877F2; }
@@ -282,7 +296,7 @@
       box-shadow: 0 0 20px rgba(193, 53, 132, 0.6);
     }
     #link-instagram:hover { 
-      box-shadow: 0 0 30px rgba(193, 53, 132, 0.9);
+      box-shadow: 0 0 35px rgba(193, 53, 132, 1);
       border-color: #8A275F;
     }
     #link-instagram svg { fill: #C13584; }
@@ -293,7 +307,7 @@
       box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
     }
     #link-telegram-catalog:hover { 
-      box-shadow: 0 0 30px rgba(0, 191, 255, 0.9);
+      box-shadow: 0 0 35px rgba(0, 191, 255, 1);
       border-color: #0080CC;
     }
     #link-telegram-catalog svg { fill: #00BFFF; }
@@ -303,18 +317,18 @@
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
     }
     #link-telegram-tutorial:hover { 
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+      box-shadow: 0 0 35px rgba(255, 215, 0, 1);
       border-color: #CCAA00;
     }
     #link-telegram-tutorial svg { fill: #FFD700; }
     
-    /* --- Catálogo de Videos (Lista) --- */
+    /* --- Catálogo de Videos (Lista Mejorada) --- */
     #video-catalog-list {
       list-style: none;
       padding: 0;
       margin: 0;
       max-height: 400px; 
-      overflow-y: auto; 
+      overflow-y: auto;
       border: 1px solid rgba(0, 175, 255, 0.3);
       border-radius: 8px;
       background: rgba(0, 0, 0, 0.2);
@@ -322,6 +336,11 @@
     #video-catalog-list li {
       padding: 15px;
       border-bottom: 1px solid rgba(0, 175, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    #video-catalog-list li:hover {
+      background: rgba(0, 175, 255, 0.1);
+      transform: translateX(5px);
     }
     #video-catalog-list li:last-child { border-bottom: none; }
     #video-catalog-list a {
@@ -329,10 +348,66 @@
       text-decoration: none;
       font-weight: bold;
       transition: all 0.2s ease;
+      display: block;
     }
     #video-catalog-list a:hover {
       color: var(--color-text-primary);
       text-shadow: 0 0 10px var(--color-text-glow);
+    }
+
+    /* --- Barra de Búsqueda Mejorada --- */
+    .search-container {
+      margin: 20px 0;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 25px;
+      border: 1px solid rgba(0, 175, 255, 0.4);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--color-text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .search-input:focus {
+      border-color: var(--color-text-glow);
+      box-shadow: 0 0 15px rgba(0, 175, 255, 0.6);
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* --- Contador de Videos --- */
+    .video-count {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      margin: 10px 0;
+      padding: 8px 16px;
+      background: rgba(0, 175, 255, 0.1);
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    /* --- Botón Volver al Catálogo --- */
+    .back-to-catalog {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 10px 20px;
+      background: rgba(0, 175, 255, 0.2);
+      color: var(--color-text-glow);
+      text-decoration: none;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 175, 255, 0.3);
+    }
+    .back-to-catalog:hover {
+      background: rgba(0, 175, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 175, 255, 0.2);
     }
 
     /* --- Footer --- */
@@ -341,7 +416,30 @@
       font-size: 0.9rem; 
       color: #aaa; 
     }
-    .footer a { color: var(--color-text-glow); text-decoration: none; }
+    .footer a { 
+      color: var(--color-text-glow); 
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer a:hover {
+      text-shadow: 0 0 10px var(--color-text-glow);
+    }
+
+    /* --- Scrollbar Personalizado --- */
+    #video-catalog-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    #video-catalog-list::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+    }
+    #video-catalog-list::-webkit-scrollbar-thumb {
+      background: var(--color-text-glow);
+      border-radius: 3px;
+    }
+    #video-catalog-list::-webkit-scrollbar-thumb:hover {
+      background: var(--color-brand-2);
+    }
 
     /* --- Optimización Móvil y Pantallas Retina --- */
     @media (max-width: 480px) {
@@ -353,11 +451,14 @@
       .icon-btn { 
         width: 50px; 
         height: 50px; 
-        margin: 5px; 
       }
       .icon-btn svg { 
         width: 24px; 
         height: 24px;
+      }
+      .search-input {
+        padding: 12px 16px;
+        font-size: 0.9rem;
       }
     }
 
@@ -366,7 +467,15 @@
       .icon-btn svg {
         width: 32px;
         height: 32px;
-        transform: scale(1) translateZ(0);
+      }
+    }
+
+    /* Reducción de movimiento para usuarios que lo prefieren */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
     
@@ -376,18 +485,19 @@
 
   <div class="container">
     
-    <h1><span id="video-icon">⚡</span> ¡Tu Video está Listo! <span id="video-icon">⚡</span></h1>
-    <p class="subtitle" id="video-title">Buscando en nuestros archivos... 🔍</p>
+    <h1><span>⚡</span> PatuConsumoXD <span>⚡</span></h1>
+    <p class="subtitle" id="video-title">Tu catálogo premium de contenido</p>
 
-    <div class="main-content">
+    <!-- Sección de Video Específico (oculta por defecto) -->
+    <div class="main-content" id="specific-video-section" style="display: none;">
       <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Ver en Filemoon</a>
       <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Ver en StreamHG</a>
       <a href="#" class="btn btn-primary hidden" id="btn-terabox">Ver en Terabox</a>
       <p class="loading" id="loading">⚙️ Preparando enlaces...</p>
+      <a href="/" class="back-to-catalog">← Volver al catálogo</a>
     </div>
 
     <div class="secondary-section community-section">
-      <hr class="divider">
       <h2><span style="font-size: 1.2em;">✨</span> ¡Únete a la Comunidad!</h2>
       
       <div class="icon-btn-container">
@@ -398,7 +508,6 @@
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-telegram-main" aria-label="Telegram">
-          <!-- SVG de Telegram optimizado y nítido -->
           <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.78 5.42-1.1 7.19-.14.75-.41 1-.67 1.02-.57.05-1-.37-1.55-.73-.86-.56-1.34-.91-2.18-1.46-.96-.63-.34-.98.21-1.55.14-.15 2.61-2.39 2.66-2.59.01-.03.01-.14-.05-.2s-.16-.06-.23-.05c-.1.02-1.64 1.04-4.64 3.06-.44.3-.84.45-1.2.44-.39-.01-1.16-.22-1.73-.4-.7-.22-1.25-.34-1.2-.72.02-.2.3-.41.84-.62 3.27-1.43 5.45-2.37 6.54-2.84 3.12-1.3 3.76-1.52 4.19-1.53.09 0 .3.02.43.12.11.08.14.19.15.27.01.06.01.21 0 .36z"/>
           </svg>
@@ -411,7 +520,6 @@
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-x" aria-label="X (Twitter)">
-          <!-- SVG de X (Twitter) optimizado y nítido -->
           <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
@@ -447,8 +555,19 @@
     
     <div class="secondary-section catalog-section">
       <hr class="divider">
-      <h2>🗂️ Catálogo Completo (Más Videos)</h2>
+      <h2>🗂️ Catálogo Completo</h2>
+      
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
+        <input type="text" id="search-input" class="search-input" placeholder="🔍 Buscar videos...">
+      </div>
+      
+      <!-- Contador de videos -->
+      <div class="video-count" id="video-count">Cargando catálogo...</div>
+      
+      <!-- Lista de videos -->
       <ul id="video-catalog-list">
+        <!-- Los videos se cargarán aquí dinámicamente -->
       </ul>
     </div>
 
