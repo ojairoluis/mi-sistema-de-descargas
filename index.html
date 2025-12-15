@@ -2,398 +2,381 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>⚡ PatuConsumoXD ⚡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>🎄 PatuConsumoXD - Navidad Mágica 🎄</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <style>
     /* ============================================================
-       TEMA "NEON PRO" (Estilo Íconos Redondos Verificado)
-       (Versión mejorada por el usuario)
+       TEMA "NAVIDAD ÉPICA 2025" - VERSIÓN DEFINITIVA 🎅
+       Optinado para Smartphones | Efectos Premium
     ============================================================
     */
 
-    /* --- 1. Variables de Color (Tema Neón) --- */
     :root {
-      /* Fondo oscuro premium */
-      --color-bg-start: #0F0C29;
-      --color-bg-end: #24243E;
+      /* Fondo: Gradiente Noche Buena Profunda */
+      --color-bg-start: #1a0000; /* Casi negro rojizo */
+      --color-bg-mid: #4a0000;   /* Rojo sangre */
+      --color-bg-end: #0a0f1c;   /* Azul noche polar */
       
-      /* Color del contenedor (oscuro traslúcido) */
-      --color-container-bg: rgba(20, 20, 40, 0.6);
+      /* Contenedor: Cristal Helado */
+      --color-container-bg: rgba(20, 0, 0, 0.65);
       
-      /* Colores de texto */
-      --color-text-primary: #FFFFFF;
-      --color-text-secondary: #E0E0E0;
-      --color-text-glow: #00AFFF; /* El neón principal */
-      
-      /* Colores de Gradiente Animado (Para CTAs) */
-      --color-brand-1: #00AFFF; /* Cian */
-      --color-brand-2: #B224EF; /* Magenta */
-      --color-brand-3: #00FFD1; /* Turquesa */
-
-      /* Fuente de sistema (sigue siendo la más rápida) */
-      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      /* Botones (Rojo Regalo) */
+      --btn-grad-1: #D40000; 
+      --btn-grad-3: #8B0000; 
     }
 
-    /* --- Animaciones --- */
-    @keyframes animatedGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* --- Animaciones Mágicas --- */
+    @keyframes snow {
+      0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(20px) rotate(360deg); opacity: 0.3; }
     }
-    @keyframes subtleGlow {
-      0%, 100% { text-shadow: 0 0 15px var(--color-text-glow); }
-      50% { text-shadow: 0 0 25px var(--color-text-glow); }
+    
+    @keyframes ornamentSwing {
+      0% { transform: rotate(4deg); }
+      50% { transform: rotate(-4deg); }
+      100% { transform: rotate(4deg); }
     }
-    @keyframes iconFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
+
+    @keyframes shine {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Animación de Luces Navideñas (Borde del contenedor) */
+    @keyframes borderLights {
+      0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+      33% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+      66% { border-color: #ffd700; box-shadow: 0 0 15px #ffd700; }
+      100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+    }
+
+    @keyframes textGoldPulse {
+      0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00; }
+      50% { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff0000; }
+      100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ff8c00; }
     }
 
     /* --- Estilos Base --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-      color: var(--color-text-primary);
+      background: radial-gradient(circle at center, var(--color-bg-mid) 0%, var(--color-bg-end) 100%);
+      color: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      padding: 15px;
       text-align: center;
-      font-family: var(--font-stack);  
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
     }
+
+    /* --- Nieve (Fondo) --- */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1em;
+      text-shadow: 0 0 5px #000;
+      animation: snow linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .snowflake:nth-child(1) { left: 10%; animation-duration: 10s; font-size: 1.2rem;}
+    .snowflake:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 1s; font-size: 0.8rem;}
+    .snowflake:nth-child(3) { left: 45%; animation-duration: 12s; animation-delay: 2s; }
+    .snowflake:nth-child(4) { left: 60%; animation-duration: 14s; opacity: 0.4; font-size: 1.5rem;}
+    .snowflake:nth-child(5) { left: 85%; animation-duration: 16s; animation-delay: 3s; }
+
+    /* --- Contenedor Principal (Tarjeta Mágica) --- */
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 550px;
       background: var(--color-container-bg);
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 175, 255, 0.4);
+      padding: 30px 20px;
+      border-radius: 20px;
+      /* Efecto Luces Navideñas en el borde */
+      border: 2px solid #ff0000;
+      animation: borderLights 4s infinite linear;
+      backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 10;
+      margin-top: 20px;
     }
 
-    /* --- Títulos y Divisores --- */
-    h1 {
-      font-family: var(--font-stack);
-      font-weight: 800;
-      font-size: 2.5rem;
-      color: var(--color-text-primary);
-      text-shadow: 0 0 10px var(--color-text-glow);
-      margin-bottom: 10px;
-      letter-spacing: -1px;
+    /* Adorno superior (Gorro abstracto) */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 60px;
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
     }
+
+    /* --- Títulos --- */
+    h1 {
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 5px;
+      letter-spacing: -0.5px;
+      animation: textGoldPulse 3s infinite; /* Nuevo brillo dorado */
+    }
+    .video-icon { font-size: 1.2em; vertical-align: middle; }
+    
     .subtitle {  
-      font-size: 1.3rem;  
-      color: var(--color-text-secondary);
+      font-size: 1.1rem;  
+      color: #ccc;
       margin-bottom: 25px;
       font-weight: 500;
-      min-height: 1.3rem;
-      word-wrap: break-word;
-    }
-    .divider {
-      border: none;
-      height: 1px;
-      background: rgba(0, 175, 255, 0.3); /* Divisor neón */
-      width: 100%;
-      margin: 30px auto;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    /* --- Contenido Principal (CTA Primario) --- */
-    .main-content {
-      min-height: 250px;  
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    /* --- CTA Primario (Descarga) --- */
+    /* --- Botones ÉPICOS (Regalos con Nieve) --- */
     .btn-primary {
-      color: #FFF;
+      color: #fff;
       border: none;
       display: block;
       width: 100%;
-      max-width: 450px;
-      margin: 15px auto;
-      padding: 16px;
+      margin: 20px auto; /* Más espacio */
+      padding: 18px;
       font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 12px;
+      font-weight: 800;
+      border-radius: 16px;
       cursor: pointer;
-      transition: all 0.3s ease;
       text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      background: linear-gradient(90deg, var(--color-brand-1), var(--color-brand-2), var(--color-brand-3), var(--color-brand-1));
-      background-size: 300% 300%;
-      animation: animatedGradient 4s ease-in-out infinite;
-      box-shadow: 0 5px 20px rgba(178, 36, 239, 0.3);
-    }
-    .btn-primary:hover {  
-      box-shadow: 0 8px 30px rgba(178, 36, 239, 0.6);  
-      transform: scale(1.03);
-      animation-play-state: paused;
-    }
-    .btn-primary.hidden { display: none; }
-    .loading {  
-      color: var(--color-text-secondary);  
-      margin: 20px 0;  
-      font-size: 1.2rem;
+      position: relative;
+      overflow: visible; /* Para que la nieve se salga un poco si queremos, pero hidden funciona mejor para el brillo */
+      overflow: hidden; 
+      
+      background: linear-gradient(180deg, var(--btn-grad-1), var(--btn-grad-3));
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s;
     }
 
-    /* --- Títulos de Sección (Comunidad, Catálogo) --- */
-    .secondary-section h2 {
-      color: var(--color-text-primary);
-      text-shadow: 0 0 8px var(--color-text-glow);
-      margin: 40px 0 25px 0; /* Espacio arriba y abajo */
-      font-size: 1.5rem;
-      font-weight: 600;
+    /* EFECTO SORPRESA: Capa de Nieve sobre el botón */
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40%; /* La nieve ocupa la parte de arriba */
+      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+      border-radius: 16px 16px 60% 60% / 10px 10px 15px 15px; /* Forma irregular de nieve */
+      pointer-events: none;
     }
+
+    /* Brillo diagonal */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shine 3.5s infinite;
+    }
+
+    .btn-primary:active { transform: scale(0.98); }
+    .hidden { display: none !important; }
     
-    /* ============================================================
-       ICONOS OPTIMIZADOS - Versión Mejorada
-    ============================================================
-    */
+    .loading {  
+      color: #ffd700;  
+      margin: 20px 0;  
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* --- Iconos y Comunidad --- */
+    .secondary-section h2 {
+      color: #fff;
+      margin: 35px 0 20px 0;
+      font-size: 1.4rem;
+      text-shadow: 0 2px 4px #000;
+    }
+
     .icon-btn-container {
       display: flex;
-      flex-wrap: wrap; /* Para que se ajusten en móviles */
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 20px; /* Espacio entre botones */
+      gap: 18px;
     }
     
+    /* Base de la Esfera */
     .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 60px;  /* Tamaño del círculo */
-      height: 60px; /* Tamaño del círculo */
-      border-radius: 50%; /* ¡Redondo! */
-      background: rgba(0, 0, 0, 0.2);
-      border: 2px solid; /* El color se define por ID */
-      color: white; /* Para el texto, aunque no hay */
-      text-decoration: none;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      /* Cristal base */
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
+      
       transition: all 0.3s ease;
+      animation: ornamentSwing 3s ease-in-out infinite;
+      transform-origin: top center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
       position: relative;
-      overflow: hidden;
     }
 
-    /* Efecto de brillo mejorado */
-    .icon-btn::before {
+    /* Brillo "Glossy" en la esfera (Efecto Cristal) */
+    .icon-btn::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .icon-btn:hover::before {
-      left: 100%;
+      top: 5px; left: 10px;
+      width: 20px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transform: rotate(-45deg);
+      pointer-events: none;
     }
 
     .icon-btn svg {
-      width: 32px;  /* Tamaño del ícono SVG */
-      height: 32px;
-      fill: white; /* Color del ícono */
-      transition: all 0.3s ease;
-      /* Propiedades clave para nitidez */
-      shape-rendering: geometricPrecision;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-      transform: translateZ(0); /* Aceleración por hardware */
-      will-change: transform;
+      width: 28px; height: 28px;
+      fill: #fff;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+      z-index: 2;
     }
 
-    .icon-btn:hover {
-      transform: scale(1.1) translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Animación flotante sutil */
-    .icon-btn {
-      animation: iconFloat 3s ease-in-out infinite;
-    }
-    .icon-btn:nth-child(2) { animation-delay: 0.2s; }
-    .icon-btn:nth-child(3) { animation-delay: 0.4s; }
-    .icon-btn:nth-child(4) { animation-delay: 0.6s; }
-    .icon-btn:nth-child(5) { animation-delay: 0.8s; }
-    .icon-btn:nth-child(6) { animation-delay: 1s; }
-    
-    /* --- Colores Individuales de Glow (Mejorados) --- */
-    
-    /* Comunidad */
-    #link-whatsapp {
-      border-color: #25D366;
-      box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-    }
-    #link-whatsapp:hover {  
-      box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
-      border-color: #128C7E;
-    }
-    #link-whatsapp svg { fill: #25D366; }
+    /* ============================================================
+       PERSONALIZACIÓN DE ESFERAS (COLORES REALES NAVIDEÑOS)
+       ¡Aquí está la magia que pediste!
+    ============================================================ */
 
-    #link-telegram-main {
-      border-color: #0088CC;
-      box-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
-    }
-    #link-telegram-main:hover {  
-      box-shadow: 0 0 30px rgba(0, 136, 204, 0.9);
-      border-color: #005A8C;
-    }
-    #link-telegram-main svg { fill: #0088CC; }
-
-    #link-tiktok {
-      border-color: #EE1D52;
-      box-shadow: 0 0 20px rgba(238, 29, 82, 0.6);
-    }
-    #link-tiktok:hover {  
-      box-shadow: 0 0 30px rgba(238, 29, 82, 0.9);
-      border-color: #C0153F;
-    }
-    #link-tiktok svg { fill: #EE1D52; }
-
+    /* X (Twitter): Esfera de Carbón y Plata (Elegante) */
     #link-x {
-      border-color: #1DA1F2;
-      box-shadow: 0 0 20px rgba(29, 161, 242, 0.6);
+      background: radial-gradient(circle at 30% 30%, #444444 0%, #000000 100%);
+      border-color: #a0a0a0;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
     }
-    #link-x:hover {  
-      box-shadow: 0 0 30px rgba(29, 161, 242, 0.9);
-      border-color: #0C85D0;
-    }
-    #link-x svg { fill: #1DA1F2; }
 
+    /* Facebook: Esfera de Hielo Azul (Frozen) */
     #link-facebook {
-      border-color: #1877F2;
-      box-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
+      background: radial-gradient(circle at 30% 30%, #5af 0%, #0044ff 100%);
+      border-color: #89cff0;
+      box-shadow: 0 0 15px rgba(0, 100, 255, 0.4);
     }
-    #link-facebook:hover {  
-      box-shadow: 0 0 30px rgba(24, 119, 242, 0.9);
-      border-color: #0C5AB5;
-    }
-    #link-facebook svg { fill: #1877F2; }
 
+    /* Instagram: Esfera de Caramelo (Degradado Cálido) */
     #link-instagram {
-      border-color: #C13584;
-      box-shadow: 0 0 20px rgba(193, 53, 132, 0.6);
+      background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 45%, #d6249f 100%);
+      border-color: #ffdb58; /* Borde dorado */
+      box-shadow: 0 0 15px rgba(214, 36, 159, 0.5);
     }
-    #link-instagram:hover {  
-      box-shadow: 0 0 30px rgba(193, 53, 132, 0.9);
-      border-color: #8A275F;
-    }
-    #link-instagram svg { fill: #C13584; }
 
-    /* Catálogo y Guías */
-    #link-telegram-catalog {
-      border-color: #00BFFF;
-      box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+    /* WhatsApp: Esfera Verde Esmeralda */
+    #link-whatsapp {
+      background: radial-gradient(circle at 30% 30%, #50fa7b 0%, #008000 100%);
+      border-color: #50fa7b;
     }
-    #link-telegram-catalog:hover {  
-      box-shadow: 0 0 30px rgba(0, 191, 255, 0.9);
-      border-color: #0080CC;
-    }
-    #link-telegram-catalog svg { fill: #00BFFF; }
 
-    #link-telegram-tutorial {
-      border-color: #FFD700;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    /* TikTok: Esfera Neón Cibernética */
+    #link-tiktok {
+      background: radial-gradient(circle at 30% 30%, #444 0%, #000 100%);
+      border-color: #ff0050;
+      box-shadow: inset 0 0 10px #00f2ea;
     }
-    #link-telegram-tutorial:hover {  
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
-      border-color: #CCAA00;
+    #link-tiktok svg { fill: #ff0050; text-shadow: -2px 0 #00f2ea; }
+
+    /* Telegram: Esfera Azul Cielo */
+    #link-telegram-main, #link-telegram-catalog, #link-telegram-tutorial {
+      background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 100%);
+      border-color: #bae6fd;
     }
-    #link-telegram-tutorial svg { fill: #FFD700; }
-    
-    /* --- Catálogo de Videos (Lista) --- */
+
+    /* Efecto Hover Genérico */
+    .icon-btn:hover {
+      transform: scale(1.15) rotate(0deg) !important;
+      animation: none;
+      filter: brightness(1.2);
+      z-index: 20;
+    }
+
+    /* --- Catálogo (Lista) --- */
     #video-catalog-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      max-height: 400px;  
+      max-height: 350px;  
       overflow-y: auto;  
-      border: 1px solid rgba(0, 175, 255, 0.3);
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     #video-catalog-list li {
       padding: 15px;
-      border-bottom: 1px solid rgba(0, 175, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    #video-catalog-list li:last-child { border-bottom: none; }
     #video-catalog-list a {
-      color: var(--color-text-glow);
+      color: #e0e0e0;
       text-decoration: none;
-      font-weight: bold;
-      transition: all 0.2s ease;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: block;
     }
     #video-catalog-list a:hover {
-      color: var(--color-text-primary);
-      text-shadow: 0 0 10px var(--color-text-glow);
+      color: #ffd700;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #fff, transparent);
+      opacity: 0.3;
+      margin: 30px 0;
+      border: none;
     }
 
     /* --- Footer --- */
     .footer {  
-      margin-top: 40px;  
-      font-size: 0.9rem;  
-      color: #aaa;  
+      margin-top: 40px; 
+      padding-bottom: 20px; 
+      font-size: 0.8rem;  
+      color: rgba(255,255,255,0.5);  
     }
-    .footer a { color: var(--color-text-glow); text-decoration: none; }
+    .footer a { color: #ffd700; text-decoration: none; }
 
-    /* --- Optimización Móvil y Pantallas Retina --- */
-    @media (max-width: 480px) {
-      .container { padding: 20px; }
-      h1 { font-size: 2rem; }
-      .subtitle { font-size: 1.1rem; margin-bottom: 20px; }
-      .btn-primary { padding: 15px; font-size: 1rem; }
-      .secondary-section h2 { font-size: 1.3rem; }
-      .icon-btn {  
-        width: 50px;  
-        height: 50px;  
-        margin: 5px;  
-      }
-      .icon-btn svg {  
-        width: 24px;  
-        height: 24px;
-      }
-    }
-
-    /* Soporte para pantallas de alta densidad */
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      .icon-btn svg {
-        width: 32px;
-        height: 32px;
-        transform: scale(1) translateZ(0);
-      }
-    }
-    
   </style>
 </head>
 <body>
 
+  <div class="snowflake">❄</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❆</div>
+  <div class="snowflake">❄</div>
+  <div class="snowflake">❅</div>
+
   <div class="container">
     
     <h1>
-      <span class="video-icon">⚡</span>
-      <span id="main-title-text">¡Tu Video está Listo!</span>
-      <span class="video-icon">⚡</span>
+      <span class="video-icon">🎄</span>
+      <span id="main-title-text">Feliz Navidad 2025</span>
+      <span class="video-icon">🎅</span>
     </h1>
-    <p class="subtitle" id="video-title">Buscando en nuestros archivos... 🔍</p>
+    <p class="subtitle" id="video-title">🎁 Buscando tu regalo... 🎁</p>
 
     <div class="main-content">
-      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Ver en Filemoon</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Ver en StreamHG</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Ver en Terabox</a>
-      <p class="loading" id="loading">⚙️ Preparando enlaces...</p>
+      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Abrir Regalo 1 (Filemoon)</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Abrir Regalo 2 (StreamHG)</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Abrir Regalo 3 (Terabox)</a>
+      <p class="loading" id="loading">☃️ Preparando trineo...</p>
     </div>
 
     <div class="secondary-section community-section">
       <hr class="divider">
-      <h2><span style="font-size: 1.2em;">✨</span> ¡Únete a la Comunidad!</h2>
+      <h2>✨ Únete a la Fiesta ✨</h2>
       
       <div class="icon-btn-container">
         <a href="#" target="_blank" class="icon-btn" id="link-whatsapp" aria-label="WhatsApp">
@@ -434,7 +417,7 @@
         </a>
       </div>
       
-      <h2><span style="font-size: 1.2em;">📚</span> Catálogo y Guías</h2>
+      <h2>📚 Catálogo y Guías 🎄</h2>
       <div class="icon-btn-container">
         <a href="#" target="_blank" class="icon-btn" id="link-telegram-catalog" aria-label="Catálogo">
           <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
@@ -451,14 +434,14 @@
     
     <div class="secondary-section catalog-section">
       <hr class="divider">
-      <h2>🗂️ Catálogo Completo (Más Videos)</h2>
+      <h2>🗂️ Más Regalos (Catálogo)</h2>
       <ul id="video-catalog-list">
         </ul>
     </div>
 
     <div class="footer">
-      <p>⚠️ Todos los enlaces son externos. Este sitio no aloja contenido.</p>
-      <p>© 2025 | <a href="https://linkvertise.com" target="_blank">Partner de Linkvertise</a></p>
+      <p>⚠️ Todos los enlaces son externos.</p>
+      <p>🎄 ¡Feliz 2025! | Partner de Linkvertise</p>
     </div>
   </div>
 
