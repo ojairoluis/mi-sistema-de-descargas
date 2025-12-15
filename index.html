@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>🎄 PatuConsumoXD - Navidad Mágica 🎄</title>
+  <title>🎄 PatuConsumoXD - Feliz Navidad 🎄</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <style>
     /* ============================================================
-       TEMA "NAVIDAD ÉPICA 2025" - VERSIÓN DEFINITIVA 🎅
-       Optinado para Smartphones | Efectos Premium
+       TEMA "DULCE NAVIDAD" - VERSIÓN DEFINITIVA 🍭
+       Optinado para Smartphones | Botones Caramelo
     ============================================================
     */
 
@@ -21,15 +21,11 @@
       --color-bg-mid: #4a0000;   /* Rojo sangre */
       --color-bg-end: #0a0f1c;   /* Azul noche polar */
       
-      /* Contenedor: Cristal Helado */
-      --color-container-bg: rgba(20, 0, 0, 0.65);
-      
-      /* Botones (Rojo Regalo) */
-      --btn-grad-1: #D40000; 
-      --btn-grad-3: #8B0000; 
+      /* Contenedor */
+      --color-container-bg: rgba(20, 0, 0, 0.75);
     }
 
-    /* --- Animaciones Mágicas --- */
+    /* --- Animaciones --- */
     @keyframes snow {
       0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
       100% { transform: translateY(100vh) translateX(20px) rotate(360deg); opacity: 0.3; }
@@ -41,9 +37,10 @@
       100% { transform: rotate(4deg); }
     }
 
-    @keyframes shine {
-      0% { background-position: -100% 0; }
-      100% { background-position: 200% 0; }
+    /* Animación SUAVE de las rayas de caramelo */
+    @keyframes candyFlow {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 0; } /* 50px coincide con el tamaño del patrón para loop perfecto */
     }
 
     /* Animación de Luces Navideñas (Borde del contenedor) */
@@ -93,14 +90,13 @@
     .snowflake:nth-child(4) { left: 60%; animation-duration: 14s; opacity: 0.4; font-size: 1.5rem;}
     .snowflake:nth-child(5) { left: 85%; animation-duration: 16s; animation-delay: 3s; }
 
-    /* --- Contenedor Principal (Tarjeta Mágica) --- */
+    /* --- Contenedor Principal --- */
     .container {
       width: 100%;
       max-width: 550px;
       background: var(--color-container-bg);
       padding: 30px 20px;
       border-radius: 20px;
-      /* Efecto Luces Navideñas en el borde */
       border: 2px solid #ff0000;
       animation: borderLights 4s infinite linear;
       backdrop-filter: blur(12px);
@@ -109,7 +105,7 @@
       margin-top: 20px;
     }
 
-    /* Adorno superior (Gorro abstracto) */
+    /* Adorno superior */
     .container::before {
       content: '';
       position: absolute;
@@ -130,7 +126,7 @@
       color: #fff;
       margin-bottom: 5px;
       letter-spacing: -0.5px;
-      animation: textGoldPulse 3s infinite; /* Nuevo brillo dorado */
+      animation: textGoldPulse 3s infinite;
     }
     .video-icon { font-size: 1.2em; vertical-align: middle; }
     
@@ -143,52 +139,66 @@
       letter-spacing: 1px;
     }
 
-    /* --- Botones ÉPICOS (Regalos con Nieve) --- */
+    /* --- BOTONES "DULCE DE NAVIDAD" (Candy Cane) --- */
     .btn-primary {
       color: #fff;
-      border: none;
+      border: 2px solid #fff; /* Borde blanco crujiente */
       display: block;
       width: 100%;
-      margin: 20px auto; /* Más espacio */
+      margin: 20px auto;
       padding: 18px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      border-radius: 16px;
+      font-size: 1.2rem;
+      font-weight: 900; /* Letra más gruesa para que se lea bien */
+      border-radius: 50px; /* Redonditos como caramelos */
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
       position: relative;
-      overflow: visible; /* Para que la nieve se salga un poco si queremos, pero hidden funciona mejor para el brillo */
       overflow: hidden; 
       
-      background: linear-gradient(180deg, var(--btn-grad-1), var(--btn-grad-3));
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      transition: transform 0.2s;
+      /* Sombras de texto para legibilidad sobre rayas blancas */
+      text-shadow: 
+        0 2px 0 #b30000, 
+        0 0 5px rgba(0,0,0,0.5);
+      
+      /* EL PATRÓN DE CARAMELO (Rojo y Blanco) */
+      background: repeating-linear-gradient(
+        45deg,
+        #d40000,
+        #d40000 15px,
+        #ffffff 15px,
+        #ffffff 30px
+      );
+      /* Una alternativa más suave con gradiente linear para animar mejor */
+      background: linear-gradient(
+        -45deg, 
+        #D40000 25%, 
+        #f8f8f8 25%, 
+        #f8f8f8 50%, 
+        #D40000 50%, 
+        #D40000 75%, 
+        #f8f8f8 75%, 
+        #f8f8f8 100%
+      );
+      background-size: 50px 50px; /* Tamaño de las rayas */
+      
+      /* Animación suave y lenta */
+      animation: candyFlow 4s linear infinite;
+      
+      box-shadow: 0 6px 0 #8B0000, 0 10px 10px rgba(0,0,0,0.3); /* Efecto 3D */
+      transition: all 0.2s;
     }
 
-    /* EFECTO SORPRESA: Capa de Nieve sobre el botón */
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 40%; /* La nieve ocupa la parte de arriba */
-      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-      border-radius: 16px 16px 60% 60% / 10px 10px 15px 15px; /* Forma irregular de nieve */
-      pointer-events: none;
+    .btn-primary:active { 
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #8B0000, 0 4px 4px rgba(0,0,0,0.3);
+    }
+    
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      animation-duration: 2s; /* Se mueve más rápido al pasar el mouse */
     }
 
-    /* Brillo diagonal */
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-      animation: shine 3.5s infinite;
-    }
-
-    .btn-primary:active { transform: scale(0.98); }
     .hidden { display: none !important; }
     
     .loading {  
@@ -213,7 +223,7 @@
       gap: 18px;
     }
     
-    /* Base de la Esfera */
+    /* Esferas */
     .icon-btn {
       display: inline-flex;
       align-items: center;
@@ -221,10 +231,8 @@
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      /* Cristal base */
       background: rgba(255,255,255,0.1);
       border: 2px solid rgba(255,255,255,0.3);
-      
       transition: all 0.3s ease;
       animation: ornamentSwing 3s ease-in-out infinite;
       transform-origin: top center;
@@ -232,7 +240,7 @@
       position: relative;
     }
 
-    /* Brillo "Glossy" en la esfera (Efecto Cristal) */
+    /* Brillo Esfera */
     .icon-btn::after {
       content: '';
       position: absolute;
@@ -251,53 +259,37 @@
       z-index: 2;
     }
 
-    /* ============================================================
-       PERSONALIZACIÓN DE ESFERAS (COLORES REALES NAVIDEÑOS)
-       ¡Aquí está la magia que pediste!
-    ============================================================ */
-
-    /* X (Twitter): Esfera de Carbón y Plata (Elegante) */
+    /* --- Colores Esferas --- */
     #link-x {
-      background: radial-gradient(circle at 30% 30%, #444444 0%, #000000 100%);
+      background: radial-gradient(circle at 30% 30%, #444 0%, #000 100%);
       border-color: #a0a0a0;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
     }
-
-    /* Facebook: Esfera de Hielo Azul (Frozen) */
     #link-facebook {
       background: radial-gradient(circle at 30% 30%, #5af 0%, #0044ff 100%);
       border-color: #89cff0;
       box-shadow: 0 0 15px rgba(0, 100, 255, 0.4);
     }
-
-    /* Instagram: Esfera de Caramelo (Degradado Cálido) */
     #link-instagram {
       background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 45%, #d6249f 100%);
-      border-color: #ffdb58; /* Borde dorado */
+      border-color: #ffdb58;
       box-shadow: 0 0 15px rgba(214, 36, 159, 0.5);
     }
-
-    /* WhatsApp: Esfera Verde Esmeralda */
     #link-whatsapp {
       background: radial-gradient(circle at 30% 30%, #50fa7b 0%, #008000 100%);
       border-color: #50fa7b;
     }
-
-    /* TikTok: Esfera Neón Cibernética */
     #link-tiktok {
       background: radial-gradient(circle at 30% 30%, #444 0%, #000 100%);
       border-color: #ff0050;
       box-shadow: inset 0 0 10px #00f2ea;
     }
     #link-tiktok svg { fill: #ff0050; text-shadow: -2px 0 #00f2ea; }
-
-    /* Telegram: Esfera Azul Cielo */
     #link-telegram-main, #link-telegram-catalog, #link-telegram-tutorial {
       background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 100%);
       border-color: #bae6fd;
     }
 
-    /* Efecto Hover Genérico */
     .icon-btn:hover {
       transform: scale(1.15) rotate(0deg) !important;
       animation: none;
@@ -305,7 +297,7 @@
       z-index: 20;
     }
 
-    /* --- Catálogo (Lista) --- */
+    /* --- Catálogo --- */
     #video-catalog-list {
       list-style: none;
       padding: 0;
@@ -339,7 +331,6 @@
       border: none;
     }
 
-    /* --- Footer --- */
     .footer {  
       margin-top: 40px; 
       padding-bottom: 20px; 
@@ -362,7 +353,7 @@
     
     <h1>
       <span class="video-icon">🎄</span>
-      <span id="main-title-text">Feliz Navidad 2025</span>
+      <span id="main-title-text">Feliz Navidad</span>
       <span class="video-icon">🎅</span>
     </h1>
     <p class="subtitle" id="video-title">🎁 Buscando tu regalo... 🎁</p>
@@ -441,7 +432,7 @@
 
     <div class="footer">
       <p>⚠️ Todos los enlaces son externos.</p>
-      <p>🎄 ¡Feliz 2025! | Partner de Linkvertise</p>
+      <p>🎄 ¡Feliz Navidad! | Partner de Linkvertise</p>
     </div>
   </div>
 
