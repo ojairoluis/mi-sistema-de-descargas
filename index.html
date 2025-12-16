@@ -11,45 +11,45 @@
 
   <style>
     /* ============================================================
-       TEMA "NAVIDAD VELOZ" - PERFORMANCE EDITION ⚡
-       Optinado para 60 FPS en móviles
+       TEMA "NAVIDAD MÁGICA" (Versión Visual Premium)
+       + Botones "Santa Claus" Optimizados (Sin Lag)
     ============================================================
     */
 
     :root {
+      /* Fondo Profundo */
       --color-bg-start: #1a0000; 
       --color-bg-mid: #4a0000;   
       --color-bg-end: #0a0f1c;   
-      --color-container-bg: rgba(20, 0, 0, 0.85); /* Más opaco para ayudar al render */
+      
+      /* Contenedor Cristal */
+      --color-container-bg: rgba(20, 0, 0, 0.7);
     }
 
-    /* --- Animaciones Optimizadas (Solo Transform y Opacity) --- */
+    /* --- Animaciones Visuales (Las que te gustaron) --- */
     @keyframes snow {
-      0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 1; }
-      100% { transform: translate3d(20px, 100vh, 0) rotate(360deg); opacity: 0.3; }
+      0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(20px) rotate(360deg); opacity: 0.3; }
     }
     
     @keyframes ornamentSwing {
-      0% { transform: rotate3d(0, 0, 1, 4deg); }
-      50% { transform: rotate3d(0, 0, 1, -4deg); }
-      100% { transform: rotate3d(0, 0, 1, 4deg); }
+      0% { transform: rotate(4deg); }
+      50% { transform: rotate(-4deg); }
+      100% { transform: rotate(4deg); }
     }
 
-    @keyframes candyFlow {
-      0% { background-position: 0 0; }
-      100% { background-position: 50px 0; }
-    }
-
-    /* Animación de luces simplificada (Menos costosa) */
+    /* Animación de Luces del Borde (Suave) */
     @keyframes borderLights {
-      0%, 100% { border-color: #ff0000; }
-      33% { border-color: #00ff00; }
-      66% { border-color: #ffd700; }
+      0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+      33% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+      66% { border-color: #ffd700; box-shadow: 0 0 15px #ffd700; }
+      100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
     }
 
-    @keyframes textPulseSimple {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.02); }
+    @keyframes textGoldPulse {
+      0% { text-shadow: 0 0 5px #ffd700; }
+      50% { text-shadow: 0 0 20px #ffd700, 0 0 10px #ff0000; }
+      100% { text-shadow: 0 0 5px #ffd700; }
     }
 
     /* --- Estilos Base --- */
@@ -66,58 +66,53 @@
       text-align: center;
       font-family: system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
-      /* Mejora de renderizado de fuentes */
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* --- Nieve Optimizada (Sin sombras pesadas) --- */
+    /* --- Nieve --- */
     .snowflake {
       position: fixed;
       top: -20px;
       color: #fff;
       font-size: 1.2em;
-      /* Eliminado text-shadow para rendimiento */
+      text-shadow: 0 0 5px #000; /* Sombra suave */
       animation: snow linear infinite;
       z-index: 0;
       pointer-events: none;
-      will-change: transform; /* Aceleración GPU */
     }
-    /* Tiempos ajustados */
     .snowflake:nth-child(1) { left: 10%; animation-duration: 10s; }
     .snowflake:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 1s; font-size: 0.8em; }
     .snowflake:nth-child(3) { left: 45%; animation-duration: 12s; animation-delay: 2s; }
     .snowflake:nth-child(4) { left: 60%; animation-duration: 14s; opacity: 0.4; font-size: 1.5em; }
     .snowflake:nth-child(5) { left: 85%; animation-duration: 16s; animation-delay: 3s; }
 
-    /* --- Contenedor Principal --- */
+    /* --- Contenedor Principal (Tarjeta Mágica) --- */
     .container {
       width: 100%;
       max-width: 550px;
       background: var(--color-container-bg);
-      padding: 25px 20px;
+      padding: 30px 20px;
       border-radius: 20px;
+      /* El efecto de luces que te gustó */
       border: 2px solid #ff0000;
-      animation: borderLights 4s infinite linear; /* Sin box-shadow animado */
-      /* Backdrop-filter reducido o eliminado si sigue lento, aquí optimizado */
-      -webkit-backdrop-filter: blur(5px);
-      backdrop-filter: blur(5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra estática es barata */
+      animation: borderLights 4s infinite linear;
+      backdrop-filter: blur(10px); /* Cristal */
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       position: relative;
       z-index: 10;
-      margin-top: 15px;
-      will-change: border-color;
+      margin-top: 20px;
     }
 
-    /* Adorno superior estático */
+    /* Adorno superior */
     .container::before {
       content: '';
       position: absolute;
       top: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 50px;
-      background: radial-gradient(ellipse at center, rgba(255,215,0,0.3) 0%, transparent 70%);
+      width: 120px;
+      height: 60px;
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.4) 0%, transparent 70%);
       border-radius: 50%;
       z-index: -1;
     }
@@ -125,179 +120,221 @@
     /* --- Títulos --- */
     h1 {
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: #fff;
       margin-bottom: 5px;
       letter-spacing: -0.5px;
-      /* Texto plano con sombra estática es más rápido que animarla */
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
-      animation: textPulseSimple 3s infinite ease-in-out;
-      will-change: transform, opacity;
+      animation: textGoldPulse 3s infinite; /* Texto brillante */
     }
     .video-icon { font-size: 1.2em; vertical-align: middle; }
     
     .subtitle {  
-      font-size: 1rem;  
+      font-size: 1.1rem;  
       color: #ccc;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    /* --- BOTONES "DULCE DE NAVIDAD" OPTIMIZADOS --- */
+    /* --- NUEVOS BOTONES "SANTA CLAUS" (Optimizados) --- */
+    /* Estos botones NO usan animaciones pesadas de fondo.
+       Usan CSS inteligente para parecer un traje de Santa/Nieve.
+    */
     .btn-primary {
       color: #fff;
-      border: 2px solid rgba(255,255,255,0.8);
       display: block;
       width: 100%;
-      margin: 15px auto;
-      padding: 16px;
-      font-size: 1.1rem;
+      margin: 20px auto;
+      padding: 18px 20px;
+      font-size: 1.2rem;
       font-weight: 800;
-      border-radius: 50px;
+      border-radius: 15px; /* Bordes suaves */
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
       position: relative;
+      overflow: hidden; 
       
-      /* Sombras estáticas (baratas) */
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-      box-shadow: 0 4px 0 #8B0000, 0 5px 10px rgba(0,0,0,0.2);
+      /* Fondo Rojo Terciopelo */
+      background: linear-gradient(180deg, #D32F2F 0%, #B71C1C 100%);
+      border: none;
       
-      /* Gradiente optimizado para repaints */
-      background: repeating-linear-gradient(
-        45deg,
-        #d40000,
-        #d40000 15px,
-        #f0f0f0 15px,
-        #f0f0f0 30px
-      );
-      background-size: 42.5px 42.5px; /* Ajuste matemático para loop suave */
+      /* Sombra 3D sólida (muy rápida) */
+      box-shadow: 0 6px 0 #7F0000, 0 12px 15px rgba(0,0,0,0.4);
       
-      animation: candyFlow 3s linear infinite;
-      will-change: background-position; /* CRÍTICO para suavidad */
-      transform: translate3d(0,0,0); /* Fuerza capa GPU */
-      transition: transform 0.1s, filter 0.1s;
+      transition: transform 0.1s; /* Solo animamos movimiento al tocar */
     }
 
-    .btn-primary:active { 
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #8B0000, 0 2px 2px rgba(0,0,0,0.2);
+    /* Efecto "Nieve" en el borde superior (Estático y rápido) */
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px; /* Borde de nieve fino arriba */
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255,255,255,0.5);
     }
-    
+
+    /* Icono de regalo sutil con CSS (círculo dorado) */
+    .btn-primary::after {
+      content: '🎁'; /* Emoji directo, renderizado nativo super rápido */
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    /* Al presionar */
+    .btn-primary:active {
+      transform: translateY(4px); /* Efecto de botón real */
+      box-shadow: 0 2px 0 #7F0000, 0 4px 4px rgba(0,0,0,0.4);
+    }
+
     .hidden { display: none !important; }
     
     .loading {  
       color: #ffd700;  
       margin: 20px 0;  
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: bold;
     }
 
-    /* --- Iconos y Comunidad --- */
+    /* --- Iconos y Comunidad (Estilo Esferas Personalizadas) --- */
     .secondary-section h2 {
       color: #fff;
-      margin: 30px 0 20px 0;
-      font-size: 1.3rem;
-      text-shadow: 0 1px 2px #000;
+      margin: 35px 0 20px 0;
+      font-size: 1.4rem;
+      text-shadow: 0 2px 4px #000;
     }
 
     .icon-btn-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 18px;
     }
     
+    /* Esferas Navideñas */
     .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 55px;
-      height: 55px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.05); /* Menos transparencia compleja */
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: transform 0.2s;
-      animation: ornamentSwing 4s ease-in-out infinite;
+      /* Cristal base */
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
+      
+      transition: all 0.3s ease;
+      animation: ornamentSwing 3s ease-in-out infinite;
       transform-origin: top center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
       position: relative;
-      will-change: transform;
     }
 
-    /* Brillo estático simple */
+    /* Brillo Glossy */
     .icon-btn::after {
       content: '';
       position: absolute;
       top: 5px; left: 10px;
-      width: 15px; height: 8px;
+      width: 20px; height: 10px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.4);
       transform: rotate(-45deg);
       pointer-events: none;
     }
 
     .icon-btn svg {
-      width: 26px; height: 26px;
+      width: 28px; height: 28px;
       fill: #fff;
-      /* Filtros pesados eliminados, usamos opacidad o sombras simples */
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5)); 
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
       z-index: 2;
     }
 
-    /* Colores optimizados (Gradientes lineales son más rápidos que radiales complejos) */
-    #link-x { background: linear-gradient(135deg, #444, #000); border-color: #888; }
-    #link-facebook { background: linear-gradient(135deg, #5af, #0044ff); border-color: #89cff0; }
-    #link-instagram { background: linear-gradient(135deg, #fdf497, #fd5949, #d6249f); border-color: #ffdb58; }
-    #link-whatsapp { background: linear-gradient(135deg, #50fa7b, #008000); border-color: #50fa7b; }
-    #link-tiktok { background: linear-gradient(135deg, #444, #000); border-color: #ff0050; }
-    #link-tiktok svg { fill: #ff0050; }
-    #link-telegram-main, #link-telegram-catalog, #link-telegram-tutorial { background: linear-gradient(135deg, #38bdf8, #0284c7); border-color: #bae6fd; }
-
-    .icon-btn:hover {
-      transform: scale(1.1) !important;
-      animation: none;
-      filter: brightness(1.1);
+    /* --- Colores de Esferas (Tus favoritos) --- */
+    #link-x {
+      background: radial-gradient(circle at 30% 30%, #444 0%, #000 100%);
+      border-color: #a0a0a0;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    }
+    #link-facebook {
+      background: radial-gradient(circle at 30% 30%, #5af 0%, #0044ff 100%);
+      border-color: #89cff0;
+      box-shadow: 0 0 15px rgba(0, 100, 255, 0.4);
+    }
+    #link-instagram {
+      background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 45%, #d6249f 100%);
+      border-color: #ffdb58;
+      box-shadow: 0 0 15px rgba(214, 36, 159, 0.5);
+    }
+    #link-whatsapp {
+      background: radial-gradient(circle at 30% 30%, #50fa7b 0%, #008000 100%);
+      border-color: #50fa7b;
+    }
+    #link-tiktok {
+      background: radial-gradient(circle at 30% 30%, #444 0%, #000 100%);
+      border-color: #ff0050;
+      box-shadow: inset 0 0 10px #00f2ea;
+    }
+    #link-tiktok svg { fill: #ff0050; text-shadow: -2px 0 #00f2ea; }
+    #link-telegram-main, #link-telegram-catalog, #link-telegram-tutorial {
+      background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 100%);
+      border-color: #bae6fd;
     }
 
-    /* --- Catálogo (Lista con scroll suave) --- */
+    .icon-btn:hover {
+      transform: scale(1.15) rotate(0deg) !important;
+      animation: none;
+      filter: brightness(1.2);
+      z-index: 20;
+    }
+
+    /* --- Catálogo --- */
     #video-catalog-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      max-height: 300px;  
+      max-height: 350px;  
       overflow-y: auto;  
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      -webkit-overflow-scrolling: touch; /* Scroll nativo en iOS */
+      -webkit-overflow-scrolling: touch;
     }
     #video-catalog-list li {
       padding: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     #video-catalog-list a {
-      color: #ddd;
+      color: #e0e0e0;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       display: block;
+    }
+    #video-catalog-list a:hover {
+      color: #ffd700;
     }
 
     .divider {
       height: 1px;
-      background: rgba(255,255,255,0.2);
+      background: linear-gradient(90deg, transparent, #fff, transparent);
+      opacity: 0.3;
+      margin: 30px 0;
       border: none;
-      margin: 25px 0;
     }
 
     .footer {  
-      margin-top: 30px; 
+      margin-top: 40px; 
       padding-bottom: 20px; 
-      font-size: 0.75rem;  
-      color: rgba(255,255,255,0.4);  
+      font-size: 0.8rem;  
+      color: rgba(255,255,255,0.5);  
     }
     .footer a { color: #ffd700; text-decoration: none; }
 
@@ -400,4 +437,4 @@
 
   <script src="script.js"></script>
 </body>
-        </html>
+</html>
