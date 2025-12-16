@@ -11,7 +11,7 @@
   <style>
     /* ============================================================
        TEMA "NAVIDAD ÉPICA 2025" 🎅
-       Optinado para Smartphones, Efectos CSS Puros
+       Optimizado para Smartphones, Efectos CSS Puros
     ============================================================
     */
 
@@ -29,11 +29,6 @@
       --color-text-primary: #FFFFFF;
       --color-text-secondary: #FFD700; /* Dorado */
       --color-text-glow: #FF4D4D;      /* Resplandor Rojo */
-      
-      /* Botones (Estilo Caramelo/Regalo) */
-      --btn-grad-1: #D40000; /* Rojo Santa */
-      --btn-grad-2: #FF2222; /* Rojo Brillante */
-      --btn-grad-3: #8B0000; /* Vino */
     }
 
     /* --- Animaciones Navideñas --- */
@@ -159,7 +154,7 @@
       opacity: 0.6;
     }
 
-    /* --- Botones ÉPICOS (Estilo Regalo) --- */
+    /* --- Botones ÉPICOS (Estilo Regalo 3D) --- */
     .btn-primary {
       color: #FFF;
       border: none;
@@ -169,17 +164,14 @@
       padding: 18px;
       font-size: 1.1rem;
       font-weight: 800;
-      border-radius: 50px; /* Botones muy redondos */
+      border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
       position: relative;
       overflow: hidden;
-      
-      /* Gradiente Rojo Intenso */
-      background: linear-gradient(135deg, var(--btn-grad-1), var(--btn-grad-3));
-      box-shadow: 0 6px 0 #580000, 0 10px 10px rgba(0,0,0,0.3); /* Efecto 3D */
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
@@ -196,18 +188,43 @@
     }
 
     .btn-primary:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 #580000, 0 4px 4px rgba(0,0,0,0.3);
+      transform: translateY(4px) scale(0.98);
+      filter: brightness(0.9);
     }
     
     .btn-primary:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.15);
+      transform: translateY(-2px);
     }
 
-    /* Colores específicos para variedad si se desea, o mantener uniformidad roja */
-    #btn-filemoon { border-bottom: 3px solid rgba(0,0,0,0.2); }
-    #btn-streamhg { filter: hue-rotate(320deg); /* Un tono rosado/morado navideño */ } 
-    #btn-terabox  { filter: hue-rotate(200deg); /* Un tono azul hielo */ }
+    /* ==================================================
+       COLORES DE BOTONES TEMÁTICOS NAVIDEÑOS
+       ================================================== 
+    */
+
+    /* FILEMOON: Tema "Noche Helada" (Azul Hielo / Invierno) */
+    #btn-filemoon {
+      background: linear-gradient(135deg, #004e92, #000428);
+      border: 2px solid #2b5876;
+      border-top: 2px solid #78ffd6; /* Brillo superior helado */
+      box-shadow: 0 6px 0 #000428, 0 10px 15px rgba(0, 198, 255, 0.2);
+    }
+
+    /* STREAMHG: Tema "Traje de Santa" (Rojo Vibrante / Caramelo) */
+    #btn-streamhg {
+      background: linear-gradient(135deg, #d31027, #ea384d);
+      border: 2px solid #990000;
+      border-top: 2px solid #ff8ea0; /* Brillo caramelo */
+      box-shadow: 0 6px 0 #8b0000, 0 10px 15px rgba(234, 56, 77, 0.3);
+    }
+
+    /* TERABOX: Tema "Pino de Navidad" (Verde Bosque / Elfo) */
+    #btn-terabox {
+      background: linear-gradient(135deg, #134E5E, #71B280);
+      border: 2px solid #0d3a46;
+      border-top: 2px solid #a8ff78; /* Brillo esmeralda */
+      box-shadow: 0 6px 0 #082d36, 0 10px 15px rgba(113, 178, 128, 0.3);
+    }
 
     .hidden { display: none !important; }
     
@@ -242,15 +259,15 @@
       width: 55px;
       height: 55px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.3);
-      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.4);
+      border: 2px solid rgba(255,255,255,0.2); /* Borde base por defecto */
       transition: all 0.3s ease;
       /* Animación de balanceo */
       animation: ornamentSwing 3s ease-in-out infinite;
       transform-origin: top center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    /* Retrasos en animación para que no se muevan todos igual */
+    /* Retrasos en animación */
     .icon-btn:nth-child(odd) { animation-duration: 3.5s; }
     .icon-btn:nth-child(even) { animation-duration: 4s; }
 
@@ -259,21 +276,63 @@
       height: 28px;
       fill: #FFF;
       filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+      transition: fill 0.3s ease;
     }
 
-    /* Colores Navideños para Hover */
+    /* Hover General */
     .icon-btn:hover {
       background: #FFF;
-      transform: scale(1.15) rotate(0deg) !important; /* Detiene el balanceo y agranda */
+      transform: scale(1.15) rotate(0deg) !important; 
       animation: none;
-      border-color: #FFD700;
+      box-shadow: 0 0 15px var(--hover-glow-color, #FFD700); /* Glow dinámico */
     }
-    .icon-btn:hover svg { fill: #D40000; } /* El icono se vuelve rojo al tocar */
+    .icon-btn:hover svg { fill: var(--hover-fill-color, #D40000); }
 
-    /* Colores específicos de borde para identificación sutil */
-    #link-whatsapp { border-color: #25D366; }
-    #link-telegram-main { border-color: #0088CC; }
-    #link-tiktok { border-color: #EE1D52; }
+    /* --- Colores Específicos para Bordes Navideños (Esferas) --- */
+    
+    /* WhatsApp: Verde Navidad */
+    #link-whatsapp { 
+        border-color: #25D366; 
+        --hover-glow-color: #25D366; 
+        --hover-fill-color: #25D366;
+    }
+    /* Telegram: Azul Hielo */
+    #link-telegram-main { 
+        border-color: #0088CC; 
+        --hover-glow-color: #0088CC; 
+        --hover-fill-color: #0088CC;
+    }
+    /* TikTok: Rosa Neón/Ponche */
+    #link-tiktok { 
+        border-color: #EE1D52; 
+        --hover-glow-color: #EE1D52; 
+        --hover-fill-color: #EE1D52;
+    }
+
+    /* X (Twitter): Plata / Nieve (Nuevo) */
+    #link-x { 
+        border-color: #E0E0E0; 
+        box-shadow: 0 0 5px rgba(224, 224, 224, 0.2);
+        --hover-glow-color: #000000;
+        --hover-fill-color: #000000;
+    }
+    
+    /* Facebook: Azul Real / Nochebuena (Nuevo) */
+    #link-facebook { 
+        border-color: #1877F2; 
+        box-shadow: 0 0 5px rgba(24, 119, 242, 0.3);
+        --hover-glow-color: #1877F2;
+        --hover-fill-color: #1877F2;
+    }
+    
+    /* Instagram: Oro Cálido / Luces de Bengala (Nuevo) */
+    #link-instagram { 
+        border-color: #E1306C; /* Tono Baya */
+        border-top-color: #FCAF45; /* Tono Dorado superior */
+        box-shadow: 0 0 5px rgba(225, 48, 108, 0.3);
+        --hover-glow-color: #C13584;
+        --hover-fill-color: #C13584;
+    }
     
     /* --- Catálogo (Lista) --- */
     #video-catalog-list {
@@ -410,7 +469,7 @@
 
     <div class="footer">
       <p>⚠️ Todos los enlaces son externos.</p>
-      <p>🎄 ¡Feliz 2025! | Partner de Linkvertise</p>
+      <p>🎄 ¡Feliz 2026! | Partner de Linkvertise</p>
     </div>
   </div>
 
