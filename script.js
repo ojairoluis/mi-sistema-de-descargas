@@ -6,7 +6,6 @@ const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
 const catalogList = document.getElementById('video-catalog-list');
 const mainTitleText = document.getElementById('main-title-text');
-const mainContentArea = document.querySelector('.main-card'); // Referencia para efectos
 
 // --- Enlaces Sociales ---
 const socialLinks = {
@@ -23,25 +22,28 @@ const telegramChannels = {
   tutorial: "https://t.me/tutodescargas" 
 };
 
-// --- TAREA 0: EFX VISUALES (Burbujas Doradas) ---
-function createBubbles() {
-  const container = document.getElementById('bubbles-container');
-  // Limpiamos por si se llama varias veces
+// --- TAREA 0: EFX VISUALES (Confeti Party) ---
+function createConfetti() {
+  const container = document.getElementById('particles-container');
   container.innerHTML = '';
-  const bubbleCount = 20; 
+  const count = 30; 
+  const colors = ['#FFD700', '#FF0055', '#00F2FF', '#00FF9D', '#FFFFFF']; // Oro, Rosa, Azul, Verde, Blanco
 
-  for (let i = 0; i < bubbleCount; i++) {
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble');
+  for (let i = 0; i < count; i++) {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
     
-    // Aleatorización
-    const size = Math.random() * 12 + 4 + 'px'; 
-    bubble.style.setProperty('--size', size);
-    bubble.style.setProperty('--pos', Math.random() * 100 + '%');
-    bubble.style.setProperty('--duration', Math.random() * 5 + 6 + 's');
-    bubble.style.setProperty('--delay', Math.random() * 5 + 's');
+    // Aleatorizar propiedades
+    const size = Math.random() * 8 + 4 + 'px';
+    const color = colors[Math.floor(Math.random() * colors.length)];
     
-    container.appendChild(bubble);
+    confetti.style.setProperty('--size', size);
+    confetti.style.setProperty('--color', color);
+    confetti.style.setProperty('--pos', Math.random() * 100 + '%');
+    confetti.style.setProperty('--duration', Math.random() * 5 + 5 + 's');
+    confetti.style.setProperty('--delay', Math.random() * 5 + 's');
+    
+    container.appendChild(confetti);
   }
 }
 
@@ -58,7 +60,7 @@ function populateCommunityLinks() {
   document.getElementById('link-instagram').href = socialLinks.instagram;
 }
 
-// --- TAREA 2: Rellenar el catálogo (Corrección del error "Isquo") ---
+// --- TAREA 2: Rellenar el catálogo (Colorido) ---
 function populateVideoCatalog(data) {
   catalogList.innerHTML = '';  
   const allVideos = Object.entries(data).reverse();
@@ -70,12 +72,14 @@ function populateVideoCatalog(data) {
     link.href = `/${videoKey}`;
     link.classList.add('catalog-link');
     
-    // AQUI ESTABA EL ERROR: Cambiado 'Isquo;' por la entidad HTML correcta '&rsaquo;' (›)
-    // Se ve como una flecha fina y elegante a la derecha
+    // Iconos de fiesta variados
+    const icons = ["🥳", "🥂", "🎆", "✨", "🔥"];
+    const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+
     link.innerHTML = `
-      <span class="link-icon">🥂</span> 
+      <span class="link-icon">${randomIcon}</span> 
       <span class="link-text">${video.title.toUpperCase()}</span> 
-      <span class="link-arrow">&rsaquo;</span>
+      <span class="link-arrow">GO</span>
     `;
     
     listItem.appendChild(link);
@@ -85,7 +89,7 @@ function populateVideoCatalog(data) {
 
 // --- TAREA 3: Lógica Principal ---
 function main() {
-  createBubbles();
+  createConfetti();
   populateCommunityLinks();
 
   const videoId = window.location.pathname.substring(1);
@@ -98,25 +102,24 @@ function main() {
     .then(data => {
       populateVideoCatalog(data);
 
-      // --- LÓGICA DE TEXTOS ---
       if (videoId === "" || videoId === "index.html") {
         // HOME
         mainTitleText.textContent = "FELIZ 2026";
-        videoTitle.textContent = "✨ Comienza la celebración. Elige abajo. 👇";
+        videoTitle.textContent = "🥳 La fiesta empieza aquí 👇";
         loading.style.display = 'none';
 
       } else {
         // PÁGINA DE VIDEO
         if (!data[videoId]) {
-          videoTitle.textContent = "❌ Enlace no disponible";
-          loading.textContent = "Lo sentimos, este archivo ya no existe.";
+          videoTitle.textContent = "❌ Enlace Vencido";
+          loading.textContent = "Intenta con otro archivo de la lista.";
           return;
         }
 
         const video = data[videoId];
         
-        // Cambio de "ACCESO VIP" a algo más elegante y gratuito
-        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
+        // Títulos
+        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#00F2FF'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
         // Asignar enlaces
@@ -124,12 +127,8 @@ function main() {
         btnStreamhg.href = video.streamhg;
         btnTerabox.href = video.terabox;
 
-        // Texto de carga cambiado
-        loading.textContent = "🥂 Enlaces listos para ti:";
-        loading.classList.remove('loading-state'); // Quitamos animación de carga
-        loading.style.marginBottom = "15px";
-
-        // Mostrar Botones
+        // Limpiar loading y mostrar botones
+        loading.textContent = "⬇️ Enlaces Listos:";
         btnFilemoon.classList.remove('hidden');
         btnStreamhg.classList.remove('hidden');
         btnTerabox.classList.remove('hidden');
@@ -138,8 +137,8 @@ function main() {
     })
     .catch((error) => {
       console.error('Error JSON:', error);
-      videoTitle.textContent = "Error de Sistema";
-      loading.textContent = "⚠️ Hubo un problema cargando los datos.";
+      videoTitle.textContent = "Error";
+      loading.textContent = "⚠️ Algo salió mal con la fiesta.";
     });
 }
 
