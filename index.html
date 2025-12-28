@@ -3,412 +3,341 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="theme-color" content="#000000">
-  <title>🎆 PatuConsumoXD - Feliz 2026 🥂</title>
+  <meta name="theme-color" content="#020202">
+  <title>🎆 PatuConsumoXD - Gala 2026 🥂</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ============================================================
-       TEMA "MIDNIGHT GOLD 2026" 🥂
-       Optimizado: Animaciones CSS puras, sin librerías pesadas.
-    ============================================================ */
+    /* =========================================
+       TEMA: MIDNIGHT CHAMPAGNE GALA 2026
+       UX/UI: Enfoque en lujo, dinamismo y claridad.
+    ========================================= */
 
     :root {
-      /* Paleta de Colores Año Nuevo */
-      --bg-dark: #050505;
-      --bg-night: #0a0a12;
-      --gold-primary: #FFD700;
-      --gold-dark: #B8860B;
-      --silver: #E0E0E0;
-      --neon-glow: #fffeca; /* Brillo blanco/dorado */
+      /* Paleta de Colores */
+      --bg-void: #020202;
+      --bg-night-gradient: radial-gradient(circle at 50% 0%, #1a1233 0%, #000000 70%);
       
-      /* Contenedor: Cristal Oscuro */
-      --glass-bg: rgba(20, 20, 20, 0.85);
-      --glass-border: 1px solid rgba(255, 215, 0, 0.3);
+      --gold-primary: #FFD700;   /* Oro puro */
+      --gold-soft: #FCEEB5;      /* Champán */
+      --gold-shadow: #8A6E2F;    /* Bronce */
       
-      /* Texto */
-      --text-main: #FFFFFF;
-      --text-accent: #FFD700;
+      /* Efectos de Cristal */
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: 1px solid rgba(255, 215, 0, 0.2);
+      --glass-blur: blur(20px);
+      --box-glow: 0 10px 40px -10px rgba(0,0,0,1), 0 0 20px rgba(255, 215, 0, 0.1) inset;
     }
 
-    /* --- Animaciones --- */
-    /* Efecto Burbujas de Champaña subiendo */
-    @keyframes rise {
-      0% { bottom: -10px; transform: translateX(0); opacity: 0; }
-      50% { opacity: 1; }
-      100% { bottom: 100vh; transform: translateX(-20px); opacity: 0; }
-    }
-
-    /* Efecto Resplandor de Texto */
-    @keyframes neonPulse {
-      0% { text-shadow: 0 0 5px var(--gold-dark); }
-      50% { text-shadow: 0 0 20px var(--gold-primary), 0 0 30px var(--gold-primary); }
-      100% { text-shadow: 0 0 5px var(--gold-dark); }
-    }
-
-    /* Efecto Brillo en botones */
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    /* --- Estilos Base --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* --- Reset y Base --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
     body {
-      background: radial-gradient(circle at bottom, #1a0b2e 0%, #000000 100%);
-      color: var(--text-main);
+      background: var(--bg-void);
+      background-image: var(--bg-night-gradient);
+      color: var(--gold-soft);
+      font-family: 'Montserrat', sans-serif;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 15px;
-      font-family: system-ui, -apple-system, sans-serif;
+      justify-content: center;
+      align-items: center; /* Centrado vertical en pantallas grandes */
+      padding: 20px 15px;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* --- Fondo Animado (Burbujas/Estrellas) --- */
-    .particle {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background-color: var(--gold-primary);
+    /* --- Fondo Animado (Burbujas de Champán) --- */
+    #bubbles-container {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    
+    .bubble {
+      position: absolute;
+      bottom: -20px;
+      background: radial-gradient(circle, var(--gold-primary) 10%, transparent 70%);
       border-radius: 50%;
-      bottom: -10px;
-      animation: rise 5s infinite ease-in;
       opacity: 0;
-      z-index: 0;
-      pointer-events: none;
+      animation: floatUp var(--duration) ease-in infinite;
+      animation-delay: var(--delay);
+      width: var(--size); height: var(--size); left: var(--pos);
       box-shadow: 0 0 10px var(--gold-primary);
     }
-    /* Generamos variación en las partículas */
-    .particle:nth-child(1) { left: 10%; animation-duration: 8s; width: 6px; height: 6px; }
-    .particle:nth-child(2) { left: 20%; animation-duration: 5s; animation-delay: 1s; }
-    .particle:nth-child(3) { left: 35%; animation-duration: 7s; animation-delay: 2s; width: 8px; height: 8px; background: var(--silver); }
-    .particle:nth-child(4) { left: 50%; animation-duration: 11s; animation-delay: 0s; }
-    .particle:nth-child(5) { left: 65%; animation-duration: 6s; animation-delay: 1s; }
-    .particle:nth-child(6) { left: 80%; animation-duration: 8s; animation-delay: 3s; width: 5px; height: 5px; background: var(--silver); }
-    .particle:nth-child(7) { left: 90%; animation-duration: 9s; animation-delay: 2s; }
 
-    /* --- Contenedor Principal --- */
-    .container {
-      width: 100%;
-      max-width: 550px;
-      background: var(--glass-bg);
-      padding: 30px 20px;
-      border-radius: 24px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,215,0,0.1);
-      border: var(--glass-border);
-      backdrop-filter: blur(12px);
-      position: relative;
-      z-index: 10;
-      margin-top: 20px;
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      20% { opacity: 0.7; }
+      80% { opacity: 0.5; }
+      100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
     }
 
-    /* Adorno "2026" futurista arriba */
-    .container::before {
-      content: '2026';
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #000;
-      border: 1px solid var(--gold-primary);
-      color: var(--gold-primary);
-      padding: 5px 20px;
-      border-radius: 20px;
+    /* --- Tarjeta Principal (Glassmorphism) --- */
+    .main-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px; /* Ancho ideal para lectura móvil */
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      border-radius: 30px;
+      padding: 40px 25px;
+      box-shadow: var(--box-glow);
+      text-align: center;
+      /* Animación de entrada */
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Badge del Año */
+    .year-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--gold-shadow), var(--gold-primary));
+      color: #000;
       font-weight: 900;
-      font-size: 0.9rem;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
       letter-spacing: 2px;
-      box-shadow: 0 0 15px var(--gold-dark);
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px var(--gold-shadow);
     }
 
     /* --- Tipografía --- */
     h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 6vw, 2.8rem); /* Tipografía responsiva */
       font-weight: 900;
-      font-size: 2.4rem;
-      color: #FFF;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      letter-spacing: -1px;
-      animation: neonPulse 3s infinite alternate;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      /* Efecto de texto dorado metálico */
+      background: linear-gradient(to right, var(--gold-soft), var(--gold-primary), var(--gold-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));
     }
     
-    .subtitle {  
-      font-size: 1rem;  
-      color: var(--silver);
-      margin-bottom: 30px;
+    .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 35px;
       font-weight: 400;
-      letter-spacing: 1px;
-      opacity: 0.8;
+      letter-spacing: 0.5px;
     }
 
-    /* --- Divisores --- */
-    .divider {
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    /* --- SECCIÓN DE BOTONES (El arreglo principal) --- */
+    .actions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px; /* Espacio vital entre botones */
+      margin-bottom: 30px;
+    }
+
+    .btn-premium {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      margin: 30px auto;
+      padding: 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: white;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Colores y gradientes únicos para cada servicio */
+    #btn-filemoon { background: linear-gradient(135deg, #141E30 0%, #243B55 100%); border-color: #4facfe; }
+    #btn-streamhg { background: linear-gradient(135deg, #3E0E0E 0%, #6D1212 100%); border-color: #ff4b4b; }
+    #btn-terabox  { background: linear-gradient(135deg, #0D2E21 0%, #14523D 100%); border-color: #1de9b6; }
+
+    /* Efecto "Brillo Deslizante" en Hover */
+    .btn-premium::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 60px; height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+      transform: rotate(25deg);
+      transition: none; /* Se controla con hover */
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.1);
+      filter: brightness(1.2);
+    }
+    .btn-premium:hover::after {
+      left: 120%;
+      transition: left 0.7s ease-in-out;
+    }
+    .btn-premium:active { transform: scale(0.98); }
+
+    /* --- Estados y Utilidades --- */
+    .hidden { display: none !important; }
+    
+    .loading-state {
+      color: var(--gold-primary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: pulseGold 2s infinite ease-in-out;
+    }
+    @keyframes pulseGold { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; text-shadow: 0 0 10px var(--gold-primary); } }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-shadow), transparent);
+      border: none;
+      margin: 30px 0;
       opacity: 0.5;
     }
 
-    /* --- Botones ÉPICOS (Estilo Metálico) --- */
-    .btn-primary {
-      color: #FFF;
-      border: none;
-      display: block;
-      width: 100%;
-      margin: 15px auto;
-      padding: 18px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      border-radius: 12px; /* Bordes menos redondos para look moderno */
-      cursor: pointer;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
-    
-    /* Brillo diagonal metálico */
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transform: skewX(-25deg);
-      transition: 0.5s;
-    }
-    
-    .btn-primary:hover::after { left: 150%; transition: 0.7s ease-in-out; }
-    .btn-primary:hover { transform: translateY(-3px); filter: brightness(1.2); }
-    .btn-primary:active { transform: translateY(2px); }
-
-    /* Colores Específicos con Estilo Metálico Oscuro */
-    
-    /* FILEMOON: Sapphire Metallic */
-    #btn-filemoon {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      border: 1px solid #4facfe;
-      box-shadow: 0 0 10px rgba(79, 172, 254, 0.2);
+    /* --- Sección de Comunidad (Iconos) --- */
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold-soft);
+      margin-bottom: 20px;
     }
 
-    /* STREAMHG: Ruby Metallic */
-    #btn-streamhg {
-      background: linear-gradient(135deg, #370000, #800000);
-      border: 1px solid #ff4b4b;
-      box-shadow: 0 0 10px rgba(255, 75, 75, 0.2);
-    }
-
-    /* TERABOX: Emerald Metallic */
-    #btn-terabox {
-      background: linear-gradient(135deg, #00251a, #004d40);
-      border: 1px solid #1de9b6;
-      box-shadow: 0 0 10px rgba(29, 233, 182, 0.2);
-    }
-
-    .hidden { display: none !important; }
-    
-    .loading {  
-      color: var(--gold-primary);  
-      margin: 20px 0;  
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    /* --- Iconos Comunidad (Estilo Moneda Dorada) --- */
-    .secondary-section h2 {
-      color: var(--text-main);
-      margin: 10px 0 25px 0;
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-
-    .icon-btn-container {
+    .social-wheel {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
+      margin-bottom: 20px;
     }
-    
-    .icon-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 12px; /* Squircle */
+
+    .icon-glass {
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
       transition: all 0.3s ease;
     }
-
-    .icon-btn svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--silver);
-      transition: fill 0.3s ease;
-    }
-
-    /* Hover Específico */
-    .icon-btn:hover {
-      transform: translateY(-5px);
-      background: var(--bg-dark);
-      border-color: var(--hover-color);
-      box-shadow: 0 5px 15px var(--hover-shadow);
-    }
-    .icon-btn:hover svg { fill: var(--hover-color); }
-
-    /* Variables CSS locales para colores de hover */
-    #link-whatsapp { --hover-color: #25D366; --hover-shadow: rgba(37, 211, 102, 0.4); }
-    #link-telegram-main { --hover-color: #0088CC; --hover-shadow: rgba(0, 136, 204, 0.4); }
-    #link-tiktok { --hover-color: #ff0050; --hover-shadow: rgba(255, 0, 80, 0.4); }
-    #link-x { --hover-color: #fff; --hover-shadow: rgba(255, 255, 255, 0.4); }
-    #link-facebook { --hover-color: #1877F2; --hover-shadow: rgba(24, 119, 242, 0.4); }
-    #link-instagram { --hover-color: #d62976; --hover-shadow: rgba(214, 41, 118, 0.4); }
+    .icon-glass svg { width: 24px; height: 24px; fill: #aaa; transition: 0.3s; }
     
-    /* Para catálogo y tutorial (Dorado) */
-    #link-telegram-catalog, #link-telegram-tutorial { 
-        --hover-color: #FFD700; 
-        --hover-shadow: rgba(255, 215, 0, 0.4); 
+    .icon-glass:hover {
+      background: var(--gold-primary);
+      box-shadow: 0 0 20px var(--gold-primary);
+      transform: rotate(10deg) translateY(-5px); border-color: transparent;
     }
+    .icon-glass:hover svg { fill: #000; }
 
-    /* --- Catálogo (Lista estilo Matriz) --- */
-    #video-catalog-list {
-      list-style: none;
+    /* --- Catálogo (Estilo Lista VIP) --- */
+    .catalog-container {
+      max-height: 300px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.2);
+      border-radius: 16px;
       padding: 5px;
-      margin: 0;
-      max-height: 300px;  
-      overflow-y: auto;  
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      /* Scrollbar personalizada */
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-shadow) transparent;
     }
-    /* Scrollbar bonita */
-    #video-catalog-list::-webkit-scrollbar { width: 5px; }
-    #video-catalog-list::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+    .catalog-container::-webkit-scrollbar { width: 6px; }
+    .catalog-container::-webkit-scrollbar-thumb { background: var(--gold-shadow); border-radius: 10px; }
+
+    #video-catalog-list { list-style: none; }
     
-    #video-catalog-list li {
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background 0.2s;
-    }
-    #video-catalog-list li:hover { background: rgba(255,215,0,0.05); }
-    
-    #video-catalog-list a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      display: block;
-      display: flex; /* Para alinear emoji y texto */
+    .catalog-link {
+      display: flex;
       align-items: center;
-      gap: 10px;
+      padding: 14px 10px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      text-align: left;
     }
-    #video-catalog-list a:hover {
+    .catalog-link:last-child { border-bottom: none; }
+    /* Efecto hover en lista */
+    .catalog-link:hover {
+      background: linear-gradient(90deg, rgba(255,215,0,0.1), transparent);
       color: var(--gold-primary);
+      padding-left: 15px; /* Pequeño desplazamiento a la derecha */
     }
 
-    /* --- Footer --- */
-    .footer {  
-      margin-top: 40px; 
-      padding-bottom: 20px; 
-      font-size: 0.75rem;  
-      color: rgba(255,255,255,0.3);  
-      letter-spacing: 1px;
+    footer {
+      margin-top: 30px; font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 1px;
     }
-    .footer a { color: var(--gold-dark); text-decoration: none; }
-
   </style>
 </head>
 <body>
 
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
-  <div class="particle"></div>
+  <div id="bubbles-container"></div>
 
-  <div class="container">
+  <div class="main-card">
+    <span class="year-badge">2026 EDITION</span>
     
-    <h1>
-      <span id="main-title-text">FELIZ 2026</span>
-    </h1>
-    <p class="subtitle" id="video-title">🥂 Preparando los mejores enlaces... 🥂</p>
+    <h1><span id="main-title-text">FELIZ AÑO NUEVO</span></h1>
+    <p class="subtitle" id="video-title">✨ La mejor selección para celebrar ✨</p>
 
-    <div class="main-content">
-      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Abrir Enlace 1 (Filemoon)</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Abrir Enlace 2 (StreamHG)</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Abrir Enlace 3 (Terabox)</a>
-      <p class="loading" id="loading">✨ Descorchando contenido...</p>
+    <div class="actions-container">
+      <a href="#" class="btn-premium hidden" id="btn-filemoon">
+        Ver en Filemoon
+      </a>
+      <a href="#" class="btn-premium hidden" id="btn-streamhg">
+        Ver en StreamHG
+      </a>
+      <a href="#" class="btn-premium hidden" id="btn-terabox">
+        Ver en Terabox
+      </a>
+      
+      <p class="loading-state" id="loading">🥂 Descorchando el contenido...</p>
     </div>
 
-    <div class="secondary-section community-section">
+    <div class="secondary-section">
       <hr class="divider">
-      <h2>🥂 Únete al VIP 🥂</h2>
+      <h2>CÍRCULO VIP</h2>
       
-      <div class="icon-btn-container">
-        <a href="#" target="_blank" class="icon-btn" id="link-whatsapp" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-        </a>
-        
-        <a href="#" target="_blank" class="icon-btn" id="link-telegram-main" aria-label="Telegram">
-          <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        </a>
-        
-        <a href="#" target="_blank" class="icon-btn" id="link-tiktok" aria-label="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-        </a>
-        
-        <a href="#" target="_blank" class="icon-btn" id="link-x" aria-label="X">
-          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        
-        <a href="#" target="_blank" class="icon-btn" id="link-facebook" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0022 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
-        </a>
-        
-        <a href="#" target="_blank" class="icon-btn" id="link-instagram" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/></svg>
-        </a>
+      <div class="social-wheel">
+        <a href="#" target="_blank" class="icon-glass" id="link-whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-telegram-main"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-tiktok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-x"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-facebook"><svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0022 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/></svg></a>
       </div>
-      
-      <h2>📚 Guías y Catálogo 📚</h2>
-      <div class="icon-btn-container">
-        <a href="#" target="_blank" class="icon-btn" id="link-telegram-catalog" aria-label="Catálogo">
-          <svg viewBox="0 0 24 24"><path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10Z"/></svg>
-        </a>
-        <a href="#" target="_blank" class="icon-btn" id="link-telegram-tutorial" aria-label="Tutoriales">
-          <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h12v16H6V4zm7 10h-2V6h2v8zm-2 2h2v2h-2v-2z"/></svg>
-        </a>
+
+      <h2>CATÁLOGO Y GUÍAS</h2>
+       <div class="social-wheel">
+        <a href="#" target="_blank" class="icon-glass" id="link-telegram-catalog"><svg viewBox="0 0 24 24"><path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10Z"/></svg></a>
+        <a href="#" target="_blank" class="icon-glass" id="link-telegram-tutorial"><svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h12v16H6V4zm7 10h-2V6h2v8zm-2 2h2v2h-2v-2z"/></svg></a>
       </div>
     </div>
     
-    <div class="secondary-section catalog-section">
+    <div class="secondary-section">
       <hr class="divider">
-      <h2>🗂️ Últimos Agregados (2026)</h2>
-      <ul id="video-catalog-list">
-        </ul>
+      <h2>INVITADOS 2026</h2>
+      <div class="catalog-container">
+        <ul id="video-catalog-list">
+          </ul>
+      </div>
     </div>
 
-    <div class="footer">
-      <p>⚠️ Enlaces externos gestionados por terceros.</p>
-      <p>🥂 ¡Feliz 2026! | PatuConsumoXD</p>
-    </div>
+    <footer>
+      <p>PatuConsumoXD | Edición Gala 2026</p>
+      <p style="margin-top:5px; opacity: 0.6;">Enlaces de terceros.</p>
+    </footer>
   </div>
 
   <script src="script.js"></script>
