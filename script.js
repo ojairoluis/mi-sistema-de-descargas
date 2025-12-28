@@ -1,4 +1,4 @@
-// --- Cache de Elementos ---
+// --- Elementos del DOM ---
 const loading = document.getElementById('loading');
 const videoTitle = document.getElementById('video-title');
 const btnFilemoon = document.getElementById('btn-filemoon');
@@ -6,8 +6,9 @@ const btnStreamhg = document.getElementById('btn-streamhg');
 const btnTerabox = document.getElementById('btn-terabox');
 const catalogList = document.getElementById('video-catalog-list');
 const mainTitleText = document.getElementById('main-title-text');
+const mainContentArea = document.querySelector('.main-card'); // Referencia para efectos
 
-// --- Enlaces (Sin cambios) ---
+// --- Enlaces Sociales ---
 const socialLinks = {
   x: "https://x.com/patuconsumoxxd?t=lBK2T6a-4wD-fXKMzQ_Lsg&s=35",
   facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL",
@@ -17,25 +18,27 @@ const socialLinks = {
 };
 
 const telegramChannels = {
-  main: "https://t.me/+iQ-eesmcw0VhYzQx",
-  catalog: "https://t.me/patuconsumoxdmenu",
-  tutorial: "https://t.me/tutodescargas"
+  main: "https://t.me/+iQ-eesmcw0VhYzQx",      
+  catalog: "https://t.me/patuconsumoxdmenu",   
+  tutorial: "https://t.me/tutodescargas" 
 };
 
-// --- TAREA 0: EFX VISUALES - Generador de Burbujas ---
+// --- TAREA 0: EFX VISUALES (Burbujas Doradas) ---
 function createBubbles() {
   const container = document.getElementById('bubbles-container');
-  const bubbleCount = 25; // Cantidad de burbujas (equilibrado para móvil)
+  // Limpiamos por si se llama varias veces
+  container.innerHTML = '';
+  const bubbleCount = 20; 
 
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
     
-    // Aleatorización de propiedades CSS para que se vea natural
-    const size = Math.random() * 10 + 5 + 'px'; // Tamaño entre 5px y 15px
+    // Aleatorización
+    const size = Math.random() * 12 + 4 + 'px'; 
     bubble.style.setProperty('--size', size);
     bubble.style.setProperty('--pos', Math.random() * 100 + '%');
-    bubble.style.setProperty('--duration', Math.random() * 5 + 5 + 's'); // Duración entre 5s y 10s
+    bubble.style.setProperty('--duration', Math.random() * 5 + 6 + 's');
     bubble.style.setProperty('--delay', Math.random() * 5 + 's');
     
     container.appendChild(bubble);
@@ -55,7 +58,7 @@ function populateCommunityLinks() {
   document.getElementById('link-instagram').href = socialLinks.instagram;
 }
 
-// --- TAREA 2: Rellenar el catálogo (Con nuevo estilo) ---
+// --- TAREA 2: Rellenar el catálogo (Corrección del error "Isquo") ---
 function populateVideoCatalog(data) {
   catalogList.innerHTML = '';  
   const allVideos = Object.entries(data).reverse();
@@ -65,10 +68,15 @@ function populateVideoCatalog(data) {
     const link = document.createElement('a');
     
     link.href = `/${videoKey}`;
-    // Usamos la nueva clase para el estilo de lista
-    link.classList.add('catalog-link'); 
-    // Un toque elegante: champán al inicio, flecha al final
-    link.innerHTML = `🥂 ${video.title.toUpperCase()} <span style="margin-left:auto; opacity:0.5;">Isquo;</span>`;
+    link.classList.add('catalog-link');
+    
+    // AQUI ESTABA EL ERROR: Cambiado 'Isquo;' por la entidad HTML correcta '&rsaquo;' (›)
+    // Se ve como una flecha fina y elegante a la derecha
+    link.innerHTML = `
+      <span class="link-icon">🥂</span> 
+      <span class="link-text">${video.title.toUpperCase()}</span> 
+      <span class="link-arrow">&rsaquo;</span>
+    `;
     
     listItem.appendChild(link);
     catalogList.appendChild(listItem);
@@ -77,7 +85,7 @@ function populateVideoCatalog(data) {
 
 // --- TAREA 3: Lógica Principal ---
 function main() {
-  createBubbles(); // Iniciar efectos visuales
+  createBubbles();
   populateCommunityLinks();
 
   const videoId = window.location.pathname.substring(1);
@@ -90,34 +98,38 @@ function main() {
     .then(data => {
       populateVideoCatalog(data);
 
-      // --- LÓGICA DE VISUALIZACIÓN ---
+      // --- LÓGICA DE TEXTOS ---
       if (videoId === "" || videoId === "index.html") {
         // HOME
         mainTitleText.textContent = "FELIZ 2026";
-        videoTitle.textContent = "✨ Bienvenido a la Gala. Elige tu contenido abajo. 👇";
-        // En el home, ocultamos el loading para que se vea limpio
+        videoTitle.textContent = "✨ Comienza la celebración. Elige abajo. 👇";
         loading.style.display = 'none';
 
       } else {
         // PÁGINA DE VIDEO
         if (!data[videoId]) {
-          videoTitle.textContent = "❌ Invitación Caducada";
-          loading.textContent = "El enlace no existe o ha expirado.";
+          videoTitle.textContent = "❌ Enlace no disponible";
+          loading.textContent = "Lo sentimos, este archivo ya no existe.";
           return;
         }
 
         const video = data[videoId];
         
-        // Títulos y Enlaces
-        mainTitleText.textContent = "ACCESO VIP";
-        videoTitle.textContent = `🥂 ${video.title.toUpperCase()} 🥂`;
+        // Cambio de "ACCESO VIP" a algo más elegante y gratuito
+        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
+        videoTitle.textContent = `${video.title.toUpperCase()}`;
         
+        // Asignar enlaces
         btnFilemoon.href = video.filemoon;
         btnStreamhg.href = video.streamhg;
         btnTerabox.href = video.terabox;
 
-        // Mostrar Botones con estilo
-        loading.style.display = 'none';
+        // Texto de carga cambiado
+        loading.textContent = "🥂 Enlaces listos para ti:";
+        loading.classList.remove('loading-state'); // Quitamos animación de carga
+        loading.style.marginBottom = "15px";
+
+        // Mostrar Botones
         btnFilemoon.classList.remove('hidden');
         btnStreamhg.classList.remove('hidden');
         btnTerabox.classList.remove('hidden');
@@ -127,7 +139,7 @@ function main() {
     .catch((error) => {
       console.error('Error JSON:', error);
       videoTitle.textContent = "Error de Sistema";
-      loading.textContent = "⚠️ La fiesta tuvo un problema técnico.";
+      loading.textContent = "⚠️ Hubo un problema cargando los datos.";
     });
 }
 
