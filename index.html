@@ -3,158 +3,160 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>🎄 PatuConsumoXD - Navidad 🎄</title>
+  <meta name="theme-color" content="#000000">
+  <title>🎆 PatuConsumoXD - Feliz 2026 🥂</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <style>
     /* ============================================================
-       TEMA "NAVIDAD ÉPICA 2025" 🎅
-       Optimizado para Smartphones, Efectos CSS Puros
-    ============================================================
-    */
+       TEMA "MIDNIGHT GOLD 2026" 🥂
+       Optimizado: Animaciones CSS puras, sin librerías pesadas.
+    ============================================================ */
 
     :root {
-      /* Fondo: Gradiente Noche Buena */
-      --color-bg-start: #2c0001; /* Rojo muy oscuro */
-      --color-bg-mid: #5e0000;   /* Rojo navidad */
-      --color-bg-end: #0f1626;   /* Azul noche invernal */
+      /* Paleta de Colores Año Nuevo */
+      --bg-dark: #050505;
+      --bg-night: #0a0a12;
+      --gold-primary: #FFD700;
+      --gold-dark: #B8860B;
+      --silver: #E0E0E0;
+      --neon-glow: #fffeca; /* Brillo blanco/dorado */
       
-      /* Contenedor: Cristal Helado */
-      --color-container-bg: rgba(255, 255, 255, 0.1);
-      --color-border: rgba(255, 215, 0, 0.3); /* Borde dorado sutil */
+      /* Contenedor: Cristal Oscuro */
+      --glass-bg: rgba(20, 20, 20, 0.85);
+      --glass-border: 1px solid rgba(255, 215, 0, 0.3);
       
-      /* Textos */
-      --color-text-primary: #FFFFFF;
-      --color-text-secondary: #FFD700; /* Dorado */
-      --color-text-glow: #FF4D4D;      /* Resplandor Rojo */
+      /* Texto */
+      --text-main: #FFFFFF;
+      --text-accent: #FFD700;
     }
 
-    /* --- Animaciones Navideñas --- */
-    @keyframes snow {
-      0% { transform: translateY(-10vh) translateX(0); opacity: 1; }
-      100% { transform: translateY(100vh) translateX(20px); opacity: 0.3; }
-    }
-    
-    @keyframes ornamentSwing {
-      0% { transform: rotate(5deg); }
-      50% { transform: rotate(-5deg); }
-      100% { transform: rotate(5deg); }
+    /* --- Animaciones --- */
+    /* Efecto Burbujas de Champaña subiendo */
+    @keyframes rise {
+      0% { bottom: -10px; transform: translateX(0); opacity: 0; }
+      50% { opacity: 1; }
+      100% { bottom: 100vh; transform: translateX(-20px); opacity: 0; }
     }
 
-    @keyframes shine {
-      0% { background-position: -100% 0; }
+    /* Efecto Resplandor de Texto */
+    @keyframes neonPulse {
+      0% { text-shadow: 0 0 5px var(--gold-dark); }
+      50% { text-shadow: 0 0 20px var(--gold-primary), 0 0 30px var(--gold-primary); }
+      100% { text-shadow: 0 0 5px var(--gold-dark); }
+    }
+
+    /* Efecto Brillo en botones */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
-    }
-
-    @keyframes pulseGold {
-      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
     }
 
     /* --- Estilos Base --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
-      background: linear-gradient(180deg, var(--color-bg-end) 0%, var(--color-bg-mid) 60%, var(--color-bg-start) 100%);
-      color: var(--color-text-primary);
+      background: radial-gradient(circle at bottom, #1a0b2e 0%, #000000 100%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 15px; /* Menos padding en móviles */
-      text-align: center;
+      padding: 15px;
       font-family: system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* --- Efecto Nieve (Snowflakes) --- */
-    .snowflake {
+    /* --- Fondo Animado (Burbujas/Estrellas) --- */
+    .particle {
       position: fixed;
-      top: -10px;
-      color: #FFF;
-      font-size: 1em;
-      font-family: Arial;
-      text-shadow: 0 0 5px #000;
-      animation: snow linear infinite;
-      z-index: 0; /* Detrás del contenido */
-      pointer-events: none; /* Click a través de la nieve */
+      width: 4px;
+      height: 4px;
+      background-color: var(--gold-primary);
+      border-radius: 50%;
+      bottom: -10px;
+      animation: rise 5s infinite ease-in;
+      opacity: 0;
+      z-index: 0;
+      pointer-events: none;
+      box-shadow: 0 0 10px var(--gold-primary);
     }
-    /* Configuración aleatoria de la nieve */
-    .snowflake:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; opacity: 0.8; font-size: 1.2rem;}
-    .snowflake:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 1s; opacity: 0.6; font-size: 0.8rem;}
-    .snowflake:nth-child(3) { left: 30%; animation-duration: 12s; animation-delay: 2s; opacity: 0.9; }
-    .snowflake:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: 0s; opacity: 0.4; font-size: 1.5rem;}
-    .snowflake:nth-child(5) { left: 50%; animation-duration: 16s; animation-delay: 3s; opacity: 0.7; }
-    .snowflake:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 1s; opacity: 0.5; font-size: 1rem;}
-    .snowflake:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 2s; opacity: 0.8; }
-    .snowflake:nth-child(8) { left: 80%; animation-duration: 18s; animation-delay: 0s; opacity: 0.6; }
-    .snowflake:nth-child(9) { left: 90%; animation-duration: 10s; animation-delay: 4s; opacity: 0.9; font-size: 1.3rem;}
-    .snowflake:nth-child(10){ left: 5%;  animation-duration: 19s; animation-delay: 5s; opacity: 0.3; }
+    /* Generamos variación en las partículas */
+    .particle:nth-child(1) { left: 10%; animation-duration: 8s; width: 6px; height: 6px; }
+    .particle:nth-child(2) { left: 20%; animation-duration: 5s; animation-delay: 1s; }
+    .particle:nth-child(3) { left: 35%; animation-duration: 7s; animation-delay: 2s; width: 8px; height: 8px; background: var(--silver); }
+    .particle:nth-child(4) { left: 50%; animation-duration: 11s; animation-delay: 0s; }
+    .particle:nth-child(5) { left: 65%; animation-duration: 6s; animation-delay: 1s; }
+    .particle:nth-child(6) { left: 80%; animation-duration: 8s; animation-delay: 3s; width: 5px; height: 5px; background: var(--silver); }
+    .particle:nth-child(7) { left: 90%; animation-duration: 9s; animation-delay: 2s; }
 
-    /* --- Contenedor Principal (Tarjeta) --- */
+    /* --- Contenedor Principal --- */
     .container {
       width: 100%;
       max-width: 550px;
-      background: rgba(20, 0, 0, 0.6); /* Fondo oscuro semitransparente */
-      padding: 25px 20px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 20px rgba(255, 0, 0, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--color-border);
+      background: var(--glass-bg);
+      padding: 30px 20px;
+      border-radius: 24px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,215,0,0.1);
+      border: var(--glass-border);
+      backdrop-filter: blur(12px);
       position: relative;
       z-index: 10;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
-    /* Adorno superior (Gorro Santa abstracto) */
+    /* Adorno "2026" futurista arriba */
     .container::before {
-      content: '';
+      content: '2026';
       position: absolute;
-      top: -5px;
+      top: -15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80%;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, #FFD700, transparent);
-      border-radius: 50%;
-      box-shadow: 0 0 15px #FFD700;
+      background: #000;
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 5px 20px;
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      box-shadow: 0 0 15px var(--gold-dark);
     }
 
     /* --- Tipografía --- */
     h1 {
       font-weight: 900;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       color: #FFF;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 15px var(--color-text-glow);
+      text-transform: uppercase;
       margin-bottom: 5px;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
+      animation: neonPulse 3s infinite alternate;
     }
-    .video-icon { font-size: 1.2em; vertical-align: middle; }
     
     .subtitle {  
-      font-size: 1.1rem;  
-      color: var(--color-text-secondary);
-      margin-bottom: 25px;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-size: 1rem;  
+      color: var(--silver);
+      margin-bottom: 30px;
+      font-weight: 400;
       letter-spacing: 1px;
+      opacity: 0.8;
     }
 
-    /* --- Divisores Navideños --- */
+    /* --- Divisores --- */
     .divider {
       border: none;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #00FF00, #FF0000, #00FF00, transparent);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
       width: 100%;
-      margin: 25px auto;
-      opacity: 0.6;
+      margin: 30px auto;
+      opacity: 0.5;
     }
 
-    /* --- Botones ÉPICOS (Estilo Regalo 3D) --- */
+    /* --- Botones ÉPICOS (Estilo Metálico) --- */
     .btn-primary {
       color: #FFF;
       border: none;
@@ -164,312 +166,248 @@
       padding: 18px;
       font-size: 1.1rem;
       font-weight: 800;
-      border-radius: 50px;
+      border-radius: 12px; /* Bordes menos redondos para look moderno */
       cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
       position: relative;
       overflow: hidden;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
     
-    /* Efecto de brillo diagonal animado */
+    /* Brillo diagonal metálico */
     .btn-primary::after {
       content: '';
       position: absolute;
       top: 0;
       left: -100%;
-      width: 100%;
+      width: 50%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      animation: shine 3s infinite;
-    }
-
-    .btn-primary:active {
-      transform: translateY(4px) scale(0.98);
-      filter: brightness(0.9);
+      transform: skewX(-25deg);
+      transition: 0.5s;
     }
     
-    .btn-primary:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-    }
+    .btn-primary:hover::after { left: 150%; transition: 0.7s ease-in-out; }
+    .btn-primary:hover { transform: translateY(-3px); filter: brightness(1.2); }
+    .btn-primary:active { transform: translateY(2px); }
 
-    /* ==================================================
-       COLORES DE BOTONES TEMÁTICOS NAVIDEÑOS
-       ================================================== 
-    */
-
-    /* FILEMOON: Tema "Noche Helada" (Azul Hielo / Invierno) */
+    /* Colores Específicos con Estilo Metálico Oscuro */
+    
+    /* FILEMOON: Sapphire Metallic */
     #btn-filemoon {
-      background: linear-gradient(135deg, #004e92, #000428);
-      border: 2px solid #2b5876;
-      border-top: 2px solid #78ffd6; /* Brillo superior helado */
-      box-shadow: 0 6px 0 #000428, 0 10px 15px rgba(0, 198, 255, 0.2);
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      border: 1px solid #4facfe;
+      box-shadow: 0 0 10px rgba(79, 172, 254, 0.2);
     }
 
-    /* STREAMHG: Tema "Traje de Santa" (Rojo Vibrante / Caramelo) */
+    /* STREAMHG: Ruby Metallic */
     #btn-streamhg {
-      background: linear-gradient(135deg, #d31027, #ea384d);
-      border: 2px solid #990000;
-      border-top: 2px solid #ff8ea0; /* Brillo caramelo */
-      box-shadow: 0 6px 0 #8b0000, 0 10px 15px rgba(234, 56, 77, 0.3);
+      background: linear-gradient(135deg, #370000, #800000);
+      border: 1px solid #ff4b4b;
+      box-shadow: 0 0 10px rgba(255, 75, 75, 0.2);
     }
 
-    /* TERABOX: Tema "Pino de Navidad" (Verde Bosque / Elfo) */
+    /* TERABOX: Emerald Metallic */
     #btn-terabox {
-      background: linear-gradient(135deg, #134E5E, #71B280);
-      border: 2px solid #0d3a46;
-      border-top: 2px solid #a8ff78; /* Brillo esmeralda */
-      box-shadow: 0 6px 0 #082d36, 0 10px 15px rgba(113, 178, 128, 0.3);
+      background: linear-gradient(135deg, #00251a, #004d40);
+      border: 1px solid #1de9b6;
+      box-shadow: 0 0 10px rgba(29, 233, 182, 0.2);
     }
 
     .hidden { display: none !important; }
     
     .loading {  
-      color: #FFD700;  
+      color: var(--gold-primary);  
       margin: 20px 0;  
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
-      animation: pulseGold 2s infinite;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    /* --- Sección Comunidad & Iconos --- */
+    /* --- Iconos Comunidad (Estilo Moneda Dorada) --- */
     .secondary-section h2 {
-      color: #FFF;
-      margin: 30px 0 20px 0;
-      font-size: 1.4rem;
-      text-shadow: 0 0 10px #FF0000;
+      color: var(--text-main);
+      margin: 10px 0 25px 0;
+      font-size: 1.3rem;
+      font-weight: 700;
     }
 
     .icon-btn-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
     }
     
-    /* Iconos Estilo "Esferas de Navidad" */
     .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.4);
-      border: 2px solid rgba(255,255,255,0.2); /* Borde base por defecto */
+      width: 50px;
+      height: 50px;
+      border-radius: 12px; /* Squircle */
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
       transition: all 0.3s ease;
-      /* Animación de balanceo */
-      animation: ornamentSwing 3s ease-in-out infinite;
-      transform-origin: top center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    /* Retrasos en animación */
-    .icon-btn:nth-child(odd) { animation-duration: 3.5s; }
-    .icon-btn:nth-child(even) { animation-duration: 4s; }
 
     .icon-btn svg {
-      width: 28px;
-      height: 28px;
-      fill: #FFF;
-      filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+      width: 24px;
+      height: 24px;
+      fill: var(--silver);
       transition: fill 0.3s ease;
     }
 
-    /* Hover General */
+    /* Hover Específico */
     .icon-btn:hover {
-      background: #FFF;
-      transform: scale(1.15) rotate(0deg) !important; 
-      animation: none;
-      box-shadow: 0 0 15px var(--hover-glow-color, #FFD700); /* Glow dinámico */
+      transform: translateY(-5px);
+      background: var(--bg-dark);
+      border-color: var(--hover-color);
+      box-shadow: 0 5px 15px var(--hover-shadow);
     }
-    .icon-btn:hover svg { fill: var(--hover-fill-color, #D40000); }
+    .icon-btn:hover svg { fill: var(--hover-color); }
 
-    /* --- Colores Específicos para Bordes Navideños (Esferas) --- */
+    /* Variables CSS locales para colores de hover */
+    #link-whatsapp { --hover-color: #25D366; --hover-shadow: rgba(37, 211, 102, 0.4); }
+    #link-telegram-main { --hover-color: #0088CC; --hover-shadow: rgba(0, 136, 204, 0.4); }
+    #link-tiktok { --hover-color: #ff0050; --hover-shadow: rgba(255, 0, 80, 0.4); }
+    #link-x { --hover-color: #fff; --hover-shadow: rgba(255, 255, 255, 0.4); }
+    #link-facebook { --hover-color: #1877F2; --hover-shadow: rgba(24, 119, 242, 0.4); }
+    #link-instagram { --hover-color: #d62976; --hover-shadow: rgba(214, 41, 118, 0.4); }
     
-    /* WhatsApp: Verde Navidad */
-    #link-whatsapp { 
-        border-color: #25D366; 
-        --hover-glow-color: #25D366; 
-        --hover-fill-color: #25D366;
-    }
-    /* Telegram: Azul Hielo */
-    #link-telegram-main { 
-        border-color: #0088CC; 
-        --hover-glow-color: #0088CC; 
-        --hover-fill-color: #0088CC;
-    }
-    /* TikTok: Rosa Neón/Ponche */
-    #link-tiktok { 
-        border-color: #EE1D52; 
-        --hover-glow-color: #EE1D52; 
-        --hover-fill-color: #EE1D52;
+    /* Para catálogo y tutorial (Dorado) */
+    #link-telegram-catalog, #link-telegram-tutorial { 
+        --hover-color: #FFD700; 
+        --hover-shadow: rgba(255, 215, 0, 0.4); 
     }
 
-    /* X (Twitter): Plata / Nieve (Nuevo) */
-    #link-x { 
-        border-color: #E0E0E0; 
-        box-shadow: 0 0 5px rgba(224, 224, 224, 0.2);
-        --hover-glow-color: #000000;
-        --hover-fill-color: #000000;
-    }
-    
-    /* Facebook: Azul Real / Nochebuena (Nuevo) */
-    #link-facebook { 
-        border-color: #1877F2; 
-        box-shadow: 0 0 5px rgba(24, 119, 242, 0.3);
-        --hover-glow-color: #1877F2;
-        --hover-fill-color: #1877F2;
-    }
-    
-    /* Instagram: Oro Cálido / Luces de Bengala (Nuevo) */
-    #link-instagram { 
-        border-color: #E1306C; /* Tono Baya */
-        border-top-color: #FCAF45; /* Tono Dorado superior */
-        box-shadow: 0 0 5px rgba(225, 48, 108, 0.3);
-        --hover-glow-color: #C13584;
-        --hover-fill-color: #C13584;
-    }
-    
-    /* --- Catálogo (Lista) --- */
+    /* --- Catálogo (Lista estilo Matriz) --- */
     #video-catalog-list {
       list-style: none;
-      padding: 0;
+      padding: 5px;
       margin: 0;
-      max-height: 350px;  
+      max-height: 300px;  
       overflow-y: auto;  
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
+    /* Scrollbar bonita */
+    #video-catalog-list::-webkit-scrollbar { width: 5px; }
+    #video-catalog-list::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
+    
     #video-catalog-list li {
-      padding: 15px;
+      padding: 12px 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s;
     }
+    #video-catalog-list li:hover { background: rgba(255,215,0,0.05); }
+    
     #video-catalog-list a {
-      color: #E0E0E0;
+      color: #ccc;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 500;
+      font-size: 0.9rem;
       display: block;
+      display: flex; /* Para alinear emoji y texto */
+      align-items: center;
+      gap: 10px;
     }
     #video-catalog-list a:hover {
-      color: #FFD700; /* Dorado al pasar el mouse */
-      padding-left: 5px; /* Pequeño movimiento */
-      transition: all 0.2s;
+      color: var(--gold-primary);
     }
 
     /* --- Footer --- */
     .footer {  
       margin-top: 40px; 
       padding-bottom: 20px; 
-      font-size: 0.8rem;  
-      color: rgba(255,255,255,0.5);  
+      font-size: 0.75rem;  
+      color: rgba(255,255,255,0.3);  
+      letter-spacing: 1px;
     }
-    .footer a { color: #FFD700; text-decoration: none; }
+    .footer a { color: var(--gold-dark); text-decoration: none; }
 
   </style>
 </head>
 <body>
 
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❄</div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
 
   <div class="container">
     
     <h1>
-      <span class="video-icon">🎄</span>
-      <span id="main-title-text">Feliz Navidad</span>
-      <span class="video-icon">🎅</span>
+      <span id="main-title-text">FELIZ 2026</span>
     </h1>
-    <p class="subtitle" id="video-title">🎁 Buscando tu regalo... 🎁</p>
+    <p class="subtitle" id="video-title">🥂 Preparando los mejores enlaces... 🥂</p>
 
     <div class="main-content">
-      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Abrir Regalo 1 (Filemoon)</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Abrir Regalo 2 (StreamHG)</a>
-      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Abrir Regalo 3 (Terabox)</a>
-      <p class="loading" id="loading">☃️ Preparando trineo...</p>
+      <a href="#" class="btn btn-primary hidden" id="btn-filemoon">Abrir Enlace 1 (Filemoon)</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-streamhg">Abrir Enlace 2 (StreamHG)</a>
+      <a href="#" class="btn btn-primary hidden" id="btn-terabox">Abrir Enlace 3 (Terabox)</a>
+      <p class="loading" id="loading">✨ Descorchando contenido...</p>
     </div>
 
     <div class="secondary-section community-section">
       <hr class="divider">
-      <h2>✨ Únete a la Fiesta ✨</h2>
+      <h2>🥂 Únete al VIP 🥂</h2>
       
       <div class="icon-btn-container">
         <a href="#" target="_blank" class="icon-btn" id="link-whatsapp" aria-label="WhatsApp">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-telegram-main" aria-label="Telegram">
-          <svg role="img" width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <title>Telegram</title>
-            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-tiktok" aria-label="TikTok">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
         </a>
         
-        <a href="#" target="_blank" class="icon-btn" id="link-x" aria-label="X (Twitter)">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
+        <a href="#" target="_blank" class="icon-btn" id="link-x" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-facebook" aria-label="Facebook">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0022 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0022 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
         </a>
         
         <a href="#" target="_blank" class="icon-btn" id="link-instagram" aria-label="Instagram">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/></svg>
         </a>
       </div>
       
-      <h2>📚 Catálogo y Guías 🎄</h2>
+      <h2>📚 Guías y Catálogo 📚</h2>
       <div class="icon-btn-container">
         <a href="#" target="_blank" class="icon-btn" id="link-telegram-catalog" aria-label="Catálogo">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10Z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10Z"/></svg>
         </a>
         <a href="#" target="_blank" class="icon-btn" id="link-telegram-tutorial" aria-label="Tutoriales">
-          <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h12v16H6V4zm7 10h-2V6h2v8zm-2 2h2v2h-2v-2z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h12v16H6V4zm7 10h-2V6h2v8zm-2 2h2v2h-2v-2z"/></svg>
         </a>
       </div>
     </div>
     
     <div class="secondary-section catalog-section">
       <hr class="divider">
-      <h2>🗂️ Más Regalos (Catálogo)</h2>
+      <h2>🗂️ Últimos Agregados (2026)</h2>
       <ul id="video-catalog-list">
         </ul>
     </div>
 
     <div class="footer">
-      <p>⚠️ Todos los enlaces son externos.</p>
-      <p>🎄 ¡Feliz 2026! | Partner de Linkvertise</p>
+      <p>⚠️ Enlaces externos gestionados por terceros.</p>
+      <p>🥂 ¡Feliz 2026! | PatuConsumoXD</p>
     </div>
   </div>
 
