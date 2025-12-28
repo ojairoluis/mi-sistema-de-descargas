@@ -18,22 +18,19 @@ const socialLinks = {
 };
 
 const telegramChannels = {
-  main: "https://t.me/+iQ-eesmcw0VhYzQx",      // Este es @teralinks12 (VIP)
-  catalog: "https://t.me/patuconsumoxdmenu",   // Este es el Catálogo (Carpeta)
-  tutorial: "https://t.me/tutodescargas" // Este es el de Guías (Libro)
+  main: "https://t.me/+iQ-eesmcw0VhYzQx",      // Canal VIP
+  catalog: "https://t.me/patuconsumoxdmenu",   // Catálogo
+  tutorial: "https://t.me/tutodescargas" // Guías
 };
 
 /**
- * TAREA 1: Hidratar enlaces estáticos de la comunidad.
- * (Asigna los enlaces a los nuevos botones de ícono)
+ * TAREA 1: Hidratar enlaces estáticos.
  */
 function populateCommunityLinks() {
-  // Telegram
   document.getElementById('link-telegram-main').href = telegramChannels.main;
   document.getElementById('link-telegram-catalog').href = telegramChannels.catalog;
   document.getElementById('link-telegram-tutorial').href = telegramChannels.tutorial;
   
-  // Redes Sociales
   document.getElementById('link-tiktok').href = socialLinks.tiktok;
   document.getElementById('link-whatsapp').href = socialLinks.whatsapp;
   document.getElementById('link-x').href = socialLinks.x;
@@ -42,27 +39,23 @@ function populateCommunityLinks() {
 }
 
 /**
- * TAREA 2: Rellenar el catálogo de videos.
- * (Emoji ⚡ coincide con el tema Neón)
+ * TAREA 2: Rellenar el catálogo.
+ * Usamos el emoji de fuegos artificiales 🎆 o champaña 🥂
  */
 function populateVideoCatalog(data) {
-  // Limpiamos la lista por si acaso
   catalogList.innerHTML = '';  
   
-  // Usamos Object.entries para tener la clave (videoKey) y el valor (video)
-  // y .reverse() para mostrar los más nuevos (asumiendo que los añades al final del JSON)
+  // Revertimos para mostrar los nuevos primero
   const allVideos = Object.entries(data).reverse();
 
   allVideos.forEach(([videoKey, video]) => {
-    // Creamos los elementos del DOM de forma segura
     const listItem = document.createElement('li');
     const link = document.createElement('a');
     
-    // Usamos la redirección que ya tienes configurada
     link.href = `/${videoKey}`;  
     
-    // Emoji Neón
-    link.textContent = `⚡ ${video.title.toUpperCase()}`;
+    // Emoji de fiesta
+    link.textContent = `🎆 ${video.title.toUpperCase()}`;
     
     listItem.appendChild(link);
     catalogList.appendChild(listItem);
@@ -70,65 +63,49 @@ function populateVideoCatalog(data) {
 }
 
 /**
- * TAREA 3: Lógica Principal (Fetch y carga del video actual)
- * (¡¡¡AQUÍ ESTÁ LA MEJORA!!!)
+ * TAREA 3: Lógica Principal
  */
 function main() {
-  // 1. Rellenar la comunidad INMEDIATAMENTE
   populateCommunityLinks();
 
-  // 2. Obtener el ID del video actual
+  // Obtener ID del video de la URL
   const videoId = window.location.pathname.substring(1);
 
-  // 3. Buscar los datos del video
   fetch('data.json')
     .then(response => {
       if (!response.ok) {
-        throw new Error(`Error en la red: ${response.statusText}`);
+        throw new Error(`Error: ${response.statusText}`);
       }
       return response.json();
     })
     .then(data => {
-      // --- A. Rellenar el Catálogo de Videos (Esto se hace siempre) ---
       populateVideoCatalog(data);
 
-      // --- B. LÓGICA CONDICIONAL ---
-      // ¿Estamos en la Homepage (raíz) O en un video específico?
-
+      // --- LÓGICA DE VISUALIZACIÓN ---
       if (videoId === "" || videoId === "index.html") {
-        // --- VISTA "LINKTREE" (Homepage) ---
-        
-        // 1. Cambiar Títulos
-        mainTitleText.textContent = "PatuConsumoXD";
-        videoTitle.textContent = "Bienvenido. Encuentra todos nuestros enlaces. 👇";
-
-        // 2. Ocultar la sección de video (botones y loading)
+        // HOME
+        mainTitleText.textContent = "FELIZ 2026";
+        videoTitle.textContent = "✨ Bienvenido. Celebra con nuestros enlaces. 👇";
         mainContent.style.display = 'none';
 
       } else {
-        // --- VISTA "VIDEO ESPECÍFICO" (Lógica anterior) ---
-
+        // PÁGINA DE VIDEO
         if (!data[videoId]) {
-          // Video no encontrado
-          videoTitle.textContent = "❌ Video no encontrado ❌";
-          loading.textContent = "El video no existe o fue movido de nuestros archivos.";
+          videoTitle.textContent = "❌ Archivo no encontrado";
+          loading.textContent = "El enlace ha caducado o no existe.";
           return;
         }
 
-        // ¡Video encontrado!
         const video = data[videoId];
         
-        // Rellenar Título y Enlaces
-        // (El H1 ya dice "¡Tu Video está Listo!" por defecto, perfecto)
-        videoTitle.textContent = `🎬 » ${video.title.toUpperCase()} « 🎬`;
+        // Títulos de Video
+        videoTitle.textContent = `🥂 » ${video.title.toUpperCase()} « 🥂`;
         btnFilemoon.href = video.filemoon;
         btnStreamhg.href = video.streamhg;
         btnTerabox.href = video.terabox;
 
-        // Ocultar "Cargando..."
+        // Mostrar Botones
         loading.style.display = 'none';
-
-        // Mostrar los botones (CTA Primario)
         btnFilemoon.classList.remove('hidden');
         btnStreamhg.classList.remove('hidden');
         btnTerabox.classList.remove('hidden');
@@ -136,11 +113,10 @@ function main() {
 
     })
     .catch((error) => {
-      console.error('Error al cargar data.json:', error);
-      videoTitle.textContent = "Error en el Sistema";
-      loading.textContent = "⚠️ Error cargando enlaces. Los archivos están temporalmente corruptos. Intenta más tarde.";
+      console.error('Error JSON:', error);
+      videoTitle.textContent = "Error de Sistema";
+      loading.textContent = "⚠️ Error cargando la fiesta. Intenta más tarde.";
     });
 }
 
-// Ejecutar la lógica principal cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', main);
