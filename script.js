@@ -7,7 +7,7 @@ const btnTerabox = document.getElementById('btn-terabox');
 const catalogList = document.getElementById('video-catalog-list');
 const mainTitleText = document.getElementById('main-title-text');
 
-// --- Enlaces Sociales ---
+// --- Enlaces Sociales (Sin cambios) ---
 const socialLinks = {
   x: "https://x.com/patuconsumoxxd?t=lBK2T6a-4wD-fXKMzQ_Lsg&s=35",
   facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL",
@@ -22,32 +22,43 @@ const telegramChannels = {
   tutorial: "https://t.me/tutodescargas" 
 };
 
-// --- TAREA 0: EFX VISUALES (Confeti Party) ---
-function createConfetti() {
+// --- TAREA 0: EFX VISUALES (Lluvia de Cotillón: Billetes y Cerveza) ---
+function createPartyElements() {
   const container = document.getElementById('particles-container');
   container.innerHTML = '';
-  const count = 30; 
-  const colors = ['#FFD700', '#FF0055', '#00F2FF', '#00FF9D', '#FFFFFF']; // Oro, Rosa, Azul, Verde, Blanco
+  const count = 40; 
+  // Colores festivos: Dorado, Verde Billete, Rojo Fiesta
+  const colors = ['#FFD700', '#228B22', '#DC143C']; 
+  // Elementos: Círculos de color, Billetes, Cervezas
+  const elements = ['circle', '💵', '🍻'];
 
   for (let i = 0; i < count; i++) {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
+    const item = document.createElement('div');
+    item.classList.add('party-item');
     
-    // Aleatorizar propiedades
-    const size = Math.random() * 8 + 4 + 'px';
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    const elementType = elements[Math.floor(Math.random() * elements.length)];
     
-    confetti.style.setProperty('--size', size);
-    confetti.style.setProperty('--color', color);
-    confetti.style.setProperty('--pos', Math.random() * 100 + '%');
-    confetti.style.setProperty('--duration', Math.random() * 5 + 5 + 's');
-    confetti.style.setProperty('--delay', Math.random() * 5 + 's');
+    if (elementType === 'circle') {
+      const size = Math.random() * 10 + 5 + 'px';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      item.style.width = size;
+      item.style.height = size;
+      item.style.backgroundColor = color;
+      item.style.borderRadius = '50%';
+    } else {
+      item.textContent = elementType;
+      item.style.fontSize = Math.random() * 15 + 10 + 'px';
+    }
     
-    container.appendChild(confetti);
+    item.style.setProperty('--pos', Math.random() * 100 + '%');
+    item.style.setProperty('--duration', Math.random() * 5 + 5 + 's');
+    item.style.setProperty('--delay', Math.random() * 5 + 's');
+    
+    container.appendChild(item);
   }
 }
 
-// --- TAREA 1: Hidratar enlaces ---
+// --- TAREA 1: Hidratar enlaces (Sin cambios) ---
 function populateCommunityLinks() {
   document.getElementById('link-telegram-main').href = telegramChannels.main;
   document.getElementById('link-telegram-catalog').href = telegramChannels.catalog;
@@ -60,7 +71,7 @@ function populateCommunityLinks() {
   document.getElementById('link-instagram').href = socialLinks.instagram;
 }
 
-// --- TAREA 2: Rellenar el catálogo (Colorido) ---
+// --- TAREA 2: Rellenar el catálogo (Festivo) ---
 function populateVideoCatalog(data) {
   catalogList.innerHTML = '';  
   const allVideos = Object.entries(data).reverse();
@@ -73,13 +84,13 @@ function populateVideoCatalog(data) {
     link.classList.add('catalog-link');
     
     // Iconos de fiesta variados
-    const icons = ["🥳", "🥂", "🎆", "✨", "🔥"];
+    const icons = ["🍻", "💵", "🎉", "✨", "🔥"];
     const randomIcon = icons[Math.floor(Math.random() * icons.length)];
 
     link.innerHTML = `
       <span class="link-icon">${randomIcon}</span> 
       <span class="link-text">${video.title.toUpperCase()}</span> 
-      <span class="link-arrow">GO</span>
+      <span class="link-arrow">IR</span>
     `;
     
     listItem.appendChild(link);
@@ -89,7 +100,7 @@ function populateVideoCatalog(data) {
 
 // --- TAREA 3: Lógica Principal ---
 function main() {
-  createConfetti();
+  createPartyElements(); // Iniciar la lluvia de cotillón
   populateCommunityLinks();
 
   const videoId = window.location.pathname.substring(1);
@@ -104,22 +115,22 @@ function main() {
 
       if (videoId === "" || videoId === "index.html") {
         // HOME
-        mainTitleText.textContent = "FELIZ 2026";
-        videoTitle.textContent = "🥳 La fiesta empieza aquí 👇";
+        mainTitleText.textContent = "¡FELIZ AÑO NUEVO!";
+        videoTitle.textContent = "🍻 ¡Brindemos y celebremos juntos! 🥂";
         loading.style.display = 'none';
 
       } else {
         // PÁGINA DE VIDEO
         if (!data[videoId]) {
-          videoTitle.textContent = "❌ Enlace Vencido";
-          loading.textContent = "Intenta con otro archivo de la lista.";
+          videoTitle.textContent = "❌ ¡Se acabó la fiesta!";
+          loading.textContent = "Este enlace ya no sirve. Busca otro en la lista.";
           return;
         }
 
         const video = data[videoId];
         
         // Títulos
-        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#00F2FF'>✨</span>";
+        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
         // Asignar enlaces
@@ -128,7 +139,7 @@ function main() {
         btnTerabox.href = video.terabox;
 
         // Limpiar loading y mostrar botones
-        loading.textContent = "⬇️ Enlaces Listos:";
+        loading.textContent = "⬇️ ¡A disfrutar se ha dicho! ⬇️";
         btnFilemoon.classList.remove('hidden');
         btnStreamhg.classList.remove('hidden');
         btnTerabox.classList.remove('hidden');
@@ -138,7 +149,7 @@ function main() {
     .catch((error) => {
       console.error('Error JSON:', error);
       videoTitle.textContent = "Error";
-      loading.textContent = "⚠️ Algo salió mal con la fiesta.";
+      loading.textContent = "⚠️ ¡Ups! Se nos cayó la cerveza. Intenta luego.";
     });
 }
 
