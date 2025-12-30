@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#FFD700">
   <title>🎉 PatuConsumoXD - ¡Fiestón 2026! 🍻</title>
   
-  <!-- Fuentes Festivas: 'Bangers' para títulos explosivos, 'Roboto' para lectura clara -->
+  <!-- Fuentes Festivas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
   <style>
     /* =========================================
        TEMA: COTILLÓN LATINO 2026 🍻💵🎉
-       ¡Alegría, dorado, verde billete y espuma!
+       ¡Más cerveza, más espuma y LLUVIA DE BILLETES!
     ========================================= */
 
     :root {
@@ -25,8 +25,8 @@
       --red-party: #DC143C;   /* Rojo festivo */
       --beer-foam: #FFFACD;   /* Espuma de cerveza */
       
-      /* Fondo de Cerveza */
-      --bg-beer: linear-gradient(to bottom, #fbb03b, #ff8c00);
+      /* Fondo de Cerveza Mejorado */
+      --bg-beer: linear-gradient(to bottom, #fbb03b 0%, #ff8c00 80%, #e67e00 100%);
 
       /* Cristal Festivo */
       --glass: rgba(255, 255, 255, 0.15);
@@ -51,13 +51,27 @@
       position: relative;
     }
 
-    /* --- Fondo Animado (Burbujas de Cerveza) --- */
+    /* --- Fondo Animado (Burbujas de Cerveza - Capa 1) --- */
     #beer-bubbles-container {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 0; overflow: hidden;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.2) 10%, transparent 10%);
-      background-size: 20px 20px;
-      animation: bubbles-rise 10s linear infinite;
+      /* Burbujas más grandes y visibles */
+      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 15%, transparent 20%);
+      background-size: 80px 80px;
+      animation: bubbles-rise 12s linear infinite;
+      opacity: 0.5;
+    }
+    
+    /* --- Fondo Animado (Burbujas de Cerveza - Capa 2) --- */
+    #beer-bubbles-container-2 {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+      /* Burbujas más pequeñas y rápidas */
+      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 10%, transparent 15%);
+      background-size: 40px 40px;
+      background-position: 20px 20px; /* Desplazamiento para que no se superpongan */
+      animation: bubbles-rise 7s linear infinite;
+      opacity: 0.3;
     }
 
     @keyframes bubbles-rise {
@@ -65,7 +79,7 @@
       to { background-position: 0 0; }
     }
     
-    /* --- Elementos Flotantes (Confeti y Billetes) --- */
+    /* --- Elementos Flotantes (Billetes) --- */
     #particles-container {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 1; overflow: hidden;
@@ -73,15 +87,17 @@
     
     .party-item {
       position: absolute;
-      top: -10%;
-      opacity: 0.8;
+      top: -15%; /* Empiezan más arriba para que no aparezcan de golpe */
+      opacity: 0.9;
       animation: fall-and-spin var(--duration) linear infinite;
       animation-delay: var(--delay);
+      /* Sombra para que se despeguen del fondo */
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
     @keyframes fall-and-spin {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+      100% { transform: translateY(115vh) rotate(720deg); opacity: 0; }
     }
 
     /* --- Tarjeta Principal --- */
@@ -156,15 +172,9 @@
     }
     
     /* Colores Vibrantes */
-    #btn-filemoon { 
-      background: linear-gradient(to bottom, #00C6FF, #0072FF); 
-    }
-    #btn-streamhg { 
-      background: linear-gradient(to bottom, var(--red-party), #FF4B2B); 
-    }
-    #btn-terabox  { 
-      background: linear-gradient(to bottom, var(--green-money), #38ef7d); 
-    }
+    #btn-filemoon { background: linear-gradient(to bottom, #00C6FF, #0072FF); }
+    #btn-streamhg { background: linear-gradient(to bottom, var(--red-party), #FF4B2B); }
+    #btn-terabox  { background: linear-gradient(to bottom, var(--green-money), #38ef7d); }
 
     .btn-fiesta:hover { 
       transform: translateY(-4px);
@@ -175,7 +185,6 @@
       box-shadow: 0 2px 0 var(--gold-dark), 0 5px 10px rgba(0,0,0,0.4);
     }
 
-    /* Efecto de Brillo */
     .btn-fiesta::before {
       content: ''; position: absolute; top: 0; left: -100%;
       width: 100%; height: 100%;
@@ -195,8 +204,7 @@
     .divider {
       height: 4px;
       background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 10px, var(--red-party) 10px, var(--red-party) 20px);
-      border: none; margin: 25px 0;
-      border-radius: 2px;
+      border: none; margin: 25px 0; border-radius: 2px;
     }
 
     h2 {
@@ -220,7 +228,6 @@
     }
     .icon-box svg { width: 28px; height: 28px; fill: var(--red-party); }
 
-    /* Hover "Pop" */
     .icon-box:hover { 
       transform: translateY(-5px) scale(1.1); 
       background: var(--green-money);
@@ -236,7 +243,6 @@
       max-height: 300px; overflow-y: auto;
       border: 2px solid var(--gold);
     }
-    /* Scrollbar dorada */
     .catalog-wrapper::-webkit-scrollbar { width: 8px; }
     .catalog-wrapper::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
 
@@ -273,9 +279,11 @@
 </head>
 <body>
 
-  <!-- Fondo de Burbujas de Cerveza -->
+  <!-- Fondo de Burbujas de Cerveza (Doble Capa) -->
   <div id="beer-bubbles-container"></div>
-  <!-- Elementos Flotantes (Confeti y Billetes) -->
+  <div id="beer-bubbles-container-2"></div>
+  
+  <!-- Lluvia de Billetes -->
   <div id="particles-container"></div>
 
   <div class="main-card">
