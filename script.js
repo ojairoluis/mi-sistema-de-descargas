@@ -120,7 +120,7 @@ function main() {
         const video = data[videoId];
         
         // Títulos
-        mainTitleText.innerHTML = "FELIZ AÑO<span style='color:#FFD700'>✨</span>";
+        mainTitleText.innerHTML = "FELIZ AÑO <span style='color:#FFD700'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
         // Asignar enlaces
