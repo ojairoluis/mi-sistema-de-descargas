@@ -7,7 +7,7 @@ const btnTerabox = document.getElementById('btn-terabox');
 const catalogList = document.getElementById('video-catalog-list');
 const mainTitleText = document.getElementById('main-title-text');
 
-// --- Enlaces Sociales (Sin cambios) ---
+// --- Enlaces Sociales ---
 const socialLinks = {
   x: "https://x.com/patuconsumoxxd?t=lBK2T6a-4wD-fXKMzQ_Lsg&s=35",
   facebook: "https://www.facebook.com/people/GREAT-LINKS/61556741140694/?mibextid=ZbWKwL",
@@ -22,33 +22,30 @@ const telegramChannels = {
   tutorial: "https://t.me/tutodescargas" 
 };
 
-// --- TAREA 0: EFX VISUALES (Lluvia de Billetes Masiva) ---
+// --- OPTIMIZACIÓN: Menos elementos, mismo impacto ---
 function createPartyElements() {
   const container = document.getElementById('particles-container');
   container.innerHTML = '';
-  const count = 120; // ¡Aumentamos drásticamente la cantidad de billetes!
+  const count = 25; // Reducido drásticamente de 120 a 25 para móviles
 
   for (let i = 0; i < count; i++) {
     const item = document.createElement('div');
     item.classList.add('party-item');
     
     item.textContent = '💵';
-    // Tamaños variados, algunos muy grandes para que destaquen
-    item.style.fontSize = Math.random() * 35 + 15 + 'px';
+    // Hacemos los billetes un poco más grandes para compensar la cantidad
+    item.style.fontSize = Math.random() * 25 + 20 + 'px';
     
-    item.style.setProperty('--pos', Math.random() * 100 + '%');
-    // Duraciones variadas para un efecto de "tormenta" más natural
-    item.style.setProperty('--duration', Math.random() * 8 + 5 + 's');
-    item.style.setProperty('--delay', Math.random() * 10 + 's');
-    
-    // Rotación inicial aleatoria para más realismo
-    item.style.transform = `rotate(${Math.random() * 360}deg)`;
+    item.style.left = Math.random() * 100 + '%';
+    // Duración más larga = menos movimiento brusco = menos carga
+    item.style.animationDuration = Math.random() * 5 + 8 + 's'; 
+    item.style.animationDelay = Math.random() * 5 + 's';
     
     container.appendChild(item);
   }
 }
 
-// --- TAREA 1: Hidratar enlaces (Sin cambios) ---
+// --- Funciones Estándar (Sin cambios pesados) ---
 function populateCommunityLinks() {
   document.getElementById('link-telegram-main').href = telegramChannels.main;
   document.getElementById('link-telegram-catalog').href = telegramChannels.catalog;
@@ -61,7 +58,6 @@ function populateCommunityLinks() {
   document.getElementById('link-instagram').href = socialLinks.instagram;
 }
 
-// --- TAREA 2: Rellenar el catálogo (Festivo) ---
 function populateVideoCatalog(data) {
   catalogList.innerHTML = '';  
   const allVideos = Object.entries(data).reverse();
@@ -73,7 +69,6 @@ function populateVideoCatalog(data) {
     link.href = `/${videoKey}`;
     link.classList.add('catalog-link');
     
-    // Iconos de fiesta variados
     const icons = ["🍻", "💵", "🎉", "✨", "🔥"];
     const randomIcon = icons[Math.floor(Math.random() * icons.length)];
 
@@ -88,9 +83,8 @@ function populateVideoCatalog(data) {
   });
 }
 
-// --- TAREA 3: Lógica Principal ---
 function main() {
-  createPartyElements(); // Iniciar la lluvia de billetes
+  createPartyElements();
   populateCommunityLinks();
 
   const videoId = window.location.pathname.substring(1);
@@ -104,31 +98,24 @@ function main() {
       populateVideoCatalog(data);
 
       if (videoId === "" || videoId === "index.html") {
-        // HOME
         mainTitleText.textContent = "¡FELIZ AÑO NUEVO!";
         videoTitle.textContent = "🍻 ¡Brindemos y celebremos juntos! 🥂";
         loading.style.display = 'none';
-
       } else {
-        // PÁGINA DE VIDEO
         if (!data[videoId]) {
           videoTitle.textContent = "❌ ¡Se acabó la fiesta!";
-          loading.textContent = "Este enlace ya no sirve. Busca otro en la lista.";
+          loading.textContent = "Busca otro enlace en la lista.";
           return;
         }
 
         const video = data[videoId];
-        
-        // Títulos
-        mainTitleText.innerHTML = "FELIZ AÑO <span style='color:#FFD700'>✨</span>";
+        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
-        // Asignar enlaces
         btnFilemoon.href = video.filemoon;
         btnStreamhg.href = video.streamhg;
         btnTerabox.href = video.terabox;
 
-        // Limpiar loading y mostrar botones
         loading.textContent = "⬇️ ¡A disfrutar se ha dicho! ⬇️";
         btnFilemoon.classList.remove('hidden');
         btnStreamhg.classList.remove('hidden');
@@ -139,7 +126,7 @@ function main() {
     .catch((error) => {
       console.error('Error JSON:', error);
       videoTitle.textContent = "Error";
-      loading.textContent = "⚠️ ¡Ups! Se nos cayó la cerveza. Intenta luego.";
+      loading.textContent = "⚠️ Intenta luego.";
     });
 }
 
