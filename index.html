@@ -6,29 +6,24 @@
   <meta name="theme-color" content="#FFD700">
   <title>🎉 PatuConsumoXD - ¡Fiestón 2026! 🍻</title>
   
-  <!-- Fuentes Festivas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================
-       TEMA: COTILLÓN LATINO 2026 🍻💵🎉
-       ¡Más cerveza, más espuma y LLUVIA DE BILLETES!
+       TEMA: COTILLÓN LATINO 2026 (OPTIMIZADO) ⚡
+       Estrategia: Uso de GPU para animaciones y reducción de capas.
     ========================================= */
 
     :root {
-      /* Paleta de Colores Festiva */
-      --gold: #FFD700;       /* Dorado brillante */
-      --gold-dark: #DAA520;  /* Dorado oscuro */
-      --green-money: #228B22; /* Verde billete */
-      --red-party: #DC143C;   /* Rojo festivo */
-      --beer-foam: #FFFACD;   /* Espuma de cerveza */
+      --gold: #FFD700;
+      --gold-dark: #DAA520;
+      --green-money: #228B22;
+      --red-party: #DC143C;
+      --beer-foam: #FFFACD;
       
-      /* Fondo de Cerveza Mejorado */
       --bg-beer: linear-gradient(to bottom, #fbb03b 0%, #ff8c00 80%, #e67e00 100%);
-
-      /* Cristal Festivo */
       --glass: rgba(255, 255, 255, 0.15);
       --glass-border: 2px solid var(--gold);
       --blur: blur(10px);
@@ -51,35 +46,41 @@
       position: relative;
     }
 
-    /* --- Fondo Animado (Burbujas de Cerveza - Capa 1) --- */
-    #beer-bubbles-container {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
-      /* Burbujas más grandes y visibles */
-      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 15%, transparent 20%);
-      background-size: 80px 80px;
-      animation: bubbles-rise 12s linear infinite;
-      opacity: 0.5;
-    }
-    
-    /* --- Fondo Animado (Burbujas de Cerveza - Capa 2) --- */
-    #beer-bubbles-container-2 {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
-      /* Burbujas más pequeñas y rápidas */
-      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 10%, transparent 15%);
-      background-size: 40px 40px;
-      background-position: 20px 20px; /* Desplazamiento para que no se superpongan */
-      animation: bubbles-rise 7s linear infinite;
-      opacity: 0.3;
+    /* --- Fondo Animado (Burbujas GPU) --- 
+       Usamos height: 200% y translateY para evitar repaints costosos.
+    */
+    .bubble-layer {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 200%; /* Doble altura para el loop infinito */
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform; /* Optimización clave */
     }
 
-    @keyframes bubbles-rise {
-      from { background-position: 0 100%; }
-      to { background-position: 0 0; }
+    /* Capa 1: Burbujas grandes */
+    #bubbles-1 {
+      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 10%, transparent 25%);
+      background-size: 80px 80px;
+      opacity: 0.4;
+      animation: slide-up 15s linear infinite;
+    }
+
+    /* Capa 2: Burbujas pequeñas */
+    #bubbles-2 {
+      background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 5%, transparent 15%);
+      background-size: 40px 40px;
+      background-position: 20px 20px;
+      opacity: 0.2;
+      animation: slide-up 8s linear infinite;
+    }
+
+    @keyframes slide-up {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
     }
     
-    /* --- Elementos Flotantes (Billetes) --- */
+    /* --- Contenedor de Billetes --- */
     #particles-container {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 1; overflow: hidden;
@@ -87,17 +88,16 @@
     
     .party-item {
       position: absolute;
-      top: -15%; /* Empiezan más arriba para que no aparezcan de golpe */
-      opacity: 0.9;
-      animation: fall-and-spin var(--duration) linear infinite;
-      animation-delay: var(--delay);
-      /* Sombra para que se despeguen del fondo */
-      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      top: -10%;
+      will-change: transform, opacity; /* Optimización para móviles */
+      animation: fall-simple 8s linear infinite; /* Animación simplificada */
+      text-shadow: 0 2px 2px rgba(0,0,0,0.2);
     }
 
-    @keyframes fall-and-spin {
+    /* Animación simplificada para evitar cálculos complejos de rotación constante */
+    @keyframes fall-simple {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(115vh) rotate(720deg); opacity: 0; }
+      100% { transform: translateY(115vh) rotate(360deg); opacity: 0; }
     }
 
     /* --- Tarjeta Principal --- */
@@ -111,177 +111,149 @@
       -webkit-backdrop-filter: var(--blur);
       border: var(--glass-border);
       border-radius: 30px;
-      padding: 35px 25px;
-      box-shadow: var(--shadow), inset 0 0 20px var(--gold);
+      padding: 30px 20px;
+      box-shadow: var(--shadow), inset 0 0 10px var(--gold);
       text-align: center;
       margin-top: 15px;
     }
 
-    /* Badge 2026 Festivo */
     .badge-year {
       display: inline-block;
       background: linear-gradient(45deg, var(--green-money), var(--gold), var(--red-party));
       color: #fff;
       border-radius: 50px;
-      padding: 8px 25px;
-      font-size: 1.1rem;
+      padding: 5px 20px;
+      font-size: 1rem;
       font-family: 'Bangers', cursive;
       letter-spacing: 2px;
       margin-bottom: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      text-shadow: 2px 2px 0 #000;
-      animation: bounce 1.5s infinite;
+      text-shadow: 1px 1px 0 #000;
+      animation: bounce 2s infinite; /* Más lento para ahorrar CPU */
     }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-    /* Títulos Explosivos */
     h1 {
       font-family: 'Bangers', cursive;
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 2.8rem;
+      margin-bottom: 5px;
       color: var(--gold);
-      text-shadow: 3px 3px 0 var(--red-party), 5px 5px 0 #000;
+      text-shadow: 3px 3px 0 var(--red-party), 4px 4px 0 #000;
       line-height: 1;
     }
 
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--beer-foam);
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       font-weight: 700;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
 
-    /* --- Botones de Fiesta --- */
-    .actions-area {
-      display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px;
-    }
+    /* --- Botones --- */
+    .actions-area { display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px; }
 
     .btn-fiesta {
       position: relative;
       display: flex; align-items: center; justify-content: center;
-      width: 100%; padding: 18px;
+      width: 100%; padding: 16px;
       font-family: 'Roboto', sans-serif;
-      font-weight: 900; font-size: 1.1rem;
+      font-weight: 900; font-size: 1rem;
       text-transform: uppercase; text-decoration: none; color: #fff;
-      border-radius: 50px; border: 3px solid var(--gold);
-      transition: all 0.3s ease;
+      border-radius: 50px; border: 2px solid var(--gold);
+      transition: transform 0.2s; /* Quitamos transiciones pesadas */
       overflow: hidden;
-      box-shadow: 0 6px 0 var(--gold-dark), 0 10px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 0 var(--gold-dark), 0 5px 10px rgba(0,0,0,0.3);
       text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
     }
     
-    /* Colores Vibrantes */
     #btn-filemoon { background: linear-gradient(to bottom, #00C6FF, #0072FF); }
     #btn-streamhg { background: linear-gradient(to bottom, var(--red-party), #FF4B2B); }
     #btn-terabox  { background: linear-gradient(to bottom, var(--green-money), #38ef7d); }
 
-    .btn-fiesta:hover { 
-      transform: translateY(-4px);
-      box-shadow: 0 10px 0 var(--gold-dark), 0 15px 25px rgba(0,0,0,0.5);
-    }
-    .btn-fiesta:active { 
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 var(--gold-dark), 0 5px 10px rgba(0,0,0,0.4);
-    }
+    .btn-fiesta:active { transform: translateY(2px); box-shadow: none; }
 
+    /* Brillo sutil */
     .btn-fiesta::before {
       content: ''; position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-20deg);
       transition: 0.5s;
     }
-    .btn-fiesta:hover::before { left: 100%; }
+    .btn-fiesta:hover::before { left: 150%; }
 
     .hidden { display: none !important; }
     
     #loading {
-      color: var(--gold); font-family: 'Bangers', cursive; font-size: 1.2rem; margin-bottom: 15px;
-      text-shadow: 2px 2px 0 #000;
+      color: var(--gold); font-family: 'Bangers', cursive; font-size: 1.2rem;
+      text-shadow: 1px 1px 0 #000; margin-bottom: 10px;
     }
 
-    /* --- Comunidad (Iconos Festivos) --- */
+    /* --- Comunidad --- */
     .divider {
-      height: 4px;
+      height: 3px;
       background: repeating-linear-gradient(45deg, var(--gold), var(--gold) 10px, var(--red-party) 10px, var(--red-party) 20px);
-      border: none; margin: 25px 0; border-radius: 2px;
+      border: none; margin: 20px 0; border-radius: 2px;
     }
 
     h2 {
       font-family: 'Bangers', cursive;
-      font-size: 1.5rem; margin-bottom: 20px;
+      font-size: 1.3rem; margin-bottom: 15px;
       color: var(--gold); text-shadow: 2px 2px 0 var(--red-party);
     }
 
-    .social-row {
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;
-    }
+    .social-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
 
     .icon-box {
-      width: 55px; height: 55px;
+      width: 50px; height: 50px;
       display: flex; align-items: center; justify-content: center;
       background: var(--gold);
       border-radius: 50%;
-      border: 3px solid var(--red-party);
-      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 0 var(--red-party);
+      border: 2px solid var(--red-party);
+      box-shadow: 0 3px 0 var(--red-party);
+      transition: transform 0.2s;
     }
-    .icon-box svg { width: 28px; height: 28px; fill: var(--red-party); }
+    .icon-box:active { transform: translateY(3px); box-shadow: none; }
+    .icon-box svg { width: 24px; height: 24px; fill: var(--red-party); }
 
-    .icon-box:hover { 
-      transform: translateY(-5px) scale(1.1); 
-      background: var(--green-money);
-      border-color: var(--gold);
-      box-shadow: 0 8px 0 var(--gold);
-    }
-    .icon-box:hover svg { fill: var(--gold); }
-
-    /* --- Catálogo (Lista de Brindis) --- */
+    /* --- Catálogo --- */
     .catalog-wrapper {
-      background: rgba(0,0,0,0.4);
-      border-radius: 20px; padding: 10px;
-      max-height: 300px; overflow-y: auto;
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px; padding: 5px;
+      max-height: 250px; overflow-y: auto; /* Altura reducida para mejor performance de scroll */
       border: 2px solid var(--gold);
+      -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
     }
-    .catalog-wrapper::-webkit-scrollbar { width: 8px; }
-    .catalog-wrapper::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
-
+    
     #video-catalog-list { list-style: none; }
 
     .catalog-link {
       display: flex; align-items: center;
-      padding: 12px 15px; margin-bottom: 8px;
-      background: rgba(255, 215, 0, 0.2);
-      border-radius: 15px;
+      padding: 10px 12px; margin-bottom: 6px;
+      background: rgba(255, 215, 0, 0.15);
+      border-radius: 12px;
       text-decoration: none; color: #fff;
-      font-weight: 700; font-size: 1rem;
-      transition: 0.2s;
+      font-weight: 700; font-size: 0.95rem;
       border: 1px solid var(--gold);
     }
     .catalog-link:last-child { margin-bottom: 0; }
     
-    .link-icon { margin-right: 10px; font-size: 1.4rem; }
-    .link-text { flex-grow: 1; text-align: left; text-shadow: 1px 1px 2px #000; }
-    .link-arrow { color: var(--gold); font-family: 'Bangers', cursive; font-size: 1.2rem; }
-
-    .catalog-link:hover { 
-      background: var(--green-money);
-      transform: scale(1.02);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .catalog-link:hover .link-arrow { color: #fff; }
+    .link-icon { margin-right: 8px; font-size: 1.2rem; }
+    .link-text { flex-grow: 1; text-align: left; text-shadow: 1px 1px 1px #000; }
+    .link-arrow { color: var(--gold); font-family: 'Bangers', cursive; }
 
     footer {
-      margin-top: 30px; font-size: 0.8rem; color: var(--beer-foam);
-      font-weight: bold; letter-spacing: 1px; text-shadow: 1px 1px 2px #000;
+      margin-top: 25px; font-size: 0.75rem; color: var(--beer-foam);
+      font-weight: bold; letter-spacing: 1px; text-shadow: 1px 1px 1px #000;
     }
   </style>
 </head>
 <body>
 
-  <!-- Fondo de Burbujas de Cerveza (Doble Capa) -->
-  <div id="beer-bubbles-container"></div>
-  <div id="beer-bubbles-container-2"></div>
+  <!-- Fondo de Burbujas Optimizado (GPU layers) -->
+  <div id="bubbles-1" class="bubble-layer"></div>
+  <div id="bubbles-2" class="bubble-layer"></div>
   
   <!-- Lluvia de Billetes -->
   <div id="particles-container"></div>
@@ -289,8 +261,8 @@
   <div class="main-card">
     <div class="badge-year">¡FIESTÓN 2026!</div>
     
-    <h1><span id="main-title-text">¡FELIZ AÑO NUEVO!</span></h1>
-    <p class="subtitle" id="video-title">🍻 ¡Brindemos y celebremos juntos! 🥂</p>
+    <h1><span id="main-title-text">¡FELIZ AÑO!</span></h1>
+    <p class="subtitle" id="video-title">🍻 ¡Brindis y Celebración! 🥂</p>
 
     <div class="actions-area">
       <!-- Botones -->
@@ -298,12 +270,12 @@
       <a href="#" class="btn-fiesta hidden" id="btn-streamhg">Ver en StreamHG</a>
       <a href="#" class="btn-fiesta hidden" id="btn-terabox">Ver en Terabox</a>
       
-      <p id="loading">🚀 Destapando la diversión...</p>
+      <p id="loading">🚀 Sirviendo la fiesta...</p>
     </div>
 
     <div class="secondary-section">
       <hr class="divider">
-      <h2>¡ÚNETE A LA FIESTA!</h2>
+      <h2>¡ÚNETE AHORA!</h2>
       
       <div class="social-row">
         <a href="#" target="_blank" class="icon-box" id="link-whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg></a>
@@ -332,7 +304,7 @@
     </div>
 
     <footer>
-      <p>PatuConsumoXD | FIESTA 2026</p>
+      <p>PatuConsumoXD | FIESTA LATINA 2026</p>
     </footer>
   </div>
 
