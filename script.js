@@ -22,37 +22,27 @@ const telegramChannels = {
   tutorial: "https://t.me/tutodescargas" 
 };
 
-// --- TAREA 0: EFX VISUALES (Lluvia de Cotillón: Billetes y Cerveza) ---
+// --- TAREA 0: EFX VISUALES (Lluvia de Billetes Masiva) ---
 function createPartyElements() {
   const container = document.getElementById('particles-container');
   container.innerHTML = '';
-  const count = 40; 
-  // Colores festivos: Dorado, Verde Billete, Rojo Fiesta
-  const colors = ['#FFD700', '#228B22', '#DC143C']; 
-  // Elementos: Círculos de color, Billetes, Cervezas
-  const elements = ['circle', '💵', '🍻'];
+  const count = 120; // ¡Aumentamos drásticamente la cantidad de billetes!
 
   for (let i = 0; i < count; i++) {
     const item = document.createElement('div');
     item.classList.add('party-item');
     
-    const elementType = elements[Math.floor(Math.random() * elements.length)];
-    
-    if (elementType === 'circle') {
-      const size = Math.random() * 10 + 5 + 'px';
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      item.style.width = size;
-      item.style.height = size;
-      item.style.backgroundColor = color;
-      item.style.borderRadius = '50%';
-    } else {
-      item.textContent = elementType;
-      item.style.fontSize = Math.random() * 15 + 10 + 'px';
-    }
+    item.textContent = '💵';
+    // Tamaños variados, algunos muy grandes para que destaquen
+    item.style.fontSize = Math.random() * 35 + 15 + 'px';
     
     item.style.setProperty('--pos', Math.random() * 100 + '%');
-    item.style.setProperty('--duration', Math.random() * 5 + 5 + 's');
-    item.style.setProperty('--delay', Math.random() * 5 + 's');
+    // Duraciones variadas para un efecto de "tormenta" más natural
+    item.style.setProperty('--duration', Math.random() * 8 + 5 + 's');
+    item.style.setProperty('--delay', Math.random() * 10 + 's');
+    
+    // Rotación inicial aleatoria para más realismo
+    item.style.transform = `rotate(${Math.random() * 360}deg)`;
     
     container.appendChild(item);
   }
@@ -100,7 +90,7 @@ function populateVideoCatalog(data) {
 
 // --- TAREA 3: Lógica Principal ---
 function main() {
-  createPartyElements(); // Iniciar la lluvia de cotillón
+  createPartyElements(); // Iniciar la lluvia de billetes
   populateCommunityLinks();
 
   const videoId = window.location.pathname.substring(1);
@@ -130,7 +120,7 @@ function main() {
         const video = data[videoId];
         
         // Títulos
-        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
+        mainTitleText.innerHTML = "FELIZ AÑO<span style='color:#FFD700'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
         // Asignar enlaces
