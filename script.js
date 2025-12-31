@@ -109,7 +109,7 @@ function main() {
         }
 
         const video = data[videoId];
-        mainTitleText.innerHTML = "TU SELECCIÓN <span style='color:#FFD700'>✨</span>";
+        mainTitleText.innerHTML = "FELIZ AÑO NUEVO <span style='color:#FFD700'>✨</span>";
         videoTitle.textContent = `${video.title.toUpperCase()}`;
         
         btnFilemoon.href = video.filemoon;
